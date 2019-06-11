@@ -1,0 +1,50 @@
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 60% !important;
+    }
+}
+.modal-dialog {
+    border-top-left-radius: 8px;
+}
+.icentra-popup .modal-header {
+    background-color: #296afa;
+}
+.icentra-popup .modal-content{
+	background:none;
+}
+.icentra-popup .modal-body {
+    padding: 0rem;
+}
+
+
+
+#openModalAssignPopUp.icentra-popup .modal-content{background:#ffffff;}
+#openModalAssignPopUp.icentra-popup label{margin-top:.5rem;}
+
+
+.cdk-drag-preview li{
+	background: #fff;
+	padding: 17px 13px;
+	border-radius: 4px;
+}
+.cdk-drag-preview {
+	min-width:80px;
+  list-style: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  padding:10px;
+}
+
+.icentra-popup .btn.btn-primary,
+.icentra-popup .btn.btn-primary:hover, 
+.icentra-popup .btn.btn-primary:focus {
+    background-color: #296afa;
+    border-color: #296afa;
+    opacity: 1;
+}

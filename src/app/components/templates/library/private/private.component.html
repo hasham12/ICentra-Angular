@@ -1,0 +1,442 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>Library</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard, Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+
+
+
+  <div class="icentra-editor creat-template-editor">
+            <div class="ic-editor-inner">
+                    <div class="ic-editor-header">
+                      <!-- 1 -->
+                       <div class="header-active-tool">
+                         <span class="header-active-tool-sign bg-dark">
+                           <img src="assets/img/editor/library-icon.png" alt="">
+                         </span>
+                         <div class="header-active-tool-name">
+                           <h6>Private</h6>
+                           <span>4 Items</span>
+                         </div>
+                       </div>
+                        <div class="ic-header-tool-list mr-auto">
+                            <button class="upload-gallery-btn ml-1"  id="openModalLibrary" data-toggle="modal"  data-target="#openModalLibrarypopup">
+                                Library Manager
+                            </button>
+                        </div>
+                      <!-- 3 -->
+                      <ul class="ic-header-tool-list">
+                        <li><a title="Share" href="javascript:void(0)" class="icentra-share" (click)="shareFiles()">
+                            <img src="assets/img/editor/share-top.png" alt="">
+                            <span>Share</span>
+                            </a>
+                        </li>
+                        <li>
+                          <a href="javascript::void(0)" class="icentra-download" *ngIf="generatingZip">
+                            <img src="assets/img/Preloader_3.gif" width="44px" >
+                          </a>
+                          <a title="Download" href="javascript:void(0)" class="icentra-download" (click)="downloadZip()" *ngIf="!generatingZip">
+                            <img src="assets/img/editor/download.png" alt=""></a>
+                            <span>Download</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="ic-editor-body">
+
+                      <div class="ic-editor-sidebar">
+                        <div class="ic-editor-sidebar-tools">
+                          <!-- Tabs -->
+                          <ul class="nav --nav-tabs ic-tools-tab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active"  routerLink="/template/library/private">
+                                <img src="assets/img/editor/hvr-private.png" alt="">
+                                <img src="assets/img/editor/private.png" alt="" class="hvr">
+                                <span>Private</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" routerLink="/template/library/office">
+                                <img src="assets/img/editor/edit-site.png" alt="">
+                                <img src="assets/img/editor/hvr-lib-office.png" alt="" class="hvr">
+                                <span>Office</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="lib-icentra-tab" routerLink="/template/library/icentra">
+                                <img src="assets/img/editor/lib-icentra.png" alt="">
+                                <img src="assets/img/editor/hvr-lib-icentra.png" alt="" class="hvr">
+                                <span>iCentra</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" routerLink="/template/library/received">
+                                <img src="assets/img/editor/received.png" alt="">
+                                <img src="assets/img/editor/hvr-receied.png" alt="" class="hvr">
+                                <span>Received</span>
+                              </a>
+                            </li>
+                          </ul>
+                          <!-- Tabs Content -->
+                          <div class="tab-content ic-tools-tab-content">
+                            <div class="tab-pane fade show active" id="lib-private" role="tabpanel">
+                              <div class="search-reports-templates">
+                                <div action="" class="form-inline">
+                                   <div class="input-group">
+                                     <input type="text" class="search-task-input search-input" placeholder="Search Private Library" (input)="filterFiles()" [(ngModel)]="fileQuery">
+                                       <button type="reset" class="close-icon sm" (click)="fileQuery=''" *ngIf="fileQuery"></button>
+                                       <button class="task-search-btn" type="submit" *ngIf="!fileQuery">
+                                         <i class="fa fa-search"></i>
+                                       </button>
+                                   </div>
+
+                                </div>
+                              </div><!--/.search-reports-templates-->
+
+                              <div class="search-by-cat template-categories">
+                                 <div class="search-cat-dropdown mb-2" *ngIf="categories">
+                                    <ng-select [items]="categories" bindLabel="title" bindValue="id" [searchable]="true" placeholder="Search / Upload Category" [(ngModel)]="category_id" (change)="filterFiles()">
+                                    </ng-select>
+                                 </div>
+
+                                  <div class="search-cat-dropdown" *ngIf="officeUsers">
+                                    <ng-select [items]="officeUsers" bindLabel="full_name" bindValue="id" [searchable]="true" placeholder="Search by Users" [(ngModel)]="user_id" (change)="filterFiles()">
+
+                                    </ng-select>
+                                  </div>
+                              </div><!--/.search-by-cat-->
+
+                              <div class="upload-my-image">
+                                 <button  class="upload-btn" type="button" (click)="file.click()">Upload File</button>
+                                 <input [hidden]="1" name="file_path[]" type="file" #file ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple>
+                              </div>
+
+
+                              <div class="editor-templates-wrap" >
+
+                                <!--<div class="lib-cat-toggler">-->
+                                  <!--<span>Views</span>-->
+                                  <!--<span class="toggler">-->
+                                    <!--<img class="cursor-pointer" src="assets/img/editor/grid-toggler.png" alt="" [hidden]="view=='grid'" (click)="view='grid'">-->
+                                    <!--<img class="cursor-pointer" src="assets/img/editor/list-toggler.png" alt="" [hidden]="view=='list'" (click)="view='list'">-->
+                                  <!--</span>-->
+                                <!--</div>-->
+
+                                <!--ngx upload start-->
+                                <div class="category-type-box" *ngIf="files.length>0">
+                                  <p>Uploading Files</p>
+                                  <ul class="drags-img-list sb-drags-img-list">
+                                    <li *ngFor="let file of files; let i = index;">
+                                       <div class="thumbnail">
+                                         <span class="close" (click)="removeFile(file.id)"></span>
+                                         <img class="img-fluid" [src]="libHelper.fileThumbbyName(file)" alt="{{file.name}}">
+                                       </div>
+                                       <div class="content">
+                                         <span class="name">{{file.name}}</span>
+                                       </div>
+                                       <div class="progress-wrap">
+                                          <div class="progress-content">
+                                            <div class="progress">
+                                              <span class="bar" [style.width]="file?.progress?.data?.percentage + '%'" [class.is-done]="file?.progress?.data?.percentage === 100"></span>
+                                            </div>
+                                          </div>
+                                          <div class="progress-text-content">
+                                            <span class="progress-text" [class.is-done]="file?.progress?.data?.percentage === 100">
+                                              <span>{{ file.progress?.data?.percentage }}% </span>
+                                              <div *ngIf="file.progress?.data?.percentage !== 100">Uploading...</div>
+                                              <div *ngIf="file.progress?.data?.percentage === 100">Done</div>
+                                            </span>
+                                            <span class="speed-and-eta-text" *ngIf="file.progress?.data?.percentage !== 0 && file.progress?.data?.percentage !== 100" [hidden]="1">
+                                              <span>{{ file.progress?.data?.speedHuman }} </span>
+                                              <span>ETA {{ file.progress?.data?.etaHuman }}</span>
+                                            </span>
+                                            </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              <!--ngx upload end-->
+                              <!-- Grid view -->
+                                  <div class="tab-content ic-tools-tab-content lib-mang-content" *ngIf="allFiles">
+                                              <!-- 1 -->
+                                              <div *ngIf="libraryData"  id="accordion_grp_1">
+                                                  <!-- Level 1 -->
+                                                  <div class="category-type-box level-1" *ngFor="let cat of libraryData">
+                                                      <a class="collapser-btn collapsed" data-toggle="collapse"
+                                                         href="#libcat-{{cat.model.id}}" aria-expanded="false">
+                                                          <i class="fa fa-caret-down"></i>
+                                                          <i class="fa fa-caret-right" style="display:none;"></i>
+                                                          <span class="name">{{ cat.model.title }}</span>
+                                                          <span class="number">{{ getFilesTotal(cat.model.id) }}</span>
+                                                      </a>
+                                                      <div class="collapse fonts-collapesd" id="libcat-{{cat.model.id}}"  data-parent="#accordion_grp_1" *ngIf="cat.children">
+                                                          <ul class="drags-img-list sb-drags-img-list"
+                                                              cdkDropList
+                                                              #todoList="cdkDropList"
+                                                              [cdkDropListData]="setFiles(cat.model.id)"
+                                                              [cdkDropListConnectedTo]="[doneList]"
+                                                              *ngIf="setFiles(cat.model.id).length ;  else nofile">
+                                                              <li *ngFor="let file of setFiles(cat.model.id)" cdkDrag>
+                                                                  <div class="thumbnail">
+                                                                      <i class="fa fa-arrow-circle-down close" aria-hidden="true" (click)="libHelper.downloadFile(file.file.file_path)"></i>
+                                                                      <span class="close" (click)="deleteFile(file.id,parentID)" ></span>
+                                                                      <img class="img-fluid" [src]="libHelper.fileThumbbyType(file.file)" alt="{{file.file.name}}">
+                                                                  </div>
+                                                                  <div class="content">
+                                                                      <span class="name">{{file.file.name}}</span>
+                                                                  </div>
+                                                              </li>
+                                                          </ul>
+                                                          <!-- LEVEL 2 -->
+                                                          <div class=" sub-list category-type-box level-2"  *ngFor="let subCat of cat.children">
+                                                              <a (click)="setFiles(subCat.model.id)" class="collapser-btn collapsed" data-toggle="collapse"
+                                                                 href="#subcat-1-{{subCat.model.id}}" aria-expanded="false">
+                                                                  {{ subCat.model.title }} <span>({{getFilesTotal(subCat.model.id)}})</span>
+                                                              </a>
+                                                              <div class="collapse fonts-collapesd" id="subcat-1-{{subCat.model.id}}" [attr.data-parent]="'#libcat-' + cat.model.id" *ngIf="subCat.children">
+                                                                  <ul class="drags-img-list sb-drags-img-list"
+                                                                      cdkDropList
+                                                                      #todoList="cdkDropList"
+                                                                      [cdkDropListData]="setFiles(subCat.model.id)"
+                                                                      [cdkDropListConnectedTo]="[doneList]"
+                                                                      *ngIf="setFiles(subCat.model.id).length ;  else nofile">
+                                                                      <li *ngFor="let file of setFiles(subCat.model.id)" cdkDrag>
+                                                                          <div class="thumbnail">
+                                                                              <i class="fa fa-arrow-circle-down close" aria-hidden="true" (click)="libHelper.downloadFile(file.file.file_path)"></i>
+                                                                              <span class="close" (click)="deleteFile(file.id,parentID)" ></span>
+                                                                              <img class="img-fluid" [src]="libHelper.fileThumbbyType(file.file)" alt="{{file.file.name}}">
+                                                                          </div>
+                                                                          <div class="content">
+                                                                              <span class="name">{{file.file.name}}</span>
+                                                                          </div>
+                                                                      </li>
+                                                                  </ul>
+                                                                  <!-- LEVEL 3 -->
+                                                                  <div class="sub-list  category-type-box level-3"  *ngFor="let subCatChild of subCat.children">
+                                                                      <a (click)="setFiles(subCatChild.model.id)" class="collapser-btn collapsed"
+                                                                         data-toggle="collapse" href="#subcat-2-{{subCatChild.model.id}}" aria-expanded="false">
+                                                                          {{ subCatChild.model.title }} <span>({{getFilesTotal(subCatChild.model.id)}})</span>
+                                                                      </a>
+                                                                      <div class="collapse fonts-collapesd" id="subcat-2-{{subCatChild.model.id}}" [attr.data-parent]="'#subcat-1-' + subCat.model.id" *ngIf="subCatChild.children">
+                                                                          <ul class="drags-img-list sb-drags-img-list"
+                                                                              cdkDropList
+                                                                              #todoList="cdkDropList"
+                                                                              [cdkDropListData]="setFiles(subCatChild.model.id)"
+                                                                              [cdkDropListConnectedTo]="[doneList]"
+                                                                              *ngIf="setFiles(subCatChild.model.id).length ;  else nofile">
+                                                                              <li *ngFor="let file of setFiles(subCatChild.model.id)" cdkDrag>
+                                                                                  <div class="thumbnail">
+                                                                                      <i class="fa fa-arrow-circle-down close" aria-hidden="true" (click)="libHelper.downloadFile(file.file.file_path)"></i>
+                                                                                      <span class="close" (click)="deleteFile(file.id,parentID)" ></span>
+                                                                                      <img class="img-fluid" [src]="libHelper.fileThumbbyType(file.file)" alt="{{file.file.name}}">
+                                                                                  </div>
+                                                                                  <div class="content">
+                                                                                      <span class="name">{{file.file.name}}</span>
+                                                                                  </div>
+                                                                              </li>
+                                                                          </ul>
+                                                                          <!-- LEVEL 4 -->
+                                                                          <div class="sub-list category-type-box level-4"  *ngFor="let subCatChildAG of subCatChild.children">
+                                                                              <a (click)="setFiles(subCatChildAG.model.id)" href="#subcat-3-{{subCatChildAG.model.id}}" class="collapser-btn collapsed" aria-expanded="false">
+                                                                                  {{ subCatChildAG.model.title }}<span>({{getFilesTotal(subCatChildAG.model.id)}})</span>
+                                                                              </a>
+                                                                              <!-- <div class="collapse fonts-collapesd" id="subcat-3-{{subCatChildAG.model.id}}" [attr.data-parent]="'#subcat-2-' + subCatChild.model.id">
+                                                                              </div> -->
+                                                                          </div>
+                                                                      </div>
+                                                                  </div><!-- END LEVEL 3 -->
+                                                              </div>
+                                                          </div>
+                                                          <!-- END LEVEL 2 -->
+                                                      </div>
+                                                  </div>
+                                                  <!-- END LEVEL 1 -->
+                                              </div>
+                                  </div>
+                                  <!--<br/><br/><br/><br/><br/>-->
+                              <!--<div class="lib-grid-view" *ngIf="view=='grid';else listview">-->
+                                 <!--<div *ngFor="let category of fileterCategoires">-->
+                                     <!--<div class="category-type-box">-->
+                                       <!--<a href="#cat-{{category.id}}" class="collapser-btn" data-toggle="collapse">-->
+                                          <!--<span>{{category.title}} </span>-->
+                                          <!--<i class="fa fa-caret-down"></i>-->
+                                          <!--<i class="fa fa-caret-right" style="display:none;"></i>-->
+                                        <!--</a>-->
+                                      <!--<div class="collapse fonts-collapesd show" id="cat-{{category.id}}">-->
+                                         <!--<ul class="drags-img-list sb-drags-img-list"-->
+                                          <!--cdkDropList-->
+                                          <!--#todoList="cdkDropList"-->
+                                          <!--[cdkDropListData]="category.files.data"-->
+                                          <!--[cdkDropListConnectedTo]="[doneList]"-->
+                                          <!--*ngIf="category.files.data.length ;  else nofile"-->
+                                          <!--&gt;-->
+                                           <!--<li *ngFor="let file of category.files.data" cdkDrag>-->
+                                              <!--<div class="thumbnail">-->
+                                                <!--<i class="fa fa-arrow-circle-down close" aria-hidden="true" (click)="libHelper.downloadFile(file.path)"></i>-->
+                                                <!--<span class="close" (click)="deleteFile(file.file_id,category.id)" ></span>-->
+                                                <!--<img class="img-fluid" [src]="libHelper.fileThumbbyType(file)" alt="{{file.name}}">-->
+                                              <!--</div>-->
+                                              <!--<div class="content">-->
+                                                <!--<span class="name">{{file.name}}</span>-->
+                                              <!--</div>-->
+                                           <!--</li>-->
+                                         <!--</ul>-->
+                                         <!--<ng-template #nofile>No Files</ng-template>-->
+                                       <!--</div>-->
+                                     <!--</div>-->
+                                 <!--</div>-->
+                              <!--</div>&lt;!&ndash; end if grid-view &ndash;&gt;-->
+
+                              <!-- List View -->
+                              <ng-template #listview>
+                              <div class="lib-list-view">
+                                 <div *ngFor="let category of fileterCategoires">
+                                     <div class="category-type-box">
+                                       <a href="#cat-{{category.id}}" class="collapser-btn" data-toggle="collapse">
+                                          <span>{{category.title}} </span>
+                                      
+                                          <i class="fa fa-caret-right" style="display:none;"></i>
+                                        </a>
+                                      <div class="collapse fonts-collapesd show" id="cat-{{category.id}}">
+                                         <ul class="drags-img-list sb-drags-img-list"
+                                          cdkDropList
+                                          #todoList="cdkDropList"
+                                          [cdkDropListData]="category.files.data"
+                                          [cdkDropListConnectedTo]="[doneList]"
+                                          *ngIf="category.files.data.length ;  else nofile"
+                                          >
+                                           <li *ngFor="let file of category.files.data" cdkDrag>
+                                              <div class="list-content">
+                                                <div class="name">{{file.name}}</div>
+                                                <div class="format">{{libHelper.fileExtension(file.name)}}</div>
+                                                <div class="size">{{file.size}}</div>
+                                              </div>
+                                           </li>
+                                         </ul>
+                                         <ng-template #nofile>No Files</ng-template>
+                                       </div>
+                                     </div>
+                                 </div>
+                              </div><!-- end if grid-view -->
+                              </ng-template>
+                              </div><!--/.editor-templates-wrap-->
+                             </div>
+                          </div><!--/.tab-content-->
+                       </div><!--/.ic-editor-sidebar-tools-->
+                      </div><!--/End sidebar-->
+                      <!-- Start Main -->
+                      <div class="ic-editor-workarea website-work-area">
+                           <div class="lib-private-upper">
+                               <div class="lib-private-add-user">
+                                  <div class="row">
+                                     <div class="col">
+                                       <div class="form-group">
+                                        <ng-select [items]="Offices" bindLabel="name" bindValue="id" [searchable]="true" placeholder="Search office" [(ngModel)]="selectedOffice" (change)="getofficeUsers()">
+                                        </ng-select>
+                                       </div>
+                                     </div>
+                                     <div class="col">
+                                       <div class="form-group">
+                                        <ng-select [items]="officeUsers" bindLabel="full_name" [searchable]="true" placeholder="Search Users" [(ngModel)]="selectedUser" notFoundText="please select an office first">
+                                        </ng-select>
+                                       </div>
+                                     </div>
+                                     <div class="col-2">
+                                       <a href="javascript:void 0" (click)="addUserList()"><img src="assets/img/editor/attach-file.png" alt=""></a>
+                                     </div>
+                                  </div>
+                                  <div class="row">
+                                    <ul class="added-user-list" *ngIf="shareUserList" >
+                                      <li *ngFor="let u of shareUserList">
+                                        <img [src]="u.photo ? u.photo_thumb : 'assets/img/profile.png'" alt="{{u.first_name}}"><span class="close" (click)="removeUser(u)"></span>
+                                      </li>
+                                    </ul>
+                                  </div>
+                               </div>
+
+                               <div class="lib-private-email-invite col-5">
+                                  <div class="row">
+                                     <div class="col col-7">
+                                       <div class="form-group">
+                                          <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" email="true" #prmEmail="ngModel">
+                                          <p *ngIf="prmEmail.errors?.email">Please enter valid email address</p>
+                                       </div>
+                                     </div>
+                                     <div class="col-1 p-0">
+                                       <button type="submit" class="btn btn-sm p-0 shadow-none"  (click)="addShareEmail(prmEmail.errors?.email)" [disabled]="email && prmEmail.errors?.email"><img src="assets/img/editor/attach-file.png" alt=""></button>
+                                     </div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="col-8">
+                                        <p *ngFor="let email of shareEmailList" class="position-relative">
+                                           {{email}}  <span class="close-icon sm" (click)="removeEmail(email)" ></span>
+                                        </p>
+                                     </div>
+                                  </div>
+                               </div>
+                           </div>
+
+                            <div class="dragdrop-area dragdrop-small">
+
+                              <button type="button" class="dragdrop-btn">Drag and drop to share files</button>
+
+                              <ul class="drags-img-list drags-img-list-box"
+
+                              cdkDropList
+                              #doneList="cdkDropList"
+                              [cdkDropListData]="shareFilesList"
+                              [cdkDropListConnectedTo]="[todoList]"
+                              (cdkDropListDropped)="addToList($event)"
+                              >
+                                <li cdkDrag *ngFor="let file of shareFilesList">
+                                  <div class="thumbnail">
+                                    <span class="close" (click)="removeSharefile(file)"></span>
+                                    <img [src]="libHelper.fileThumbbyType(file)" alt="" class="img-fluid">
+                                  </div>
+                                  <div class="content">
+                                    <span class="name">{{file.name}}</span>
+
+                                    <span [hidden]='1'>Category A</span>
+                                  </div>
+                                </li>
+
+
+                              </ul>
+                            </div>
+                          <div class="modal fade icentra-popup library-manager-popup" id="openModalLibrarypopup" >
+                              <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                      <app-library-manager (TaskFileSelected)="shareTheArray($event)"
+                                                           (refreshParent)="refreshNow($event)"></app-library-manager>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div><!-- End Main -->
+                    </div><!--/body-->
+            </div>
+      </div><!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+ <app-activity-stream></app-activity-stream>
+
+
+</div><!-- /.inner-wrapper -->

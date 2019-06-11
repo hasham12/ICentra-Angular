@@ -1,0 +1,296 @@
+<div class="container-fluid">
+    <div class="welcome-message">
+        <div class="welcome-header d-flex">
+            <h3>Create New Task</h3>
+            <app-breadcrumb></app-breadcrumb>
+        </div>
+    </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div class="welcome-outer-content">
+                <p>This section refers to all details regarding the user tasks</p>
+                <div class="activity-opner">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+                </div>
+            </div>
+            <!-- EDitor Start  -->
+            <div class="icentra-editor creat-template-editor mt-2">
+                <div class="ic-editor-inner">
+                    <div class="ic-editor-header">
+                        <!-- 1 -->
+                        <div class="header-active-tool">
+                   <span class="header-active-tool-sign">
+                     <img src="assets/img/editor/create-task.png" alt="">
+                   </span>
+                            <div class="header-active-tool-name">
+                                <h6>Tasks</h6>
+                                <span>My Task</span>
+                            </div>
+                        </div>
+
+                        <ul class="ic-header-tool-list">
+                            <li><a title="Save" routerLink="javascript:;">
+                                <img src="assets/img/editor/save.png" alt="">
+                            </a>
+                            </li>
+                            <li><a title="Publish" routerLink="javascript:;">
+                                <img src="assets/img/editor/publish.png" alt="">
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ic-editor-body">
+                        <div class="ic-editor-sidebar no-tab-content">
+                            <div class="ic-editor-sidebar-tools">
+                                <!-- Tabs -->
+                                <ul class="nav --nav-tabs ic-tools-tab">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" routerLink="/tasks/create-task">
+                                            <img src="assets/img/editor/hvr-create.png" alt="" >
+                                            <span>Create</span>
+                                        </a>
+                                    </li>
+                                    <!--<li class="nav-item">-->
+                                        <!-- routerLink="/task/draft" -->
+                                        <!--<a class="nav-link">-->
+                                            <!--<img src="assets/img/editor/draft.png" alt="">-->
+                                            <!--<img src="assets/img/editor/hvr-draft.png" alt="" class="hvr">-->
+                                            <!--<span>Draft</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                </ul>
+                            </div><!--/.ic-editor-sidebar-tools-->
+                        </div><!--/-sidebar-->
+                        <!-- Main -->
+                        <div class="user-workarea">
+                            <div action="" class="form">
+                                <div class="create-user-form">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="task-switch-wrap">
+                                                <p>Single Task</p>
+                                                <label class="switch" routerLink="/tasks/create-task">
+                                                    <input type="checkbox">
+                                                    <span class="slider"></span>
+                                                </label>
+                                                <p>Marketing Task</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form [formGroup]="createTaskForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" *ngIf="taskSets">
+                                                    <label for="role">Task Set</label>
+                                                    <ng-select formControlName="task_set_id" [items]="taskSets"
+                                                               bindLabel="name" bindValue="id" [searchable]="true"
+                                                               (change)="showMarketingTasks($event)"
+                                                               [clearable]="false" placeholder="Select Task Set">
+                                                    </ng-select>
+                                                    <span class="dummy-text"
+                                                          *ngIf="createTaskForm.controls['task_set_id'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['task_set_id'].hasError('required')">Task Set is required<br></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row justify-content-between">
+                                                    <div class="col-md-5">
+                                                        <label for="startdate">Start Date</label>
+                                                        <input type="date" formControlName="start_date"
+                                                               class="form-control block-tab" (input)="dateChanged()" >
+                                                        <span class="dummy-text">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['start_date'].hasError('required')">Please add a start date<br></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" *ngIf="editableIndex !== -1">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <h4 class="sub-task-heading"><b>{{editableRow.title}}</b></h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-6" *ngIf="editableRow.is_printing == 1">
+                                                        <label>Printing</label>
+                                                        <div class="form-group">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="custom-checkbox">
+                                                                    <input type="radio" value="1"
+                                                                           [ngModelOptions]="{standalone: true}"
+                                                                           [(ngModel)]="editableRow.printing_type_id"
+                                                                           ng-value="1">In house
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="custom-checkbox">Third party
+                                                                    <input type="radio" value="2"
+                                                                           [ngModelOptions]="{standalone: true}"
+                                                                           [(ngModel)]="editableRow.printing_type_id"
+                                                                           ng-value="2" checked>
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group quantity-details"
+                                                             *ngIf="editableRow.printing_type_id === '1'">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-3">
+                                                                    <div class="custom-site-quantity">
+                                                                        <span class="btn-dec" (click)="changeQtyBox('minus')">-</span>
+                                                                        <input type="number"
+                                                                               (input)="getBill()"
+                                                                               [ngModelOptions]="{standalone: true}"
+                                                                               [(ngModel)]="editableRow.quantity"
+                                                                               class="form-control" min="0">
+                                                                        <span class="btn-inc" (click)="changeQtyBox('plus')">+</span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-2 pl-0"><span>Quantity</span></div>
+                                                                <div class="col-4 pl-0"><span
+                                                                        class="printing-price">${{ editableRow.bill | number: '1.2-2'}}</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" *ngIf="editableRow.is_property == 1">
+                                                        <div class="create-task-dropdown">
+                                                            <label>Property</label>
+                                                            <ng-select [(ngModel)]="editableRow.property_id"
+                                                                       [ngModelOptions]="{standalone: true}"
+                                                                       [items]="propertiesList"
+                                                                       (search)="searchedProperties($event)"
+                                                                       bindLabel="address"
+                                                                       bindValue="_id"
+                                                                       (change)="propertySelection($event)"
+                                                                       [searchable]="true"
+                                                                       placeholder="Search Property">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" *ngIf="editableRow.is_assign == 1">
+                                                        <div class="create-task-dropdown">
+                                                            <label for="assign">Assignee</label>
+                                                            <ng-select [(ngModel)]="editableRow.assignee"
+                                                                       [items]="originalAssigns"
+                                                                       [ngModelOptions]="{standalone: true}"                                                                       bindLabel="full_name"
+                                                                       bindValue="id"
+                                                                       [searchable]="true" [multiple]="true"
+                                                                       placeholder="Select Assignee">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" *ngIf="editableRow.is_commenting == 1">
+                                                        <label>Additional Comments</label>
+                                                        <textarea name="additionalcoments" [(ngModel)]="editableRow.description"
+                                                                  class="form-control block-tab" cols="20" [ngModelOptions]="{standalone: true}"
+                                                                  rows="4"></textarea>
+                                                    </div>
+                                                    <div class="col-md-12 text-right"><br/>
+                                                        <button  class="btn btn-primary text-right" (click)="editNextBtn(editableIndex)">Edit Next</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class=" col-md-12 job-table-body task-table-body" *ngIf="subTask">
+
+                                                <h2>Below is the list of sub task(s)</h2>
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Task</th>
+                                                            <th scope="col">Task Type</th>
+                                                            <th scope="col">Start Date</th>
+                                                            <th scope="col">Due Date</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Priority</th>
+                                                            <th scope="col">Category</th>
+                                                            <th scope="col">Property</th>
+                                                            <th scope="col">Comments </th>
+                                                            <th scope="col">Print Cost</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr *ngFor="let sub Of subTask">
+                                                            <td><p>{{ sub.title }}</p></td>
+                                                            <td><p>{{ getNameById(sub.job_type_id, 'type')}}</p></td>
+                                                            <td><p>{{ sub.start_date }}</p></td>
+                                                            <td><p>{{ sub.due_date }}</p></td>
+                                                            <td><p>{{ getNameById(sub.task_status_id, 'status') }}</p></td>
+                                                            <td><p>{{ getNameById(sub.priority_id, 'priority')}}</p></td>
+                                                            <td><p>{{ getNameById(sub.task_category_id, 'category')}}</p></td>
+                                                            <td>
+                                                                <p *ngIf="sub.is_property == 0"> N/A </p>
+                                                                <p *ngIf="sub.is_property == 1 && addressBox"> {{getNameById(sub.property_id, 'pobox')}}  </p>
+                                                            </td>
+                                                            <td>
+                                                                <p *ngIf="sub.is_commenting == 0"> N/A </p>
+                                                                <p *ngIf="sub.is_commenting == 1"> {{sub.description}} </p>
+                                                            </td>
+                                                            <td>
+                                                                <p *ngIf="sub.is_printing == 0"> N/A </p>
+                                                                <p *ngIf="sub.is_printing == 1 && sub.printing_type_id == 2"> Third party </p>
+                                                                <p *ngIf="sub.is_printing == 1 && sub.printing_type_id == 1"> In house {{sub.bill | number: '1.2-2'}} </p>
+                                                            </td>
+                                                            <td>
+                                                                <a (click)="editorOpen(sub)">
+                                                                    <img src="assets/img/editor/edit.png"/>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- Table End -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <!--<button class="btn btn-primary" (click)="onSubmit('later')">Save for-->
+                                                        <!--later-->
+                                                    <!--</button>-->
+                                                    <button class="btn btn-primary" routerLink="/tasks/my-tasks">Cancel</button> &nbsp;&nbsp;
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary" (click)="onSubmit('save')">Publish
+                                                        Task
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--/end-main-->
+                    </div><!--/body-->
+                </div>
+            </div>
+            <!-- EDitor End -->
+        </div>
+        <!--/.container-fluid-->
+    </div>
+    <!--/.content-wrapper-->
+    <!-- Activity Stream -->
+    <app-activity-stream></app-activity-stream>
+
+
+</div><!-- /.inner-wrapper -->

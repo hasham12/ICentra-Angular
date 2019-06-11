@@ -1,0 +1,104 @@
+
+                        <div class="upload-my-image">
+                           <button class="upload-btn print-popup-toggler" type="button">Create New Design</button>
+                        </div>
+
+                        <div class="search-reports-templates">
+                          <div action="" class="form-inline">
+                             <div class="input-group">
+                                <div class="input-group tempsection">
+                                   <input type="text" name="templatesearch"  id="templatesearch" class="search-task-input search-input search-box" placeholder="Search Kits" (input)="searchtemplates()">
+                                   <button class="close-icon"  type="reset" (click)="clearvalues()" style="display: none;"></button>
+                                   <button class="btn-small searchicon task-search-btn" type="submit" (click)="searchtemplates()">
+                                   <i class="fa fa-search"></i>
+                                   </button>
+                                </div>
+                                 <div class="input-group tempsection" style="margin-top: 5px;">
+                                   <input type="text" name="usertemplatesearch"  id="usertemplatesearch" class="search-task-input search-input search-box" placeholder="Search User Kits" (input)="searchusertemplates()">
+                                   <button class="close-icon"  type="reset" (click)="clearvalues()" style="display: none;"></button>
+                                   <button class="btn-small searchicon task-search-btn" type="submit" (click)="searchusertemplates()">
+                                   <i class="fa fa-search"></i>
+                                   </button>
+                                </div>
+                             </div>
+                          </div>
+                        </div><!--/.search-reports-templates-->
+
+                        <div class="search-by-cat template-categories d-flex">
+                           <div class="search-cat-dropdown position-relative">
+                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                               <span class="selcatname">Select Category</span>
+                              </a>
+                              <div class="selecttempcatid dropdown-menu dropdown-menu-categories catdropdown" id="tmpcategeries">
+                              </div>
+                           </div>
+                           <div class="arrange-dropdown">
+                           <a href="javascript:void(0)" class="layout-toggler" data-toggle="dropdown">
+                             <img src="assets/img/editor/layout-toggler.png" alt="">
+                           </a>
+                           <div class="dropdown-menu catdropdown">
+                                <a class="dropdown-item" href="javascript:void(0);" (click)='addtempcatmodal()'>Add Category</a>
+                                <a class="dropdown-item" href="javascript:void(0);" (click)='createnewdesign()'>New Template</a>
+                            </div>
+                            </div>
+                        </div><!--/.search-by-cat-->
+                        <div class="editor-templates-wrap xn-bg-light"  malihu-scrollbar [scrollbarOptions]="inset2dark">                          
+                          <div class="category-type-box" id="templatesection">
+
+                          </div>
+                           
+                        </div><!--/.editor-templates-wrap-->
+                        
+                        <!-- New Popup -->
+                         <div class="modal fade icentra-popup new-icentra-popup" id="tempcategorymodal">
+                           <div class="modal-dialog modal-dialog-centered">
+                             <div class="modal-content">
+                                <form #tempcatForm="ngForm" (ngSubmit)="onTempCatSubmit(tempcatForm)" id="tempcatForm" novalidate>
+                                       <!-- Modal Header -->
+                                       <div class="modal-header">
+                                          <span> Add Category</span>
+                                         <a href="javascript:;" class="close" data-dismiss="modal">
+                                           <img src="assets/img/icons/popup-close.png" alt="">
+                                         </a>
+                                       </div>
+                                       <!-- Modal body -->
+                                       <div class="modal-body">
+                                          <div class="form-group">
+                                              <label for="role" class="catsec">Category</label>
+                                                  <input type="text" class="form-control catsec" placeholder="Enter Name" name="name" id="name" ngModel>
+                                          </div>
+
+                                       </div>
+                                       <!-- Modal footer -->
+                                       <div class="modal-footer">
+                                         <button type="submit" class="btn btn-primary addimagemodal-btn">Add</button>
+                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                       </div>
+                                </form>
+                             </div>
+                           </div>
+                         </div>
+
+                        <div class="modal fade icentra-popup" id="alertModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                <form #warningForm="ngForm" (ngSubmit)="onWarningFormSubmit(warningForm)" id="warningForm" novalidate>
+                                    <input type="hidden" name="deletetempid" id='deletetempid' ngModel>
+                                    <div class="modal-header">
+                                        Warning
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label style="margin-top: 20px;"><h6>Please confirm you want to delete this design.</h6></label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary addimagemodal-btn">OK</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+   

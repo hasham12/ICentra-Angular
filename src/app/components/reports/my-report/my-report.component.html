@@ -1,0 +1,218 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>All Reports</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+
+
+    <div class="reports-tools-header mydesign-header-tools myjob-header-tools mb-2 mt-1">
+        <div class="search-cat-dropdown m-0">
+         <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+          <span>filter by</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-categories">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          </div>
+         </div>
+
+         <div class="add-new-task ml-auto mr-0">
+         <button type="button" class="xn-bg-red new-task-btn">
+          <i class="fa fa-paint-brush" aria-hidden="true"></i>  Customise My View
+          </button>
+         </div>
+    </div>
+
+      <!-- job tracking progress -->
+      <div class="job-tracking-progress">
+        <h3><span>Overview</span></h3>
+        <div class="tracking-progress-row">
+           <div class="singler-tracker in-progress progress-cgreen">
+                <span>My Expenses</span>
+                  <circle-progress
+                    [percent]="30"
+                    [radius]="50"
+                    [outerStrokeWidth]  ="5"
+                    [innerStrokeWidth]  ="2"
+                    [space]             ="2"
+                    [outerStrokeColor]  ="'#fd7980'"
+                    [innerStrokeColor]  ="'#fd7980'"
+                    [animation]         ="true"
+                    [titleFontSize]     = "30"
+                    [showSubtitle]      ="false"
+                    [animationDuration] ="300"
+                    [showBackground]    ="false"
+                    [showUnits]    ="false"
+                    [titleColor]        ="'#fd7980'"
+                  ></circle-progress>
+                <button type="button" class="view-btn">View</button>
+           </div>
+           <div class="singler-tracker in-progress progress-red">
+                <span>My Templates</span>
+                <circle-progress
+                  [percent]="50"
+                  [radius]="50"
+                  [outerStrokeWidth]  ="5"
+                  [innerStrokeWidth]  ="2"
+                  [space]             ="2"
+                  [outerStrokeColor]  ="'#597fdd'"
+                  [innerStrokeColor]  ="'#597fdd'"
+                  [animation]         ="true"
+                  [titleFontSize]     = "30"
+                  [showSubtitle]      ="false"
+                  [animationDuration] ="300"
+                  [showBackground]    ="false"
+                  [showUnits]         ="false"
+                  [titleColor]        ="'#597fdd'"
+                ></circle-progress>
+                <button type="button" class="view-btn">View</button>
+           </div>
+           <div class="singler-tracker in-progress progress-primary">
+                <span>Jobs Outstanding</span>
+                <circle-progress
+                  [percent]="70"
+                  [radius]="50"
+                  [outerStrokeWidth]  ="5"
+                  [innerStrokeWidth]  ="2"
+                  [space]             ="2"
+                  [outerStrokeColor]  ="'#30d4c3'"
+                  [innerStrokeColor]  ="'#30d4c3'"
+                  [animation]         ="true"
+                  [titleFontSize]     = "30"
+                  [showSubtitle]      ="false"
+                  [animationDuration] ="300"
+                  [showBackground]    ="false"
+                  [showUnits]         ="false"
+                  [titleColor]        ="'#30d4c3'"
+                ></circle-progress>
+                <button type="button" class="view-btn">View</button>
+           </div>
+           <div class="singler-tracker in-progress progress-warning">
+                <span>Jobs Complete</span>
+                <circle-progress
+                  [percent]="90"
+                  [radius]="50"
+                  [outerStrokeWidth]  ="5"
+                  [innerStrokeWidth]  ="2"
+                  [space]             ="2"
+                  [outerStrokeColor]  ="'#ffc400'"
+                  [innerStrokeColor]  ="'#ffc400'"
+                  [animation]         ="true"
+                  [titleFontSize]     = "30"
+                  [showSubtitle]      ="false"
+                  [animationDuration] ="300"
+                  [showBackground]    ="false"
+                  [showUnits]         ="false"
+                  [titleColor]        ="'#ffc400'"
+                ></circle-progress>
+                <button type="button" class="view-btn">View</button>
+           </div>
+
+           <div class="singler-tracker in-progress progress-red">
+                <span>Create Reports</span>
+                <div class="create-report"><img src="assets/img/editor/reports.png" alt=""></div>
+                <button type="button" class="view-btn" routerLink="/report/create-report">Create</button>
+           </div>
+        </div>
+      </div>
+
+
+      <!-- Spend Section -->
+      <div class="spend-section">
+        <div class="row">
+          <div class="col-md-7 spend-col">
+            <div class="current-spend s-spend">
+              <h3>
+                  <span>Current</span> Spend
+              </h3>
+
+              <div class="current-spend-body">
+                  <div style="display: block">
+                    <canvas baseChart
+                            [datasets]="barChartData"
+                            [labels]="barChartLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend"
+                            [chartType]="barChartType"
+                            >
+                    </canvas>
+                  </div>
+                <p>Revenue</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 spend-col">
+             <div class="s-spend spend-history">
+               <div class="s-spend-row">
+                 <div class="s-spend-md primary-history">
+                   <div class="history-header">
+                     <i class="fa fa-tag"></i>
+                     <span>October Spend</span>
+                   </div>
+                   <div class="history-price">
+                     <h2>- $4,500</h2><i class="fas fa-long-arrow-alt-down"></i>
+                   </div>
+
+
+                 </div>
+                 <div class="s-spend-md ferozi-history">
+                     <div class="history-header">
+                       <i class="fa fa-tag"></i>
+                       <span>TD 2018 Spend</span>
+                     </div>
+                     <div class="history-price">
+                       <h2>$10,800</h2><i class="fas fa-long-arrow-alt-up"></i>
+                     </div>
+                 </div>
+              </div>
+              <div class="s-spend-row">
+                 <div class="s-spend-md red-history">
+                     <div class="history-header">
+                       <i class="fa fa-tag"></i>
+                       <span>September Spend</span>
+                     </div>
+                     <div class="history-price">
+                       <h2>+$4,500</h2><i class="fa fa-long-arrow-alt-down"></i>
+                     </div>
+                 </div>
+                <div class="s-spend-md dark-history">
+                     <div class="history-header">
+                       <i class="fa fa-cloud-download-alt"></i>
+                       <span>Download Report</span>
+                     </div>
+                     <ul class="reports-download-links">
+                       <li><a class="bg-primary" href="javascript:void(0)"><i class="fas fa-print"></i></a></li>
+                       <li><a class="bg-danger" href="javascript:void(0)"><i class="far fa-file-pdf"></i></a></li>
+                       <li><a class="bg-ferozi" href="javascript:void(0)"><i class="far fa-file-excel"></i></a></li>
+                     </ul>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!--/spend-section-->
+
+
+
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+ <!-- Activity Stream -->
+ <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->

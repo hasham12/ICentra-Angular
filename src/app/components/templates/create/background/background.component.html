@@ -1,0 +1,191 @@
+<div class="upload-my-image">
+   <button class="upload-btn print-popup-toggler" type="button">Create New Design</button>
+</div>
+<div class="search-reports-templates">
+   <div action="" class="form-inline">
+      <div class="input-group">
+         <input type="text" id="bgimagesearch" name="bgimagesearch"  class="search-task-input search-input search-box" placeholder="Search Backgrounds" (input)="searchbgimages()">
+         <button class="close-icon"  type="reset" (click)="clearvalues()" style="display: none;"></button>
+         <button class="btn-small searchicon task-search-btn" type="button" (click)="searchbgimages()">
+         <i class="fa fa-search"></i>
+         </button>
+      </div>
+   </div>
+</div>
+<div class="search-by-cat template-categories d-flex">
+   <div class="search-cat-dropdown">
+      <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+      <span class="selbgimgcatname">Select Category</span>
+      </a>
+      <div class="selectbgimgcatid dropdown-menu dropdown-menu-categories catdropdown" id="bgimgcategeries">
+      </div>
+   </div>
+   <div class="arrange-dropdown">
+      <a  href="javascript:void(0)" data-toggle="dropdown">
+      <img src="assets/img/editor/layout-toggler.png">
+      </a>
+      <div class="dropdown-menu catdropdown">
+         <a class="dropdown-item" href="javascript:void(0);" (click)='addbgimgcatmodal()'>Add Category</a>
+         <a class="dropdown-item" href="javascript:void(0);" (click)='addbgimgmodal()'>Add Background</a>
+      </div>
+   </div>
+</div>
+<div class="upload-my-image">
+   <button class="upload-btn" type="button" (click)="addbgimgmodal();">Add Background</button>
+</div>
+<div class="upload-my-image">
+   <button class="upload-btn" type="button" (click)="deleteCanvasBg();">Remove Background</button>
+</div>
+<div class="sidebar-tools-tabs">
+   <ul class="nav">
+      <li>
+         <a class="active" id="solid-tab" data-toggle="tab" href="#solid-contents">Solid</a>
+      </li>
+      <li>
+         <a class="" id="background-tab" data-toggle="tab" href="#backgrounds-contents">Backgrounds</a>
+      </li>
+   </ul>
+   <div class="tab-content">
+      <div class="tab-pane fade show active" id="solid-contents">
+         <div class="custom-bg-item">
+            <input type="text" class="custom-bg-code" value="{{props.canvasFill}}">
+            <input title="BG Color" type="text" class="font-color font-tools-sm-input colorselectorfont"  [cpPosition]="'right'" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill" (colorPickerChange)="setCanvasFill()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+            <button (click)="savebgcolor()" class="btn btn-primary btn-xs savebtnbg">Save</button>
+         </div>
+         <div class="solid-color">
+            <p class="solid-heading">Solid Background Color</p>
+            <ul class="gradient-colors-list" id="bgcolorlist">
+            </ul>
+         </div>
+         <p class="solid-heading">Gradient Background Color</p>
+         <div class="gradient-btns gradient-btns-left nav">
+            <a href="javascript:void(0);" id="solidbg-tab" class="btn linearbtn active" data-toggle="tab" href="#linearbgtab" style="width:45%;" (click)="linearGradient()">
+            <img src="assets/img/editor/linear.png" alt="">
+            <span>Linear</span>
+            </a>
+            <a href="javascript:void(0);" class="btn radialbtn" id="backgroundbg-tab" data-toggle="tab" href="#radialbgtab" style="width:40%;"  (click)="radialGradient()">
+            <img src="assets/img/editor/radial.png" alt="">
+            <span>Radial</span>
+            </a>
+         </div>
+         <!-- Color List -->
+         <!-- <ul class="gradient-colors-list solid-gradient-colors-list gradientbgsec grdbgsec">
+            </ul> -->
+         <div class="tab-content">
+            <div class="tab-pane fade show active" id="linearbgtab">
+               <ul class="gradient-colors-list gradientbgsec">
+               </ul>
+            </div>
+            <div class="tab-pane fade" id="radialbgtab">
+               <ul class="gradient-colors-list radialbggradientsec">
+               </ul>
+            </div>
+         </div>
+         <!-- End Color List -->
+         <div class="selected-color">
+
+             <div class=""  style="width: 80px;">
+               <div ass="fill-color grd1" style="float: left;">
+                  <input type="text" class="font-color font-tools-sm-input colorselectorfont bggrdcol" style="height: 30px;width: 40px;"  [cpPosition]="'top'" [(colorPicker)]="props.colorone" [style.background]="props.colorone" (colorPickerChange)="getGradientcolone()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+               </div>
+               <div style="float: right;margin-top: 5px;">Color1</div>
+               <div class="" style="float: left;margin-top: 5px;"><input type="text" class="custom-bg-code colsection1 colsec1" value="" id="grdcolval1" (input)="grdcolval1()"></div>
+            </div>
+            <div class=""  style="width: 80px;margin-left: 10px;">
+               <div ass="fill-color grd1" style="float: left;">
+                  <input type="text" class="font-color font-tools-sm-input colorselectorfont bggrdcolr" style="height: 30px;width: 40px;"  [cpPosition]="'top'" [(colorPicker)]="props.colortwo" [style.background]="props.colortwo" (colorPickerChange)="getGradientcoltwo()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+               </div>
+               <div style="float: right;margin-top: 5px;">Color2</div>
+               <div class="" style="float: left;margin-top: 5px;">
+                  <input type="text" class="custom-bg-code colsec2 colsection1" id="grdcolval2" value="" (input)="grdcolval2()">
+               </div>
+            </div>
+
+
+
+            <button (click)="saveGradient()" class="btn btn-primary btn-xs savebtnbg">Save</button>
+
+         </div>
+         </div>
+         <div class="tab-pane fade" id="backgrounds-contents">
+            <div class="photos-collapser" >
+               <a href="#photos" class="collapser-btn" data-toggle="collapse">
+                  <span>Photos</span>
+                  <div class="allPhotos">All <i class="downright fa fa-caret-down"></i></div>
+               </a>
+               <div malihu-scrollbar [scrollbarOptions]="inset2dark" style="max-height:100px;">
+                  <div class="collapse photo-collapesd show photosection" id="photos" >
+                  </div>
+               </div>
+            </div>
+            <div class="photos-collapser">
+               <a href="#pattren" class="collapser-btn" data-toggle="collapse">
+                  <span>Patterns</span>
+                  <div class="allPattern">All <i class="rightdown fa fa-caret-right"></i></div>
+               </a>
+               <div  style="max-height:100px;" malihu-scrollbar [scrollbarOptions]="inset2dark">
+                  <div class="collapse photo-collapesd pattrensection" id="pattren"></div>
+               </div>
+            </div>
+         </div>
+         </div>
+         </div>
+         <!-- New Popup -->
+         <div class="modal fade icentra-popup new-icentra-popup" id="addbgimgmodal">
+            <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                  <form #bgimgForm="ngForm" (ngSubmit)="onBgimgSubmit(bgimgForm)" id="bgimgform">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <span> Add Background</span>
+                        <a href="javascript:;" class="close" data-dismiss="modal">
+                                 <img src="assets/img/icons/popup-close.png" alt="">
+                        </a>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                     <div class="form-group">
+                        <label for="role" class="catsec">Category</label>
+                        <select id="cat_id" name="cat_id" class="form-control bgimgcatid catdropdown" ngModel required>
+                           <option value="null">Select Category</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="role" class="catsec">Image File</label>
+                        <input type="file" class="form-control-file catsec" id="path" style="margin-left: 18px;" name="path" (change)="onFileChange($event)" #fileInput accept="image/x-png,image/jpeg" multiple="multiple">
+                     </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary addimagemodal-btn">Add</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="modal fade icentra-popup" id="bgimagecategorymodal">
+            <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                  <form #bgimgcatForm="ngForm" (ngSubmit)="onBgimgCatSubmit(bgimgcatForm)" novalidate>
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                     Add Category
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                     <div class="form-group">
+                        <label for="role" class="catsec">Category</label>
+                        <input type="text" class="form-control catsec" placeholder="Enter Name" name="name" id="name" ngModel>
+                     </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary addimagemodal-btn">Add</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+                  </form>
+               </div>
+            </div>
+         </div>

@@ -1,0 +1,234 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>Library</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+
+
+
+  <div class="icentra-editor creat-template-editor">
+            <div class="ic-editor-inner">
+                    <div class="ic-editor-header">
+                      <!-- 1 -->
+                       <div class="header-active-tool">
+                         <span class="header-active-tool-sign bg-dark">
+                           <img src="assets/img/editor/library-icon.png" alt="">
+                         </span>
+                         <div class="header-active-tool-name">
+                           <h6>Received Files</h6>
+                           <span>4 Items</span>
+                         </div>
+                       </div>
+                      <!-- 3 -->
+                      <ul class="ic-header-tool-list">
+                      </ul>
+                    </div>
+                    <div class="ic-editor-body">
+
+                      <div class="ic-editor-sidebar">
+                        <div class="ic-editor-sidebar-tools">
+                          <!-- Tabs -->
+                          <ul class="nav --nav-tabs ic-tools-tab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link"  routerLink="/template/library/private">
+                                <img src="assets/img/editor/hvr-private.png" alt="">
+                                <img src="assets/img/editor/private.png" alt="" class="hvr">
+                                <span>Private</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="lib-site-tab" routerLink="/template/library/office">
+                                <img src="assets/img/editor/edit-site.png" alt="">
+                                <img src="assets/img/editor/hvr-lib-office.png" alt="" class="hvr">
+                                <span>Office</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="lib-icentra-tab" routerLink="/template/library/icentra">
+                                <img src="assets/img/editor/lib-icentra.png" alt="">
+                                <img src="assets/img/editor/hvr-lib-icentra.png" alt="" class="hvr">
+                                <span>iCentra</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link active" routerLink="/template/library/received">
+                                <img src="assets/img/editor/received.png" alt="">
+                                <img src="assets/img/editor/hvr-receied.png" alt="" class="hvr">
+                                <span>Received</span>
+                              </a>
+                            </li>
+                          </ul>
+                          <!-- Tabs Content -->
+                          <div class="tab-content ic-tools-tab-content">
+                            <div class="tab-pane fade show active" id="lib-private" role="tabpanel">
+                              <div class="search-reports-templates">
+                                <div action="" class="form-inline">
+                                    <div class="input-group">
+                                        <input type="text" class="search-task-input search-input" placeholder="Search Private Library" (input)="filterFiles()" [(ngModel)]="fileQuery">
+                                          <button type="reset" class="close-icon sm" (click)="fileQuery=''" *ngIf="fileQuery"></button>
+                                          <button class="task-search-btn" type="submit" *ngIf="!fileQuery">
+                                            <i class="fa fa-search"></i>
+                                          </button>
+                                    </div>
+                                </div>
+                              </div><!--/.search-reports-templates-->
+
+                              <div class="search-by-cat template-categories d-flex">
+                                  <div class="search-cat-dropdown mb-2" *ngIf="categories">
+                                      <ng-select [items]="categories" bindLabel="title" bindValue="id" [searchable]="true" placeholder="Search / Upload Category" [(ngModel)]="category_id" (change)="filterFiles()">
+                                      </ng-select>
+                                  </div>
+                              </div><!--/.search-by-cat-->
+                              <div class="lib-cat-toggler">
+                                <span>Views</span>
+                                <span class="toggler">
+                                  <img class="cursor-pointer" src="assets/img/editor/grid-toggler.png" alt="" [hidden]="view=='grid'" (click)="view='grid'">
+                                  <img class="cursor-pointer" src="assets/img/editor/list-toggler.png" alt="" [hidden]="view=='list'" (click)="view='list'">
+                                </span>
+                              </div>
+                              <!-- Grid view -->
+                              <div class="lib-grid-view" *ngIf="view=='grid';else listview">
+                                <div *ngFor="let category of fileterCategoires">
+                                    <div class="category-type-box">
+                                      <a href="#cat-{{category.id}}" class="collapser-btn" data-toggle="collapse">
+                                         <span>{{category.title}} </span>
+                                         <i class="fa fa-caret-right" style="display:none;"></i>
+                                       </a>
+                                     <div class="collapse fonts-collapesd show" id="cat-{{category.id}}">
+                                        <ul class="drags-img-list sb-drags-img-list">
+                                          <li *ngFor="let file of category.files.data" cdkDrag>
+                                             <div class="thumbnail">
+                                               <i class="fa fa-arrow-circle-down close" aria-hidden="true" (click)="libHelper.downloadFile(file.path)"></i>
+                                               <span class="close" (click)="deleteFile(file.file_id,category.id)" ></span>
+                                               <img class="img-fluid" [src]="libHelper.fileThumbbyType(file)" alt="{{file.name}}">
+                                             </div>
+                                             <div class="content">
+                                               <span class="name">{{file.name}}</span>
+                                             </div>
+                                          </li>
+                                        </ul>
+                                        <ng-template #nofile>No Files</ng-template>
+                                      </div>
+                                    </div>
+                                </div>
+                             </div><!-- end if grid-view -->
+
+                             <!-- List View -->
+                             <ng-template #listview>
+                             <div class="lib-list-view">
+                                <div *ngFor="let category of fileterCategoires">
+                                    <div class="category-type-box">
+                                      <a href="#cat-{{category.id}}" class="collapser-btn" data-toggle="collapse">
+                                         <span>{{category.title}} </span>
+                                         <i class="fa fa-caret-right" style="display:none;"></i>
+                                       </a>
+                                     <div class="collapse fonts-collapesd show" id="cat-{{category.id}}">
+                                        <ul class="drags-img-list sb-drags-img-list">
+                                          <li *ngFor="let file of category.files.data" cdkDrag>
+                                             <div class="list-content">
+                                               <div class="name">{{file.name}}</div>
+                                               <div class="format">{{libHelper.fileExtension(file.name)}}</div>
+                                               <div class="size">{{file.size}}</div>
+                                             </div>
+                                          </li>
+                                        </ul>
+                                        <ng-template #nofile>No Files</ng-template>
+                                      </div>
+                                    </div>
+                                </div>
+                             </div><!-- end if grid-view -->
+                             </ng-template><!--/.editor-templates-wrap-->
+                             </div>
+                          </div><!--/.tab-content-->
+                       </div><!--/.ic-editor-sidebar-tools-->
+                      </div><!--/End sidebar-->
+                      <!-- Start Main -->
+                      <div class="ic-editor-workarea website-work-area">
+
+                         <div class="files-received-list" *ngIf="receivedFiles;else noReceivedFile" >
+                            <div class="row">
+                                <div class="col">
+                                  <div class="form-group">
+                                    Store accepted received files into
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group">
+                                    <ng-select [items]="libraries" bindLabel="name" bindValue="id" [searchable]="true" placeholder="Search Library" [(ngModel)]="library_id" (change)="checkLibrary(library_id);">
+                                    </ng-select>
+                                  </div>
+                                </div>
+                                <div class="col" *ngIf="library_id === 2">
+                                    <div class="form-group">
+                                        <ng-select [items]="offices" bindLabel="name" bindValue="id" [searchable]="true" placeholder="Search Office" [(ngModel)]="office_id" (change)="getCategories(library_id);">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group">
+                                    <ng-select [items]="libCategories" bindLabel="title" bindValue="id" [searchable]="true" placeholder="Search categories" [(ngModel)]="selectedCategory" notFoundText="please select an library first">
+                                    </ng-select>
+                                  </div>
+                                </div>
+                              </div>
+                             <!-- 1 -->
+                             <div class="single-file-received" *ngFor="let Received of receivedFiles">
+                                  <div class="row">
+                                      <div class="col receiver-information">
+                                         <div class="receiver-name">
+                                            Files shared by {{Received[0]?.from_user.first_name}} {{Received[0].from_user?.last_name}}
+                                         </div>
+                                      </div>
+                                      <div class="col text-right">
+                                         <div class="--btn-group">
+                                           <a class="btn btn-primary" (click)="Accept(Received[0]?.from_user_id,Received[0]?.to_user_id,'accept')">ACCEPT</a>
+                                           <a class="btn btn-primary" (click)="Accept(Received[0]?.from_user_id,Received[0]?.to_user_id,'decline')">DECLINE</a>
+                                         </div>
+                                      </div>
+                                  </div>
+
+                                  <ul class="drags-img-list">
+                                    <li *ngFor="let files of Received">
+                                      <div class="thumbnail">
+
+                                        <span class="close" (click)="deleteReceivedFile(files.id)"></span>
+                                        <img [src]="libHelper.fileThumbbyType(files.files)" alt="" class="img-fluid">
+                                      </div>
+                                      <div class="content">
+                                        <span class="name">{{files.files.file_name}}</span>
+                                        <span [hidden]="1">Category A</span>
+                                      </div>
+                                    </li>
+                                  </ul>
+                             </div>
+                         </div>
+                         <ng-template #noReceivedFile>
+                          You have no received files.
+                         </ng-template>
+                      </div><!-- End Main -->
+                    </div><!--/body-->
+            </div>
+      </div><!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+ <app-activity-stream></app-activity-stream>
+
+
+</div><!-- /.inner-wrapper -->

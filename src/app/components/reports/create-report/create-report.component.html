@@ -1,0 +1,152 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+      <h3>Create Report</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's
+          standard, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 150.</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+
+      <div class="icentra-editor creat-template-editor">
+        <div class="ic-editor-inner">
+          <div class="ic-editor-header">
+            <!-- 1 -->
+            <div class="header-active-tool">
+              <span class="header-active-tool-sign bg-dark">
+                <img src="assets/img/editor/report-name.png" alt="">
+              </span>
+              <div class="header-active-tool-name">
+                <h6>Report Name</h6>
+                <span>created date</span>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <ul class="ic-header-tool-list">
+              <li><a title="Save" (click)="createReport()" class="cursor-pointer">
+                  <img src="assets/img/editor/template-save.png" alt="">
+                  <span>Generate Report</span>
+                </a></li>
+            </ul>
+
+          </div>
+          <div class="ic-editor-body">
+            <!-- Mobile Header Tools -->
+            <ul class="mb-editer-header-tool">
+              <li><a title="Save" href="javascript:void(0)" class="cursor-pointer">
+                  <img src="assets/img/editor/template-save.png" alt="">
+                  <span>Save</span>
+                </a></li>
+            </ul>
+
+            <div class="ic-editor-sidebar">
+              <div class="ic-editor-sidebar-tools">
+                <!-- Tabs -->
+                <ul class="nav --nav-tabs ic-tools-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#data" id="data-tab" data-toggle="tab">
+                      <img src="assets/img/editor/hvr-green-data.png" alt="">
+                    </a>
+                  </li>
+                </ul>
+                <!-- Tabs Content -->
+                <div class="tab-content ic-tools-tab-content">
+                  <div class="tab-pane fade show active" id="data">
+                    <div class="data-inner layouts-inner">
+                      <div class="data-type-s">
+                        <p>Reporting Areas</p>
+                        <ul class="data-types-list" cdkDropList #moduleList="cdkDropList"
+                          [cdkDropListData]="moduleItems" [cdkDropListConnectedTo]="[moduleSelectedList]"
+                          (cdkDropListDropped)="drop($event)">
+                          <li *ngFor="let item of moduleItems;index as index" cdkDrag  (click)="addModule(item, index)">
+                            <p>{{item.label}}</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/.tab-content-->
+              </div>
+              <!--/.ic-editor-sidebar-tools-->
+            </div>
+            <!--/.ic-editor-sidebar-->
+            <!-- START WORKAREA -->
+            <div class="ic-editor-workarea">
+
+                <div class="form-group">
+                    <label for="name" class="title">Name Your Report</label>
+                    <input name="name" type="text" class="form-control" [(ngModel)]="reportName">
+                </div>
+
+              <!-- 1 -->
+              <div class="single-section module-task">
+                <p class="title">Reporting Areas</p>
+                <div class="module-data-types-wrapper dragdrop-area p-0">
+                  <button *ngIf="moduleSelectedItems.length === 0" class="dragdrop-btn" type="button">Drag and drop Reporting Areas</button>
+                  <ul class="module-data-types mb-0" cdkDropList #moduleSelectedList="cdkDropList"
+                      [cdkDropListData]="moduleSelectedItems" [cdkDropListConnectedTo]="[moduleList]" (cdkDropListDropped)="dropInModule($event)">
+                    <li *ngFor="let item of moduleSelectedItems;"
+                        cdkDrag>{{ item.label }}</li>
+                  </ul>
+                </div>
+
+              </div>
+              <!-- 2 -->
+
+              <div class="data-type-s module-task mt-5" [hidden]="!moduleSelectedItems.length">
+                <p class="title">{{ selectedModule.label }} Reporting Options</p>
+                <ul class="data-types-list module-type" cdkDropList #dataItemsList="cdkDropList" [cdkDropListData]="dataItems"
+                    [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="dropData($event)">
+                  <li *ngFor="let item of dataItems" cdkDrag>
+                    <p>{{ item.label }}</p>
+                  </li>
+                </ul>
+              </div>
+
+
+              <div class="single-section mt-5">
+                <div class="template-form-widgets-header">
+                  <p class="title">Selected Reporting Fields</p>
+                </div>
+
+                <div class="dragdrop-area p-0">
+                  <button *ngIf="selectedModule.data_types.length === 0" class="dragdrop-btn" type="button">Drag and drop Reporting Fields</button>
+                  <ul class="data-widget-list mb-0" cdkDropList #doneList="cdkDropList"
+                      [cdkDropListData]="selectedModule.data_types" [cdkDropListConnectedTo]="[dataItemsList]" (cdkDropListDropped)="dropData($event)">
+                    <li *ngFor="let item of selectedModule.data_types; index as index"
+                        class="condition" cdkDrag>
+                      <p>{{item.label}}</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--/.ic-editor-workarea-->
+          </div>
+        </div>
+      </div>
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+  <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

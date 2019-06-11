@@ -1,0 +1,6 @@
+.ic-tools-tab li .nav-link,
+.ic-tools-tab li .nav-link.active,
+.ic-tools-tab li .nav-link.show{
+  flex-flow:column;
+  color:#fccd13;
+}

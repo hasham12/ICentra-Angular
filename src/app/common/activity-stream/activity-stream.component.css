@@ -1,0 +1,271 @@
+.activity-stream {
+  position:relative;
+  background-color: #ffffff;
+  border-top-left-radius: 3px;
+  z-index:100;
+  width: 266px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+}
+.activity-stream.show{
+ margin-right:0px;
+}
+.activity-stream.close {
+  width: 0px !important;
+  display: none !important;
+}
+.activity-stream.p-overlay{
+  position:absolute;
+}
+
+.stream-header {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 10.81px;
+  color: #ffffff;
+  background-color: #303030;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-top-left-radius: 3px;
+}
+
+.stream-content span {
+  margin-left: 5px;
+}
+
+.stream-header i {
+  font-size: 14px;
+}
+
+.close-stream i.fa-long-arrow-alt-right {
+  width: 18px;
+  height: 9px;
+  background: url('../../../assets/img/sprit.png')no-repeat;
+  background-position: -11px -40px;
+  text-indent: -99999px;
+  position: relative;
+  top: 4px;
+  cursor: pointer;
+}
+
+.stream-content i.fa-bullhorn,
+.activity-opner i.fa-bullhorn {
+  width: 17px;
+  height: 15px;
+  background: url('../../../assets/img/sprit.png')no-repeat;
+  background-position: -31px -41px;
+  text-indent: -99999px;
+}
+
+.activity-opner i.fa-long-arrow-alt-left {
+  width: 18px;
+  height: 9px;
+  background: url('../../../assets/img/sprit.png')no-repeat;
+  background-position: -11px -49px;
+  text-indent: -99999px;
+  position: relative;
+  top: 1px;
+  cursor: pointer;
+}
+
+/* 
+*  --( a ) Activity Tabs 
+*/
+.stream-tabs {
+  border-bottom: 1px solid #edeef5;
+  display: flex;
+  justify-content: space-around;
+}
+
+.stream-tabs li a {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #9b9b9b;
+  padding: 13px 5px;
+  border: none !important;
+  border-bottom: 1px solid transparent !important;
+}
+.stream-tabs li a.active,
+.stream-tabs li a:hover,
+.stream-tabs li a:focus {
+  border: none;
+  background: none !important;
+  color: #000000;
+}
+.stream-tabs li a.active {
+  border-bottom: 1px solid #000 !important;
+}
+
+/* 
+*  --( b ) Activity Tabs Content
+*/
+.stream-tab-content {
+  padding: 13px;
+  background: #f3f4f9;
+  height: calc(100vh - 100px);
+  padding-right: 0px;
+}
+.stream-tab-content-list {
+  padding: 0px;
+  list-style: none;
+  margin: 0px;
+}
+.stream-tab-content-list>li {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 15px;
+  background: #fff;
+  padding: 20px 10px;
+  border-radius: 4px;
+}
+
+.stream-tab-content-list .stream-list-header{
+  display:flex;
+  align-items:self-start;
+
+}
+.stream-tab-content-list li .stream-profile{
+  margin-right:15px;
+}
+.stream-tab-content-list li .stream-profile img {
+  width:34px;
+  height:34px;
+  border:1px solid #adadad;
+}
+.stream-tab-content-list li .stream-list-header h4,
+.stream-tab-content-list li .stream-list-header h4 a{
+  font-size: 16px;
+  line-height: 16px;
+  color: #303030;
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+}
+.time-action .time {
+  font-size:12px;
+  color:#9b9b9b;
+}
+.stream-details p {
+  font-weight:300;
+  font-size:12px;
+  color:#676767;
+  margin:5px 0px 10px;
+  line-height: 1.3;
+  padding-left: 50px;
+}
+.stream-details p.bg-text {
+  background: #f5f5f9;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* 
+*  --( c ) Activity Tabs Metadata
+*/
+ul.stream-metadata {
+  display: flex;
+  padding: 0px;
+  padding-bottom: 12px;
+  list-style: none;
+  justify-content:flex-end;
+}
+.stream-metadata li a {
+  font-size: 10px;
+  color: #ffffff;
+  background: #999999;
+  width: 21px;
+  height: 21px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-left: 5px;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+}
+.stream-metadata li a:hover,
+.stream-metadata li a:focus {
+  color:#ffffff;
+  background:#1a1a1a;
+}
+.stream-metadata li span{
+  font-size: 14px;
+  color: #999999;
+  padding: 0px 3px;
+}
+
+/* 
+*  --( d ) Activity Tabs Reply Form
+*/
+.reply-form {
+  display:block;
+}
+.reply-form-meta a{
+  font-size:12px;
+  color:#999999;
+  border:1px solid #999999;
+  width:25px;
+  height:25px;
+  border-radius:50px;
+  margin-right:5px;
+  margin-bottom:5px;
+  display:inline-block;
+  text-align:center;
+  line-height:25px;
+  transition:all 0.4s ease-in-out;
+  -webkit-transition:all 0.4s ease-in-out;
+}
+.reply-form-meta a:hover,
+.reply-form-meta a:focus{
+  color:#ffffff;
+  background:#1a1a1a;
+  border-color:#1a1a1a;
+}
+.reply-form-inner {
+  display: flex;
+  position: relative;
+  background: #f5f5f9;
+  border-radius:40px;
+}
+.reply-form-inner .reply-input {
+  font-weight:400;
+  font-size:12px;
+  color:#303030;
+  background:#f5f5f9;
+  border:none;
+  padding:5px 10px;
+  border-radius:40px;
+  width:100%;
+  outline:none;
+  box-shadow:none;
+  -webkit-box-shadow:none;
+}
+.reply-form-inner .reply-input:focus{
+  background:#f5f5f9;
+  outline:none;
+  box-shadow:none;
+  -webkit-box-shadow:none;
+}
+.reply-form-inner .reply-btn {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  color: #8e8e90;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  outline: none;
+  top: 4px;
+}
+
+.reply-form-inner .reply-btn+.reply-btn {
+  right: 30px;
+}

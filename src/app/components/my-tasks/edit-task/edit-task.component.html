@@ -1,0 +1,463 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+      <h3>Edit Task </h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>This section refers to all details regarding the user tasks</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+      <div class="icentra-editor creat-template-editor mt-2">
+        <div class="ic-editor-inner">
+          <div class="ic-editor-header">
+            <!-- 1 -->
+            <div class="header-active-tool">
+              <span class="header-active-tool-sign">
+                <img src="assets/img/editor/create-task.png" alt="">
+              </span>
+              <div class="header-active-tool-name">
+                <h6>Tasks</h6>
+                <span>My Task</span>
+              </div>
+            </div>
+            <ul class="ic-header-tool-list">
+              <li>
+                <span class="btn-apply p-1" title="Following Task" (click)="taskFollowBtn(1)" *ngIf="!followTask">
+                  <i class="far fa-eye"></i>
+                </span>
+                <span class="btn-apply active p-1" title="Stop Following" (click)="taskFollowBtn(0)" *ngIf="followTask">
+                  <i class="far fa-eye"></i>
+                </span>
+              </li>
+              <li>
+              </li>
+            </ul>
+
+          </div>
+          <div class="ic-editor-body">
+            <div class="ic-editor-sidebar no-tab-content">
+              <div class="ic-editor-sidebar-tools">
+                <!-- Tabs -->
+                <ul class="nav --nav-tabs ic-tools-tab">
+                  <li class="nav-item">
+                    <a class="nav-link active" routerLink="/task/create">
+                      <img src="assets/img/editor/hvr-create.png" alt="">
+                      <span>Edit</span>
+                    </a>
+                  </li>
+                  <!--<li class="nav-item">-->
+                     <!--routerLink="/task/draft" -->
+                    <!--<a class="nav-link">-->
+                      <!--<img src="assets/img/editor/draft.png" alt="">-->
+                      <!--<img src="assets/img/editor/hvr-draft.png" alt="" class="hvr">-->
+                      <!--<span>Draft</span>-->
+                    <!--</a>-->
+                  <!--</li>-->
+                </ul>
+              </div>
+              <!--/.ic-editor-sidebar-tools-->
+            </div>
+            <!--/-sidebar-->
+            <!-- Main -->
+            <div class="user-workarea">
+              <div action="" class="form">
+                <div class="create-user-form">
+
+                  <form [formGroup]="createTaskForm">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="title">Title</label>
+                          <input type="text" class="form-control" formControlName="title">
+                          <span class="dummy-text"
+                                *ngIf="createTaskForm.controls['title'].touched">
+                                                        <span class="form-error"
+                                                              *ngIf="createTaskForm.controls['title'].hasError('required')">Title is required<br></span>
+                                                     </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="create-task-dropdown">
+                          <label for="assign">Assignee</label>
+                          <a href="javascript:void(0)" style="float: right; color: #9b9b9b;" (click)="selectAllAssignee()">Select All Staff</a>
+                          <ng-select formControlName="assignedUsers"
+                                     [items]="originalAssigns"
+                                     bindLabel="full_name"
+                                     bindValue="id"
+                                     [searchable]="true" [multiple]="true"
+                                     placeholder="Select Assignee">
+                          </ng-select>
+                          <span class="dummy-text"
+                                *ngIf="createTaskForm.controls['assignedUsers'].touched">
+                              <span class="form-error"
+                                    *ngIf="createTaskForm.controls['assignedUsers'].hasError('required') || createTaskForm.controls['assignedUsers'].value.length === 0 ">Please select assignee<br></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group" *ngIf="jobTypes">
+                          <label for="role">Job Type</label>
+                          <ng-select formControlName="job_type_id" [items]="jobTypes"
+                                     bindLabel="name" bindValue="id" [searchable]="true"
+                                     (change)="bill = 0.0; createTaskForm.controls['quantity'].setValue(0);
+                                      createTaskForm.controls['task_category_id'].setValue(null);"
+                                     [clearable]="false" placeholder="Select Job Type">
+
+                          </ng-select>
+                          <span class="dummy-text"
+                                *ngIf="createTaskForm.controls['job_type_id'].touched">
+                                                        <span class="form-error"
+                                                              *ngIf="createTaskForm.controls['job_type_id'].hasError('required')">Job Type is required<br></span>
+                                                    </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row justify-content-between">
+                          <div class="col-md-5">
+                            <label for="startdate">Start Date</label>
+                            <input type="date" formControlName="start_date"
+                                   class="form-control">
+                            <span class="dummy-text"
+                                  *ngIf="createTaskForm.controls['start_date'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['start_date'].hasError('required')">Start Date is required<br></span>
+                                                        </span>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="duedate">Due Date</label>
+                            <input type="date" formControlName="due_date"
+                                   class="form-control">
+                            <span class="dummy-text"
+                                  *ngIf="createTaskForm.controls['due_date'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['due_date'].hasError('required')">Due Date is required<br></span>
+                                                        </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group" *ngIf="categories && createTaskForm.controls['job_type_id'].value == 2">
+                          <label for="role">Printing Type</label>
+                          <ng-select formControlName="task_category_id" [items]="categories"
+                                     bindLabel="name" bindValue="id" [searchable]="true"
+                                     (change)="bill = 0.0;
+                                     createTaskForm.controls['quantity'].setValue(0);"
+                                     [clearable]="false" placeholder="Select Printing Type">
+
+                          </ng-select>
+                          <span class="dummy-text"
+                                *ngIf="createTaskForm.controls['task_category_id'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['task_category_id'].hasError('required')">Category is required<br></span>
+                                                    </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="form-error"
+                              *ngIf="!rexValid">Please Set Your CRM Credentials For Selecting a Property</span>
+                        <div class="create-task-dropdown" *ngIf="rexValid">
+                          <label for="assign">Property</label>
+                          <ng-select formControlName="property_id"
+                                     [items]="propertiesList"
+                                     (search)="searchedProperties($event)"
+                                     bindLabel="address"
+                                     bindValue="_id"
+                                     (change)="propertySelection($event)"
+                                     [searchable]="true"
+                                     placeholder="Search Property">
+                          </ng-select>
+                          <!--<a class="dropdown-toggle form-control" href="javascript:void(0)"-->
+                             <!--data-toggle="dropdown">-->
+                                                        <!--<span *ngIf="createTaskForm.controls['property_id'].value !== ''">-->
+                                                            <!--{{addressSelection}}-->
+                                                        <!--</span>-->
+                          <!--</a>-->
+                          <!--<div class="dropdown-menu dropdown-menu-with-form"-->
+                               <!--style="overflow-y: scroll; height: 200px !important;">-->
+                            <!--<input type="search" class="search-to-assign"-->
+                                   <!--(input)="searchedProperties($event)"-->
+                                   <!--placeholder="Find Address">-->
+                            <!--<a class="dropdown-item" *ngFor="let pl of propertiesList">-->
+                              <!--<span style="cursor: pointer" (click)="propertySelection(pl)">{{ pl.address }}</span>-->
+                            <!--</a>-->
+                          <!--</div>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <!--<label for="design">Design</label>-->
+                          <!--<input type="file" id="design" class="d-none"><br>-->
+                          <!--<button class="btn btn-primary" (click)="$event.preventDefault();">-->
+                          <!--Browse-->
+                          <!--</button>-->
+                          <!--<div class="uploaded-design-file">-->
+                          <!--<span></span>-->
+                          <!--</div>-->
+                        </div>
+
+                        <div class="form-group"
+                             [hidden]="this.createTaskForm.controls['task_category_id'].value === null">
+                          <label for="category">Printing Required?</label><br>
+                          <div class="form-check form-check-inline">
+                            <label class="custom-checkbox">
+                              <input type="radio" value="yes"
+                                     (click)="printingTypeSetting('yes')"
+                                     formControlName="isPrinting" class="yes"
+                                     ng-value="'yes'">Yes
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <label class="custom-checkbox">No
+                              <input type="radio" value="no"
+                                     (click)="printingTypeSetting('no')"
+                                     formControlName="isPrinting" class="no"
+                                     ng-value="'no'" checked>
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                          <span class="dummy-text"
+                                *ngIf="createTaskForm.controls['isPrinting'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['isPrinting'].hasError('required')">Printing option is required<br></span>
+                                                    </span>
+                        </div>
+
+                        <div class="printing-yes-show d-none"
+                             [hidden]="this.createTaskForm.controls['task_category_id'].value === null">
+                          <div class="form-group">
+                            <div class="form-check form-check-inline">
+                              <label class="custom-checkbox">
+                                <input type="radio" formControlName="printing_type_id"
+                                       (click)="QuantityCheck('yes')"
+                                       [value]="1">Inhouse
+                                <span class="checkmark"></span>
+                              </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <label class="custom-checkbox">Thirdparty
+                                <input type="radio" formControlName="printing_type_id"
+                                       (click)="QuantityCheck('no')"
+                                       [value]="2">
+                                <span class="checkmark"></span>
+                              </label>
+                            </div>
+                            <span class="dummy-text"
+                                  *ngIf="createTaskForm.controls['printing_type_id'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['printing_type_id'].hasError('required')">Printing Type is required<br></span>
+                                                    </span>
+                          </div>
+
+                          <div class="form-group quantity-details"
+                               *ngIf="createTaskForm.controls['printing_type_id'].value === 1">
+                          <div class="row align-items-center">
+                              <div class="col-3">
+                                <div class="custom-site-quantity">
+                                  <span class="btn-dec" (click)="changeQtyBox('minus')">-</span>
+                                  <input type="number"
+                                                        (input)="getBill()"
+                                                        formControlName="quantity"
+                                                        class="form-control" min="0">
+                                  <span class="btn-inc" (click)="changeQtyBox('plus')">+</span>
+                                </div>
+                              </div>
+                              <div class="col-2 pl-0"><span>Quantity</span></div>
+                              <div class="col-4 pl-0"><span
+                                      class="printing-price">${{ bill | number: '1.2-2'}}</span></div>
+                            </div>
+                            <span class="dummy-text"
+                                  *ngIf="createTaskForm.controls['quantity'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['quantity'].hasError('required')">Quantity is required<br></span>
+                                                    </span>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-check form-check-inline">
+                            <label class="custom-checkbox">Recurring Task ?
+                              <input type="checkbox" formControlName="isRecurring">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group" *ngIf="jobTypes">
+                              <label for="role">Task Status</label>
+                              <ng-select formControlName="task_status_id"
+                                         [items]="taskStatuses" bindLabel="name"
+                                         bindValue="id" [searchable]="true"
+                                         [clearable]="false"
+                                         placeholder="Select Status">
+                              </ng-select>
+                              <span class="dummy-text"
+                                    *ngIf="createTaskForm.controls['task_status_id'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['task_status_id'].hasError('required')">Status is required<br></span>
+                                                    </span>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group" *ngIf="priorities">
+                              <label for="role">Priority</label>
+                              <ng-select formControlName="priority_id" [clearable]="false"
+                                         [items]="priorities" bindLabel="name"
+                                         bindValue="id" [searchable]="true"
+                                         placeholder="Select Priority">
+                              </ng-select>
+                              <span class="dummy-text"
+                                    *ngIf="createTaskForm.controls['priority_id'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['priority_id'].hasError('required')">Priority is required<br></span>
+                                                    </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="additionalcoments">Additional Comments</label>
+                          <textarea name="additionalcoments" formControlName="description"
+                                    class="form-control block-tab" cols="20"
+                                    rows="4"></textarea>
+                          <span class="dummy-text"
+                                *ngIf="createTaskForm.controls['description'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['description'].hasError('required')">Comments are required<br></span>
+                                                    </span>
+                        </div>
+                        <div class="form-group"  *ngIf="!uploadedFile || uploadedFile.length === 0">
+                          <!--<div class="upload-logo">-->
+                            <!--<img src="assets/img/editor/attach-file.png" alt="">-->
+                            <!--<span>Attach File</span>-->
+                          <!--</div>-->
+                          <!--<input id="fileInput" type='file' [hidden]="true" name="photo"-->
+                                 <!--(change)="onSelectFile($event)" accept=".txt,jpeg,.gif,.png,.pdf,.doc,.docx,.xls,.xlsx" #fileInput>-->
+                          <!--<button class="btn btn-primary mr-2"-->
+                                  <!--(click)="fileInput.click();$event.preventDefault();">Upload-->
+                          <!--</button>-->
+                          <!--<button class="btn btn-primary ml-2" (click)="$event.preventDefault();">-->
+                            <!--Library-->
+                          <!--</button>-->
+                          <button class="btn btn-primary ml-1"  id="openModalLibrary" data-toggle="modal"  data-target="#openModalLibrarypopup">
+                            Select From Library / Upload
+                          </button>
+                        </div>
+                        <div class="form-group" *ngIf="uploadedFile && uploadedFile.length > 0">
+                          <span (click)="deleteUploadFile()"
+                                                        class="close"><i
+                                class="fa fa-times"></i></span>
+                          <p *ngFor="let file of uploadedFile">
+                            {{ file.file.file_name }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <!--<button class="btn btn-primary" [disabled]="!createTaskForm.valid"-->
+                                  <!--(click)="onSubmit('later')">Save for later-->
+                          <!--</button>-->
+                          <button class="btn btn-primary" routerLink="/tasks/my-tasks">Cancel</button> &nbsp;&nbsp;
+                        </div>
+                      </div>
+                      <div class="col-md-9 text-right">
+                        <div class="form-group">
+                          <div class="form-check form-check-inline" *ngIf="bill > 0">
+                            <label class="custom-checkbox">Accept Printing Costs
+                              <input type="checkbox" value="accept"
+                                     formControlName="isChecked">
+                              <span class="checkmark"></span>
+                            </label>
+                            <span class="dummy-text"
+                                  *ngIf="createTaskForm.controls['isChecked'].touched">
+                                                            <span class="form-error"
+                                                                  *ngIf="createTaskForm.controls['isChecked'].hasError('pattern')"> Acceptance is required<br></span>
+                                                    </span>
+                          </div>
+
+                          <button class="btn btn-primary" [disabled]="!createTaskForm.valid"
+                                  (click)="onSubmit('save')">Publish
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <!--<button class="btn btn-primary" routerLink="/tasks/my-tasks">Cancel</button> &nbsp;&nbsp;-->
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="activity-wrap">
+                        <h4>Activity</h4>
+                        <div  class="commentList" *ngIf="commentList">
+                          <div *ngFor="let comment of commentList">
+                            <p>{{comment.comments}}</p>
+                            <div class="comments-meta">
+                              <span> by <b>{{comment.user.data.first_name}} </b></span>
+                              <span class="small">{{comment.time_ago}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" [(ngModel)]="comments" cols="1" rows="8"></textarea>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <button class="btn btn-primary" [disabled]="this.comments === ''"
+                                    (click)="saveComments()">Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Model -->
+              <div class="modal fade icentra-popup library-manager-popup" id="openModalLibrarypopup" >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <app-library-manager (TaskFileSelected)="fileReceivedForTask($event)"></app-library-manager>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/end-main-->
+          </div>
+          <!--/body-->
+        </div>
+      </div>
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+  <app-activity-stream></app-activity-stream>
+
+
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

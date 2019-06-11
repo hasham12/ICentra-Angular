@@ -1,0 +1,1396 @@
+<ul class='custom-menu'>
+    <li data-action="selectall">Select All</li>
+    <li data-action="cut">Cut</li>
+    <li data-action="copy">Copy</li>
+    <li data-action="paste">Paste</li>
+    <li data-action="clone">Clone</li>
+</ul>
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>Create Design</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper position-relative" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+          <div class="welcome-outer-content">
+            <div class="activity-opner">
+              <i class="fa fa-bullhorn" aria-hidden="true"></i>
+              <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+            </div>
+          </div>
+          <!--==============-->
+          <!-- Working Area -->
+          <!--==============-->
+          <div class="icentra-editor creat-template-editor">
+              <div class="ic-editor-inner">
+                    <!-- Header Start -->
+                    <div class="ic-editor-header">
+                         <!-- 1 -->
+                         <div class="header-active-tool">
+                           <span class="header-active-tool-sign bg-dark">
+                             <img src="assets/img/editor/design-name.png" alt="">
+                           </span>
+                           <div class="header-active-tool-name">
+                              <h6 id="designname">Design Name</h6>
+                              <span id="pagename">Page Name</span>
+                              <button class="upload-gallery-btn ml-1"  id="openModalLibrary" data-toggle="modal"  data-target="#openModalLibrarypopup">
+                                Library Manager
+                            </button>
+                           </div>
+                         </div>
+                         <!-- 2 -->
+                         <ul class="undo-rendo-btns ic-header-tool-list mr-auto ml-0">
+                          <li (click)="undo();"><a title="Undo" href="javascript:void(0)" class="icentra-unde">
+                              <span class="icon"><img src="assets/img/editor/undo.png" alt=""></span>
+                              <span>Undo</span>
+                          </a></li>
+                          <li (click)="redo();"><a title="Redo" href="javascript:void(0)" class="icentra-rendo">
+                              <span class="icon"><img src="assets/img/editor/redo.png" alt=""></span>
+                              <span>Redo</span>
+                          </a></li>
+                          <li class="icentra-text-toggler"><a href="javascript:void(0)">
+                              <span class="icon"><img src="assets/img/editor/text.png" alt=""></span>
+                              <span>Texts</span>
+                          </a></li>
+                          <li class="icentra-tools-toggler"><a href="javascript:void(0)">
+                              <span class="icon"><img src="assets/img/editor/design-name-gray.png" alt=""></span>
+                          </a></li>
+                         </ul>
+                         <!-- 3 -->
+                        <ul class="ic-header-tool-list mr-auto ml-0">
+                          <li (click)="removeSelected()"><a title="Delete Item" href="javascript:void(0)" class="icentra-scale">
+                              <span class="icon"><img src="assets/img/editor/delete.png" alt="" ></span>
+                              <span>Delete</span>
+                          </a></li>
+                          <li (click)="objectlock()"><a title="Lock Item" href="javascript:void(0)" class="icentra-rorate">
+                              <span class="icon"><img src="assets/img/editor/lock.png" alt=""></span>
+                              <span>Lock</span>
+                          </a></li>
+                          <li class="editor-dropdown-tools">
+                            <a class="" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                            <span class="icon"><img src="assets/img/editor/flip.png" alt=""></span>
+                            <span>Flip</span>
+                            </a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="javascript:void(0)" (click)="flipvertical();">Vertical</a>
+                              <a class="dropdown-item" href="javascript:void(0)" (click)="fliphorizontal();">Horizontal</a>
+                            </div>
+                          </li>
+                        </ul>
+                        <!-- 4 -->
+                        <ul class="ic-header-tool-list tool-br-right ml-0">
+                          <li (click)="groupItems();"><a title="Group" href="javascript:void(0)" class="icentra-group">
+                            <span class="icon"><img src="assets/img/editor/group.png" alt=""></span>
+                            <span>Group</span>
+                          </a></li>
+                          <li (click)="unGroupItems();"><a title="Ungroup" href="javascript:void(0)" class="icentra-ungroup">
+                              <span class="icon"><img src="assets/img/editor/ungroup.png" alt=""></span>
+                              <span>Ungroup</span>
+                          </a></li>
+                          <li class="editor-dropdown-tools">
+                              <div class="arrange-dropdown">
+                                 <a class="" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                                    <span class="icon"><img src="assets/img/editor/arrange.png" alt=""></span>
+                                    <span>Arrange</span>
+                                 </a>
+                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:void(0)" (click)="bringforwarditems();">
+                                      <span class="icon"><img src="assets/img/editor/dropdown/forward.png" alt=""></span>
+                                      <span>Forwards</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0)" (click)="sendbackwarditems();">
+                                      <span class="icon"><img src="assets/img/editor/dropdown/backword.png" alt=""></span>
+                                      <span>Backwards</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0)" (click)="bringToFronts();">
+                                      <span class="icon"><img src="assets/img/editor/dropdown/backword.png" alt=""></span>
+                                      <span>bringToFront</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0)" (click)="sendToBacks();">
+                                      <span class="icon"><img src="assets/img/editor/dropdown/forward.png" alt=""></span>
+                                      <span>sendToBack</span>
+                                    </a>
+                                 </div>
+                              </div>
+                          </li>
+                        </ul>
+                        <!-- 5 -->
+                        <ul class="ic-header-tool-list action-tools-list">
+                          <li (click)="previewcanvas();"><a title="Preview" href="javascript:void(0)" class="icentra-preview">
+                              <span class="icon"><img src="assets/img/editor/preview.png" alt=""></span>
+                              <span>Preview</span>
+                          </a></li>
+                          <li (click)="dwnloadtempfile();"><a title="Download Design" href="javascript:void(0)" class="icentra-download">
+                              <span class="icon"><img src="assets/img/editor/download.png" alt=""></span>
+                              <span>Download</span>
+                          </a></li>
+                          <li (click)="savedesign();"><a title="Save Design" href="javascript:void(0)" class="icentra-save">
+                              <span class="icon"><img src="assets/img/editor/template-save.png" alt=""></span>
+                              <span>Save</span>
+                          </a></li>
+                          <li (click)="saveAsdesign();"><a title="Save As" href="javascript:void(0)" class="icentra-save">
+                              <span class="icon"><img src="assets/img/editor/save-as.png" alt=""></span>
+                              <span>Save As</span>
+                          </a></li>
+                          <li><a title="Close Design" (click)="close()">
+                            <span class="icon"><img src="assets/img/editor/preview-close.png" alt=""></span>
+                            <span>Close</span>
+                          </a></li>
+                        </ul>
+                    </div>
+                    <!-- End Header -->
+                    <!-- Body Start -->
+                    <div class="template-editor-body">
+                        <div class="template-editor-row d-flex">
+                             <!-- Start Right Sidebar -->
+                             <div class="template-editor-left-sidebar">
+                              <div class="tel-sidebar-inner">
+                                  <app-template-nav (rightSideBarVisible)='rightSideBarDisplay($event)'
+                                  [leftSideBarItemVisible]=leftSideBarItemVisible
+                                  #templateNavChild></app-template-nav>
+                                  <!-- Tabs Content -->
+                                  <div class="tab-content ic-editor-sidebar-tab-content">
+                                      <div class="tab-pane" id="kits-content" [className]="leftSideBarItemVisible == 'kits-tab' ?'tab-pane active':'tab-pane'">
+                                        <app-kits></app-kits>
+                                      </div>
+                                      <div class="tab-pane sf-bottom" id="pages-content" [className]="leftSideBarItemVisible == 'pages-tab' ?'tab-pane sf-bottom active':'tab-pane sf-bottom'">
+                                        <app-pages></app-pages>
+                                      </div>
+                                      <div class="tab-pane" id="images-content" [className]="leftSideBarItemVisible == 'images-tab' ?'tab-pane active':'tab-pane'">
+                                        <app-images></app-images>
+                                      </div>
+                                      <div class="tab-pane sf-bottom" id="text-content" [className]="leftSideBarItemVisible == 'text-tab' ?'tab-pane sf-bottom active':'tab-pane sf-bottom'">
+                                        <app-text></app-text>
+                                      </div>
+                                      <div class="tab-pane" id="icons-content" [className]="leftSideBarItemVisible == 'icons-tab' ?'tab-pane active':'tab-pane'">
+                                        <app-icons></app-icons>
+                                      </div>
+                                      <div class="tab-pane sf-bottom" id="shapes-content" [className]="leftSideBarItemVisible == 'shapes-tab' ?'tab-pane sf-bottom active':'tab-pane sf-bottom'">
+                                        <app-shapes></app-shapes>
+                                      </div>
+                                      <div class="tab-pane" id="backgrounds-content" [className]="leftSideBarItemVisible == 'background-tab' ?'tab-pane active':'tab-pane'">
+                                        <app-background></app-background>
+                                      </div>
+                                      <div class="tab-pane sf-bottom" id="draw-content" [className]="leftSideBarItemVisible == 'draw-tab' ?'tab-pane sf-bottom active':'tab-pane sf-bottom'">
+                                        <app-draw></app-draw>
+                                      </div>
+                                      <div class="tab-pane" id="import-content" [className]="leftSideBarItemVisible == 'import-tab' ?'tab-pane active':'tab-pane'">
+                                        <app-import></app-import>
+                                      </div>
+                                      <div class="tab-pane sf-bottom" id="rea-content" [className]="leftSideBarItemVisible == 'rea-tab' ?'tab-pane sf-bottom active':'tab-pane sf-bottom'">
+                                        <app-rea></app-rea>
+                                      </div>
+                                      <div class="tab-pane" id="fields-content" [className]="leftSideBarItemVisible == 'fields-tab' ?'tab-pane active':'tab-pane'">
+                                        <app-fields></app-fields>
+                                      </div>
+                                  </div><!--/.tab-content-->
+                               </div>
+                             </div>
+                             <!-- End Left Sidebar -->
+                             <!-- START OF CANVAS -->
+                             <div class="template-canvas-wrap">
+                                 <div class="canvas-steps" *ngIf="stepDomEnable">
+                                    <a class="steps nav-link" href="#rea-content" (click)="showimages('rea-tab')" >
+                                       <span>STEP 1</span>
+                                       <span>Select Listing</span>
+                                    </a>
+                                    <a class="steps nav-link" href="#images-content" (click)="showimages('images-tab')">
+                                       <span>STEP 2</span>
+                                       <span>Edit Images</span>
+                                    </a>
+                                    <a class="steps nav-link" href="#text-content" (click)="showimages('text-tab')">
+                                       <span>STEP 3</span>
+                                       <span>Edit Content</span>
+                                    </a>
+                                 </div>
+                                  <div class="canvas-work-area" style="display: inline-table; position: relative; left: 50%; transform: translateX(-50%);">
+                                    <div id="canvasbox-tab" class="text-center" style="display: inline-table;">
+                                        <div id='canvaspages' tabindex="0" style="display: inline-table;"></div>
+                                        <div class="canvasicons">
+                                          <div>
+                                             <i id='duplicatecanvas' class="fa fa-files-o fa-lg duplicatecanvas" title="Duplicate Page"></i>
+                                          </div>
+                                          <div>
+                                             <i id='deletecanvas' class="fa fa-trash-o fa-lg deletecanvas" title="Delete Page"></i>
+                                          </div>
+                                          <div>
+                                             <i  id="addnewpagebutton" class="fa fa-plus fa-lg addnewpagebutton" (click)="addnewpage()" title="Add New Page"></i>
+                                          </div>
+                                          <div>
+                                             <i id='moveup' class="fa fa-sort-asc fa-2 moveup" title="Move Page Up"></i>
+                                          </div>
+                                          <span class="pagenumber" id='pagenumber'>1</span>
+                                          <div>
+                                             <i id='movedown' class="fa fa-sort-desc movedown" title="Move Page Down"></i>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                      <div class="newpagebtn">
+                                          + Add New Page
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <!-- Page Zoom  -->
+                                  <div class="page-zoom">
+                                    <input type="range" title="{{props.zoomPercent}}%" class="slider" max="300" min="20" step="10" id="zoomPercent" [(ngModel)]="props.zoomPercent" (change)="zoomToPercent(props.zoomPercent)">
+                                    <div class="zoom-page-dropdown">
+                                       <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown">
+                                         {{props.zoomPercent}}%
+                                       </a>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('300')">300%</a>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('200')">200%</a>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('150')">150%</a>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('100')">100%</a>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('75')">75%</a>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('50')">50%</a>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="zoomToPercent('25')">25%</a>
+                                          <hr>
+                                          <a class="dropdown-item" href="javascript:void(0);" (click)="fitZoom()">Fit</a>
+                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- END OF CANVAS -->
+                             <!-- Start Right Sidebar -->
+                             <div class="template-editor-right-sidebar" [hidden]="!rightSideBarVisible">
+                              
+                                <!-- Side Tool #02 -->
+                                <div class="sidebar-tools-tabs textEditor">
+                                  <ul class="nav taburl">
+                                    <li>
+                                        <a id="adjust-tab"  href="#adjust-content" [className]="rightSideBarType=='textbox'? 'active' : ''"
+                                        (click)="showProperty('textbox')">
+                                        <!-- data-toggle="tab" -->
+                                          <div class="icon-box"><img src="assets/img/icons/text-tab-icon.png" alt=""></div>
+                                          <span>Text</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="gradiant-tab" href="#gradiant-content" [className]="rightSideBarType=='gradiant'? 'active' : ''"
+                                        (click)="showProperty('gradiant')">
+                                          <div class="icon-box"><img src="assets/img/icons/color-tab-icon.png" alt=""></div>
+                                          <span>Colours</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="image-tab"  href="#image-content" [className]="rightSideBarType=='image'? 'active' : ''"
+                                        (click)="showProperty('image')"> <!-- [hidden]="rightSideBarType=='image'? false : true" -->
+                                          <div class="icon-box"><img src="assets/img/icons/images-tab-icon.png" alt=""></div>
+                                          <span>Images</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a  id="shape-tab" href="#shape-content" [className]="rightSideBarType=='path'||rightSideBarType=='group'? 'active' : ''"
+                                        (click)="showProperty('path')">
+                                          <div class="icon-box"><img src="assets/img/icons/shape-tab-icon.png" alt=""></div>
+                                          <span>Shapes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a  id="layers-tab" href="#layers-content" [className]="rightSideBarType=='layers'? 'active' : ''"
+                                        (click)="showProperty('layers')">
+                                          <div class="icon-box"><img src="assets/img/icons/layers-tab-icons.png" alt=""></div>
+                                          <span>Layers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a  id="canvas-tab" href="#canvas-content" [className]="rightSideBarType=='canvas'? 'active' : ''"
+                                        (click)="showProperty('canvas')">
+                                          <div class="icon-box"><img src="assets/img/icons/canvas-tab-icon.png" alt=""></div>
+                                          <span>Canvas</span>
+                                        </a>
+                                    </li>                                    
+                                  </ul>
+                                  <div class="tab-content">
+                                       <!-- 01 -->
+                                        <div class="tab-pane fade" id="adjust-content" [hidden]="rightSideBarType=='textbox'? false : true" [className]="rightSideBarType=='textbox'? 'tab-pane fade active show' : 'tab-pane fade'"> <!--  -->
+                                          <div class="tab-content-heading">
+                                              <h4>Text</h4>
+                                          </div>
+                                          <div class="ic-sidebar-fonts-tools">
+                                               <!-- 1 -->
+                                                <div class="font-tools-row">
+                                                  <div class="font-family-list font-tools-dropdown font-tools-col">
+                                                      <a class="dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                                                        <span class="selfontname">Font Family</span>
+                                                      </a>
+                                                      <div class="dropdown-menu font-dropdown" id="fontlistcontainer">
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 2 -->
+                                                <div class="font-tools-row">
+                                                  <div class="fonts-tools-btn-group">
+                                                    <button class="font-tools-btn boldbtn" type="button" (click)="setBold()">
+                                                      <img src="assets/img/editor/bold.png" alt="">
+                                                    </button>
+                                                    <button class="font-tools-btn italicbtn" type="button" (click)="setItalic()">
+                                                      <img src="assets/img/editor/italic.png" alt="">
+                                                    </button>
+                                                     <button class="font-tools-btn" type="button" (click)="setTextDecoration('underline')">
+                                                      <img src="assets/img/editor/underline.png" alt="">
+                                                    </button>
+                                                     <button class="font-tools-btn" type="button" (click)="setTextDecoration('overline')">
+                                                      <img src="assets/img/editor/text-arrow.png" alt="">
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                                <!-- 3 -->
+                                                 <div class="font-tools-row">
+                                                     <div class="font-tools-col textcolor-picker">
+                                                       <label for="color-picker">Color</label>
+                                                      <input title="Text Color" type="text" class="font-color font-tools-sm-input colorselectorfont textcolor"  [cpPosition]="'left'" [(colorPicker)]="props.fill" [style.background]="props.fill" (colorPickerChange)="setFill()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+                                                     </div>
+                                                 </div>
+                                                 <!-- 4 -->
+                                                 <div class="font-tools-row flex-column">
+                                                     <div class="font-tools-col fonts-ranger">
+                                                        <label for="">Font Size:</label>
+                                                       <!--  <span class="size fontsize">{{props.fontSize}}px</span> -->
+                                                       <input type="text" class="size inputstyle" name="textsize" id="textsize" value="{{props.fontSize}}" (input)="setTextSize()"><label>px</label>
+                                                     </div>
+                                                     <div class="fonts-slider">
+                                                      <input type="range" class="slider" id="fontSize" max="200" min="5" step="5" [(ngModel)]="props.fontSize" (change)="setFontSize()">
+                                                     </div>
+                                                 </div>
+                                                 <!-- 5 -->
+                                                 <div class="font-tools-row flex-column">
+                                                     <div class="font-tools-col fonts-ranger">
+                                                        <label for="">Character Spacing:</label>
+                                                        <!-- <span class="size charSpac">{{props.charSpacing}}px</span> -->
+                                                        <input type="text" class="size inputstyle" name="textspac" id="textspac" value="{{props.charSpacing}}" (input)="setTextspac()"><label>px</label>
+                                                     </div>
+                                                     <div class="fonts-slider">
+                                                       <input type="range" class="slider" id="charSpac" max="400" min="50" step="25" [(ngModel)]="props.charSpacing" (change)="setCharSpacing()">
+                                                     </div>
+                                                 </div>
+                                                 <!-- 6 -->
+                                                 <div class="font-tools-row flex-column">
+                                                     <div class="font-tools-col fonts-ranger">
+                                                        <label for="">Line Height:</label>
+                                                       <!--  <span class="size lineHei">{{props.lineHeight}}px</span> -->
+                                                        <input type="text" class="size inputstyle" name="textheight" id="textheight" value="{{props.lineHeight}}" (input)="setTextheight()"><label>px</label>
+                                                     </div>
+                                                     <div class="fonts-slider">
+                                                        <input type="range" class="slider" id="lineHei" max="4" min="1" step="0.2" [(ngModel)]="props.lineHeight" (change)="setLineHeight()">
+                                                     </div>
+                                                 </div>
+                                                 <br>
+                                                 <!-- 7 -->
+                                                 <div class="font-tools-row">
+                                                   <div class="fonts-tools-btn-group">
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/tt-1.png" alt="" (click)="setUpperCase()"></button>
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/tt-1.png" alt=""  (click)="setLowerCase()"></button>
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/tt2.png" alt=""  (click)="setCamelCase()"></button>
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/tt3.png" alt=""></button>
+                                                   </div>
+                                                 </div>
+                                                 <!-- 8 -->
+                                                 <div class="font-tools-row">
+                                                   <div class="fonts-tools-btn-group">
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/left-text.png" alt="" (click)="setTextAlign('left')"></button>
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/center-text.png" alt="" (click)="setTextAlign('center')"></button>
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/right-text.png" alt="" (click)="setTextAlign('right')"></button>
+                                                     <button class="font-tools-btn" type="button"><img src="assets/img/editor/justify-text.png" alt="" (click)="setTextAlign('justify')"></button>
+                                                   </div>
+                                                 </div>
+                                                 <!-- Effect -->
+                                                 <div class="ic-sidebar-fonts-tools">
+                                                   <h4>Effects</h4>
+                                                   <div class="font-tools-row flex-column">
+                                                       <div class="fonts-slider">
+                                                         <input class="slider" type="range" max="100" min="0" step="5" [(ngModel)]="props.opacity" (change)="setOpacity()">
+                                                         <label>Transparency</label>
+                                                       </div>
+                                                   </div>
+                                                   <div class="font-tools-row flex-column">
+                                                       <div class="fonts-slider">
+                                                         <input class="slider" type="range" max="10" min="1" step="1" [(ngModel)]="props.textoffsetX" (change)="setTextoffsetX()">
+                                                         <label>Drop Shadow</label>
+                                                       </div>
+                                                   </div>
+                                                   <div class="font-tools-row flex-column">
+                                                       <div class="fonts-slider">
+                                                         <input class="slider" type="range" max="1000" min="100" step="1" value="250" [(ngModel)]="props.textDiameter" (change)="setTextdiameter()">
+                                                         <label>Curved text </label>
+                                                         <label class="size ml-2">{{props.textDiameter}}</label>
+                                                       </div>
+                                                   </div>
+                                                   <div class="font-tools-row flex-column">
+                                                       <div class="fonts-slider">
+                                                         <input class="slider" type="range" max="5" min="1" step="1" [(ngModel)]="props.textBrightness" (change)="setTextbrightness()">
+                                                         <label>Brightness </label>
+                                                         <label class="size ml-2">{{props.textBrightness}}%</label>
+                                                       </div>
+                                                   </div>
+                                                </div>
+                                                <!-- End Effect -->
+                                          </div>
+                                       </div>
+                                       <!-- 02 -->
+                                       <div class="tab-pane fade" id="gradiant-content" [hidden]="rightSideBarType=='gradiant'? false : true" [className]="rightSideBarType=='gradiant'? 'tab-pane fade active show' : 'tab-pane fade'">
+                                              <div class="tab-content-heading">
+                                                  <h4>Colours</h4>
+                                              </div>
+                                              <div class="setDefault-bg-color d-flex align-items-center">
+                                                <input type="text" class="DF-color-code" value="{{props.fill}}">
+                                                <input type="text" class="DF-color-slecter-box colorselectorfont"  [cpPosition]="'left'" [(colorPicker)]="props.fill" [style.background]="props.fill" (colorPickerChange)="setFill()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+                                                <button  class="sm-save-btn" (click)="savetxtcolor()">Save</button>
+                                              </div>
+                                              <!-- Solid Color -->
+                                              <div class="solid-colors-sec">
+                                                <p class="solid-heading">Solid Color</p>
+                                                <ul class="gradient-colors-list" id="txtcolorlist"></ul>
+                                              </div>
+                                              <!-- Gradient Color -->
+                                              <div class="gradient-colors-sec">
+                                                  <p class="solid-heading">Gradient Color</p>
+                                                  <ul class="nav gradient-btns">
+                                                    <li>
+                                                      <a class="active btn" id="solid-tab" data-toggle="tab" href="#lineartab" (click)="linearGradient()">
+                                                      <img src="assets/img/editor/linear.png" alt="">
+                                                      <span>Linear</span></a>
+                                                    </li>
+                                                    <li>
+                                                      <a class="btn ml-4" id="background-tab" data-toggle="tab" href="#radialtab" (click)="radialGradient()">
+                                                      <img src="assets/img/editor/radial.png" alt="">
+                                                      <span>Radial</span></a>
+                                                    </li>
+                                                  </ul>
+                                                  <div class="tab-content">
+                                                    <div class="tab-pane fade show active" id="lineartab">
+                                                      <ul class="gradient-colors-list gradientsec"></ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="radialtab">
+                                                       <ul class="gradient-colors-list radialgradientsec"></ul>
+                                                    </div>
+                                                  </div>
+                                              </div>
+
+                                             <div class="selected-color">
+                                                 <div class="d-flex new-gradiet-colors-row">
+                                                    <div class="slected-gradiet-color">
+                                                      <span>Color 1</span>
+                                                       <input type="text" class="colorselectorfont txtgrdcol"  [cpPosition]="'left'" [(colorPicker)]="props.colorone" [style.background]="props.colorone" (colorPickerChange)="getGradientcolone()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+                                                     </div>
+                                                     <div class="slected-gradiet-color">
+                                                        <span>Color 2</span>
+                                                        <input type="text" class="colorselectorfont txtgrdcol"  [cpPosition]="'left'" [(colorPicker)]="props.colortwo" [style.background]="props.colortwo" (colorPickerChange)="getGradientcoltwo()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+                                                     </div>
+                                                     <button (click)="saveGradient()" class="sm-save-btn">Save</button>
+                                                  </div>
+                                              </div>
+                                             <input type="text" class="custom-bg-code colsection1 colsec1" value="{{props.colorone}}" id="txtgrdcolval1" (input)="txtgrdcolval1()">
+                                             <input type="text" class="custom-bg-code colsec2 colsection1" id="txtgrdcolval2" value="{{props.colortwo}}" (input)="txtgrdcolval2()">
+                                       </div>
+                                       <!-- 03 -->
+                                       <div class="tab-pane fade" id="image-content" [hidden]="rightSideBarType=='image'? false : true" [className]="rightSideBarType=='image'? 'active show' : ''">
+                                         <div class="tab-content-heading">
+                                              <h4>Images</h4>
+                                          </div>
+                                          <div class="ic-sidebar-fonts-tools">
+                                              <div class="imgtool">
+                                                <div class="d-flex align-items-center">
+                                                    <button class="replace-btn d-none" type="button" (click)="cropimage()">Crop Image</button>
+                                                    <button class="replace-btn bg-pink" type="button"  (click)="replaceimage()">Replace Image</button>
+                                                </div>
+                                              </div>
+                                              <div class="mt-3" style="padding:10px;display:flex;align-items:center;justify-content:space-between;width:100%;">
+                                                <div class="" style="height: 50px;">
+                                                   <div class="">
+                                                      <div class="custom-site-quantity">
+                                                        <span class="btn-dec">-</span>
+                                                        <input type="number"  id="imgwidth" style="width: 95%;" (keyup.enter)="setaspectratio()" min="1">
+                                                        <span class="btn-inc">+</span>
+                                                      </div>
+                                                   </div>
+                                                   <label>Width</label>
+                                                </div>
+                                                <div class="" style="height:50px;" >
+                                                   <div class="">
+                                                      <div class="custom-site-quantity">
+                                                        <span class="btn-dec">-</span>
+                                                        <input type="number" id="imgheight"  style="width: 95%;" (keyup.enter)="setaspectratio()" min="1">
+                                                        <span class="btn-inc">+</span>
+                                                      </div>
+                                                   </div>
+                                                   <label>Height</label>
+                                                </div>
+                                             </div>
+                                             <div class="ic-sidebar-fonts-tools">
+                                              <h4>Effects</h4>
+                                              <div class="font-tools-row flex-column">
+                                                 <div class="fonts-slider">
+                                                   <input type="range" class="slider shapeslider" max="100" min="0" step="5" [(ngModel)]="props.opacity" (change)="setOpacity()" >
+                                                   <label>Opacity: </label> <label class="info">{{props.opacity}}%</label>
+                                                 </div>
+                                              </div>
+                                              <div class="font-tools-row flex-column">
+                                                 <div class="fonts-slider">
+                                                   <input class="slider" type="range" max="10" min="1" step="1" [(ngModel)]="props.textoffsetX" (change)="setTextoffsetX()">
+                                                   <label>Drop Shadow</label>
+                                                 </div>
+                                              </div>
+                                              <div class="font-tools-row flex-column">
+                                                 <div class="fonts-slider">
+                                                   <input class="slider" type="range" max="1000" min="100" step="1" value="250" [(ngModel)]="props.textDiameter" (change)="setTextdiameter()">
+                                                   <label>Curved text </label>
+                                                   <label class="size ml-2">{{props.textDiameter}}</label>
+                                                 </div>
+                                              </div>
+                                              <div class="font-tools-row flex-column">
+                                                 <div class="fonts-slider">
+                                                   <input class="slider" type="range" max="5" min="1" step="1" [(ngModel)]="props.textBrightness" (change)="setTextbrightness()">
+                                                   <label>Brightness </label>
+                                                   <label class="size ml-2">{{props.textBrightness}}%</label>
+                                                 </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                       </div>
+                                        <!-- 04 -->
+                                        <div class="tab-pane fade" id="shape-content" [hidden]="rightSideBarType=='path'||rightSideBarType=='group' ? false : true" [className]="rightSideBarType=='path'||rightSideBarType=='group'? 'tab-pane fade active show' : 'tab-pane fade'">
+                                          <div class="tab-content-heading">
+                                              <h4>Shape</h4>
+                                          </div>
+                                          <div class="ic-sidebar-fonts-tools">
+                                              <div class="font-tools-row">
+                                                <div class="font-tools-col textcolor-picker">
+                                                  <label for="color-picker">Fill Color</label>
+                                                  <input type="text" class="font-color font-tools-sm-input colorselectorfont pathcolor" style="margin-left: 20px;"  [cpPosition]="'left'" [(colorPicker)]="props.pathfill" [style.background]="props.pathfill" (colorPickerChange)="pathfill()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+                                                </div>
+                                               </div>
+                                               <div class="font-tools-row">
+                                                  <div class="font-tools-col textcolor-picker">
+                                                    <label for="color-picker">Stroke Color</label>
+                                                    <input type="text" class="font-color font-tools-sm-input colorselectorfont pathstrokecolor"  [cpPosition]="'left'" [(colorPicker)]="props.stroke" [style.background]="props.stroke" (colorPickerChange)="setStroke()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+                                                  </div>
+                                               </div>
+                                               <div class="font-tools-row flex-column">
+                                                   <div class="font-tools-col fonts-ranger">
+                                                      <label>Stroke Width</label>
+                                                   </div>
+                                                   <div class="fonts-slider fonts-slider-inline">
+                                                     <input type="range" class="slider shapeslider pathstrokewidth" max="100" min="1" step="1" [(ngModel)]="props.strokeWidth" (change)="setStorkeWidth()">
+                                                     <input type="text" class="opacity-counter" value="{{props.strokeWidth}}">
+                                                   </div>
+                                               </div>
+                                               <div class="font-tools-row flex-column">
+                                                   <div class="font-tools-col fonts-ranger">
+                                                      <label>Opacity</label>
+                                                   </div>
+                                                   <div class="fonts-slider fonts-slider-inline">
+                                                      <input type="range" class="slider shapeslider pathopacity" max="100" min="0" step="5" [(ngModel)]="props.opacity" (change)="setOpacity()">
+                                                     <input type="text" class="opacity-counter" value="{{props.opacity}}%">
+                                                   </div>
+                                               </div>
+                                                <div class="font-tools-row flex-column">
+                                                   <div class="font-tools-col fonts-ranger">
+                                                      <label>Dash</label>
+                                                   </div>
+                                                   <div class="fonts-slider fonts-slider-inline">
+                                                       <input title="Shape Dash" class="slider shapeslider pathdash" type="range" max="5" min="0" step="1" [(ngModel)]="props.strokeDash" (change)="setGapDashSize()">
+                                                     <input type="text" class="opacity-counter" value="{{props.strokeDash}}%">
+                                                   </div>
+                                               </div>
+                                          </div>
+                                        </div>
+                                       <!-- 05 -->
+                                        <div class="tab-pane fade" id="canvas-content" [hidden]="rightSideBarType=='canvas'? false : true" [className]="rightSideBarType=='canvas'? 'tab-pane fade active show' : 'tab-pane fade'">
+                                        <div class="tab-content-heading">
+                                              <h4>Canvas</h4>
+                                          </div>
+                                          <div class="editcanvassec">
+                                             <form #editcanvaswhForm="ngForm" (ngSubmit)="oneditCanvaswhFormSubmit(editcanvaswhForm)" id="editcanvaswhForm" novalidate>
+                                             <div class=" justify-content-start">
+                                                <div class="pp-sidebar-row justify-content-start">
+                                                   <div class="pp-sidebar-col mr-4">
+                                                      <label for="print-width">Width</label>
+                                                       <div class="custom-site-quantity">
+                                                          <span class="btn-dec">-</span>
+                                                          <input type="number" class="font-tools-sm-input"  id="editCanvasWid" name="editCanvasWid"   min="1" ngModel required>
+                                                          <span class="btn-inc">+</span>
+                                                       </div>
+                                                   </div>
+                                                   <div class="pp-sidebar-col">
+                                                      <label for="print-width">Units</label>
+                                                      <select id='editunits' (focus)="setunits($event)" (change)="oneditunitchange($event)">
+                                                         <option>MM</option>
+                                                         <option>CM</option>
+                                                         <option>PX</option>
+                                                      </select>
+                                                   </div>
+                                                </div>
+                                                <!-- 2 -->
+                                                <div class="pp-sidebar-row justify-content-start">
+                                                   <div class="pp-sidebar-col mr-4">
+                                                      <label for="print-height">Height</label>
+                                                      <div class="custom-site-quantity">
+                                                          <span class="btn-dec">-</span>
+                                                          <input type="number" class="font-tools-sm-input" id="editCanvasHei" name="editCanvasHei" ngModel required min="1">
+                                                          <span class="btn-inc">+</span>
+                                                       </div>
+                                                   </div>
+                                                   <div class="pp-sidebar-col" style="display: none;">
+                                                      <label for="">Orientation</label>
+                                                      <span class="orientation-tick active" (click)="portrait()">
+                                                      <img src="assets/img/active-oritation.png" alt="" class="active">
+                                                      <img src="assets/img/oritation.png" alt="">
+                                                      </span>
+                                                      <span class="orientation-tick" (click)="landscape()">
+                                                      <img src="assets/img/active-oritation-1.png" alt="" class="active">
+                                                      <img src="assets/img/oritation-1.png" alt="">
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                                <!-- 3 -->
+                                                <div class="pp-sidebar-row" style="display: none;">
+                                                   <div class="pp-sidebar-col">
+                                                      <label for="print-pages">Pages</label>
+                                                       <div class="custom-site-quantity">
+                                                          <span class="btn-dec">-</span>
+                                                          <input type="number" class="font-tools-sm-input" value="1"  name="editpages" id="editpages"  min="1">
+                                                          <span class="btn-inc">+</span>
+                                                       </div>
+                                                   </div>
+                                                </div>
+                                                <!-- sidebar collpaser -->
+                                                <!-- 01 -->
+                                                <div class="pp-sdebar-collapser" style="display: none;">
+                                                   <div class="pp-sidebar-collapes-header">
+                                                       Margins
+                                                   </div>
+                                                   <div class="pp-sidebar-collapes-body">
+                                                      <!-- -1 -->
+                                                      <div class="pp-sidebar-row cols-3-row">
+                                                         <div class="pp-sidebar-col">
+                                                            <label for="print-top">Top</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-top" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                           </div>
+                                                            <label for="print-inside">Inside</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-inside" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                           </div>
+                                                         </div>
+                                                         <div class="pp-sidebar-col pl-10">
+                                                            <label for="print-bottom">Bottom</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bottom" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                            </div>
+                                                            <label for="print-outside">Outside</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-outside" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                            </div>
+                                                         </div>
+                                                         <div class="pp-sidebar-col">
+                                                            <button class="pp-sm-btn">
+                                                            <i class="fa fa-link"></i>
+                                                            </button>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <!-- 02 -->
+                                                <div class="pp-sdebar-collapser">
+                                                   <div class="pp-sidebar-collapes-header">
+                                                      Bleed and Slug
+                                                   </div>
+                                                   <div class="pp-sidebar-collapes-body">
+                                                      <!-- -1 -->
+                                                      <div class="pp-sidebar-row cols-3-row">
+                                                         <div class="pp-sidebar-col">
+                                                            <label for="print-bleed-top">Top</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-top" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                            </div>
+                                                            <label for="print-bleed-inside">Inside</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-inside" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                            </div>
+                                                         </div>
+                                                         <div class="pp-sidebar-col pl-10">
+                                                            <label for="print-bleed-bottom">Bottom</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-bottom" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                            </div>
+                                                            <label for="print-bleed-outside">Outside</label>
+                                                            <div class="custom-site-quantity">
+                                                              <span class="btn-dec">-</span>
+                                                              <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-outside" min="1">
+                                                              <span class="btn-inc">+</span>
+                                                            </div>
+                                                         </div>
+                                                         <div class="pp-sidebar-col">
+                                                            <button class="pp-sm-btn">
+                                                            <i class="fa fa-link"></i>
+                                                            </button>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <!--/inner-->
+                                             <div class="print-create-wrap">
+                                                <button type="submit" class="print-create-btn">Update</button>
+                                             </div>
+                                             </form>
+                                          </div>
+                                        </div>
+                                        <!-- o6 -->
+                                        <div class="tab-pane fade" id="layers-content" [hidden]="rightSideBarType=='layers'? false : true" [className]="rightSideBarType=='layers'? 'tab-pane fade active show' : 'tab-pane fade'">
+                                           <div class="tab-content-heading">
+                                              <h4>Layers</h4>
+                                          </div>
+                                           <ul class="layers-selection-list layers"></ul>
+                                        </div>
+                                  </div>
+                                </div>
+                             </div>
+                             <!-- END of Right Sidebar -->
+                       </div><!--/.row-->
+                    </div><!-- End template-editor-body  -->
+              </div>
+          </div>
+          <!--==================-->
+          <!-- End Working Area -->
+          <!--==================-->
+      </div>
+    </div>
+      <app-activity-stream></app-activity-stream>
+</div>
+ <!--======================================-->
+ <!--       All Model(popups) Start -->
+ <!--======================================-->
+<div id="displaycanvasmodal" class="modal fade icentra-popup new-icentra-popup" data-keyboard="false">
+   <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <span>Preview</span>
+           <a href="javascript:;" class="close" data-dismiss="modal">
+             <img src="assets/img/icons/popup-close.png" alt="">
+           </a>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <div class="body" style="height:500px;" malihu-scrollbar [scrollbarOptions]="inset2dark">
+              <div class="" id="canvasloadimg">
+
+              </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+ <!-- New Popup -->
+   <div class="modal fade icentra-popup new-icentra-popup" id="templatesaveModal">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <form #tempform="ngForm" (ngSubmit)="onSaveTempSubmit(tempform)" id="savedesign" novalidate>
+           <!-- Modal Header -->
+           <div class="modal-header">
+              <span>Save Design</span>
+             <a href="javascript:;" class="close" data-dismiss="modal" data-target="#openModalLibrarypopup">
+               <img src="assets/img/icons/popup-close.png" alt="">
+             </a>
+           </div>
+           <!-- Modal body -->
+           <div class="modal-body">
+             <div class="form-group">
+                 <label for="role">Design Category</label>
+                 <select id="cat_id" name="cat_id" class="form-control tempcatid" ngModel required>
+                     <option value="null">Select Category</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label for="role">Design Name</label>
+                 <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name" ngModel>
+             </div>
+             <span>Please select where you would like to save your file.</span>
+             <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="isPublish" id="isPublish" value="0" ngModel>
+                  Publish Design
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="isFav" id="isFav" value="0" ngModel>
+                  Add To Favourites
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="savePriLib" id="savePriLib" value="0" ngModel>
+                  Private Library
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="saveOffLib" id="saveOffLib" value="0" ngModel>
+                  Office Library
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline" style="margin-left: 10px;">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="saveiCenLib" id="saveiCenLib" value="0" ngModel>
+                  iCentra Library
+                </label>
+              </div>
+           </div>
+           <!-- Modal footer -->
+           <div class="modal-footer">
+             <button type="submit" class="btn btn-primary addimagemodal-btn">Add</button>
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+           </div>
+          </form>
+       </div>
+     </div>
+   </div>
+
+   <div class="modal fade icentra-popup new-icentra-popup" id="crop_imagepopup">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:700px">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <span> Crop Image</span>
+           <a href="javascript:;" class="close" data-dismiss="modal">
+             <img src="assets/img/icons/popup-close.png" alt="">
+           </a>
+         </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div>
+          <img id="imagetocrop" src="" alt="Picture">
+          </div>
+          <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="setDragMode" data-option="move" title="Move" (click)='setDragMode("move");'>
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;move&quot;)">
+           <span class="fa fa-arrows">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="setDragMode" data-option="crop" title="Crop" (click)='setDragMode("crop");'>
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;crop&quot;)">
+           <span class="fa fa-crop">
+           </span>
+           </span>
+           </button>
+          </div>
+          <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="zoom" data-option="0.1" title="Zoom In" (click)='zoom(0.1)'>
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+           <span class="fa fa-search-plus">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="zoom" data-option="-0.1" title="Zoom Out" (click)="zoom(-0.1)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+           <span class="fa fa-search-minus">
+           </span>
+           </span>
+           </button>
+          </div>
+          <!-- <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="move" data-option="-10" data-second-option="0" title="Move Left"  (click)="move(-10,0)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
+           <span class="fa fa-arrow-left">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="move" data-option="10" data-second-option="0" title="Move Right" (click)="move(10,0)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
+           <span class="fa fa-arrow-right">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="move" data-option="0" data-second-option="-10" title="Move Up" (click)='move(0,-10)'>
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
+           <span class="fa fa-arrow-up">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="move" data-option="0" data-second-option="10" title="Move Down" (click)='move(0,10)'>
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
+           <span class="fa fa-arrow-down">
+           </span>
+           </span>
+           </button>
+          </div> -->
+          <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="rotate" data-option="-45" title="Rotate Left" (click)="rotate(-45)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+           <span class="fa fa-rotate-left">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="rotate" data-option="45" title="Rotate Right" (click)="rotate(45)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+           <span class="fa fa-rotate-right">
+           </span>
+           </span>
+           </button>
+          </div>
+          <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="scaleX" data-option="-1" title="Flip Horizontal" (click)="scaleX(-1)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+           <span class="fa fa-arrows-h">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="scaleY" data-option="-1" title="Flip Vertical" (click)="scaleY(-1)">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+           <span class="fa fa-arrows-v">
+           </span>
+           </span>
+           </button>
+          </div>
+          <!-- <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="disable" title="Disable">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.disable()">
+           <span class="fa fa-lock">
+           </span>
+           </span>
+           </button>
+           <button type="button" class="cropbtn" data-method="enable" title="Enable">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.enable()">
+           <span class="fa fa-unlock">
+           </span>
+           </span>
+           </button>
+          </div> -->
+          <div class="btn-group" style="padding: 4px;">
+           <button type="button" class="cropbtn" data-method="reset" title="Reset">
+           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+           <span class="fa fa-refresh">
+           </span>
+           </span>
+           </button>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary addimagemodal-btn" data-method="getCroppedCanvas" id="getCroppedCanvas" name='getCroppedCanvas'>Click Apply</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+       </div>
+     </div>
+   </div>
+
+
+  <!-- Download Templates Popup -->
+   <div class="modal fade icentra-popup new-icentra-popup" id="downloadfileModal">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+        <form #donwloadForm="ngForm" (ngSubmit)="onDownloadSubmit(donwloadForm)" id="downloadform">
+                 <!-- Modal Header -->
+                 <div class="modal-header">
+                    <span>Download</span>
+                   <a href="javascript:;" class="close" data-dismiss="modal">
+                     <img src="assets/img/icons/popup-close.png" alt="">
+                   </a>
+                 </div>
+                 <!-- Modal body -->
+                 <div class="modal-body">
+                  <!-- 1 -->
+                  <div class="popup--insm-box">
+                    <div class="box-heading">Format</div>
+                    <div class="box-body">
+                        <label class="custom-checkbox">
+                          PDF
+                          <input name="pdf" type="checkbox">
+                          <span  class="checkmark"></span>
+                        </label>
+                        <label  class="custom-checkbox">
+                          JPEG
+                          <input name="jpg" type="checkbox">
+                          <span  class="checkmark"></span>
+                        </label>
+                        <label  class="custom-checkbox">
+                          PNG
+                          <input name="png" type="checkbox">
+                          <span  class="checkmark"></span>
+                        </label>
+                        <label  class="custom-checkbox">
+                          Download All
+                          <input name="all" type="checkbox">
+                          <span  class="checkmark"></span>
+                        </label>
+                      </div>
+                  </div>
+
+                  <!-- 2 -->
+                  <div class="popup--insm-box">
+                    <div class="box-heading">Pages</div>
+                    <div class="box-body">
+                        <label class="custom-checkbox">
+                          All
+                          <input type="checkbox">
+                          <span  class="checkmark"></span>
+                        </label>
+
+                        <div class="box-body-row mb-1">
+                          <div class="box-body-col">
+                            <label class="custom-checkbox">
+                              Page Range
+                              <input type="checkbox">
+                              <span  class="checkmark"></span>
+                            </label>
+                          </div>
+                          <div class="box-body-col">
+                            <input type="button" name="" class="box-btn" value="e.g. 1-3,7,12-14">
+                          </div>
+                        </div>
+
+                        <label class="custom-checkbox">
+                          Current Page
+                          <input type="checkbox">
+                          <span  class="checkmark"></span>
+                        </label>
+                      </div>
+                  </div>
+
+                  <!-- 3 -->
+                  <div class="popup--insm-box">
+                    <div class="box-heading">Resolution</div>
+                    <div class="box-body">
+                        <div class="box-body-row">
+                          <div class="box-body-col">
+                            <a href="javascript:;" class="box-btn"> Save for Web - 72 dpi</a>
+                          </div>
+                          <div class="box-body-col">
+                            <a href="javascript:;" class="box-btn active"> Print - 300 dpi</a>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- 4 -->
+                  <div class="popup--insm-box">
+                    <div class="box-heading">Advanced</div>
+                    <div class="box-body">
+                        <label class="custom-checkbox square">
+                          Crop Marks
+                          <input type="checkbox" name="marks">
+                          <span  class="checkmark"></span>
+                        </label>
+                        <label class="custom-checkbox square">
+                           Bleed Marks
+                          <input type="checkbox" name="marks">
+                          <span  class="checkmark"></span>
+                        </label>
+                      </div>
+                  </div>
+
+                    <!-- <div class="savemain">
+                       <label style="margin-left: 10%;">Download All</label>
+                    </div>
+                    <div class="savedesin">
+                       <input type="checkbox" class="" name="downloadall" id="downloadall" value="all" ngModel>
+                    </div>
+                    <div class="savemain">
+                       <label style="margin-left: 10%;">Download As PDF</label>
+                    </div>
+                    <div class="savedesin">
+                       <input type="checkbox" class="" name="downloadaspdf" id="downloadaspdf" value="pdf" ngModel>
+                    </div>
+                    <div class="savemain">
+                       <label style="margin-left: 10%;">Download As PNG</label>
+                    </div>
+                    <div class="savedesin">
+                       <input type="checkbox" class="" name="downloadaspng" id="downloadaspng" value="png" ngModel>
+                    </div>
+                    <div class="savemain">
+                       <label style="margin-left: 10%;">Download As JPEG</label>
+                    </div>
+                    <div class="savedesin">
+                       <input type="checkbox" class="" name="downloadasjpeg" id="downloadasjpeg" value="jpeg" ngModel>
+                    </div> -->
+                 </div>
+                 <!-- Modal footer -->
+                 <div class="modal-footer">
+                   <button type="submit" class="btn btn-primary shadow-none addimagemodal-btn">Download</button>
+                 </div>
+          </form>
+       </div>
+     </div>
+   </div>
+
+<!-- print wrap  -->
+<div class="print-popup-wrap page-section" style="display:none;">
+   <div class="scroll-in-popup" malihu-scrollbar [scrollbarOptions]="inset2dark">
+     <div class="print-popup-container">
+        <div class="sidebar-tools-tabs print-popup-body">
+           <div class="print-popup-header">
+              <ul class="print-popup-nav">
+                  <li class="active print-tog"><a href="javascript:void(0);">Print</a></li>
+                  <li class="web-tog" ><a href="javascript:void(0);">Web</a></li>
+              </ul>
+              <h4>Please Select Document Size</h4>
+           </div>
+           <!--/.print-popup-header-->
+           <div class="print-popup-tabs-content" style="min-height:410px;">
+              <!-- 1 -->
+              <div class="print-tab">
+                 <div class="print-sizes-list printlist">
+                 </div>
+              </div>
+              <!--/.print-tab-->
+              <!-- 2 -->
+              <div class="web-tab" style="display: none;">
+                 <div class="print-sizes-list weblist">
+                 </div>
+              </div>
+              <!--/.web-tab-->
+           </div>
+           <div class="" style="width:100px;height: 50px;margin-top:16px;">
+             <button type="button" class="print-create-btn" (click)="closePopup()" style="border: none;">Close</button>
+           </div>
+        </div>
+        <!-- sidebar -->
+        <div class="print-popup-sidebar">
+           <form #canvaswhForm="ngForm" (ngSubmit)="onCanvaswhFormSubmit(canvaswhForm)" id="canvaswhForm" novalidate>
+           <div class="print-popup-sidebar-inner ">
+              <div class="pp-sidebar-header">
+                 Design Name
+              </div>
+              <div class="pp-sidebar-row">
+                 <input type="text" class="design-name-input" placeholder="Enter Design Name" name="name" id="name" ngModel>
+              </div>
+              <!-- 1 -->
+              <div class="pp-sidebar-row justify-content-start">
+                 <div class="pp-sidebar-col mr-4">
+                    <label for="print-width">Width</label>
+                    <div class="custom-site-quantity">
+                      <span class="btn-dec">-</span>
+                      <input type="number" class="font-tools-sm-input printwidth" id='loadCanvasWid' name='loadCanvasWid' ngModel min="1">
+                      <span class="btn-inc">+</span>
+                    </div>
+                 </div>
+                 <div class="pp-sidebar-col">
+                    <label for="print-width">Units</label>
+                    <select id='units' (focus)="setunits($event)" (change)="onunitchange($event)">
+                       <option>MM</option>
+                       <option>CM</option>
+                       <option>PX</option>
+                    </select>
+                 </div>
+              </div>
+              <!-- 2 -->
+              <div class="pp-sidebar-row justify-content-start">
+                 <div class="pp-sidebar-col mr-4">
+                    <label for="print-height">Height</label>
+                    <div class="custom-site-quantity">
+                      <span class="btn-dec">-</span>
+                      <input type="number" class="font-tools-sm-input printheight" id='loadCanvasHei' name='loadCanvasHei' ngModel min="1">
+                      <span class="btn-inc">+</span>
+                    </div>
+                 </div>
+                 <div class="pp-sidebar-col" style="display: none;">
+                    <label for="">Orientation</label>
+                    <span class="orientation-tick active" (click)="portrait()">
+                    <img src="assets/img/active-oritation.png" alt="" class="active">
+                    <img src="assets/img/oritation.png" alt="">
+                    </span>
+                    <span class="orientation-tick"  (click)="landscape()">
+                    <img src="assets/img/active-oritation-1.png" alt="" class="active">
+                    <img src="assets/img/oritation-1.png" alt="">
+                    </span>
+                 </div>
+              </div>
+              <!-- 3 -->
+              <div class="pp-sidebar-row" style="display: none;">
+                 <div class="pp-sidebar-col">
+                    <label for="print-pages">Pages</label>
+                    <div class="custom-site-quantity">
+                      <span class="btn-dec">-</span>
+                      <input type="number" class="font-tools-sm-input pagenum" value="1" name="pages" id="pages" ngModel min="1">
+                      <span class="btn-inc">+</span>
+                    </div>
+                 </div>
+              </div>
+              <!-- sidebar collpaser -->
+              <!-- 01 -->
+              <div class="pp-sdebar-collapser" style="display: none;">
+                 <div class="pp-sidebar-collapes-header">
+                    <img src="assets/img/collapse-arrow.png" alt=""> Margins
+                 </div>
+                 <div class="pp-sidebar-collapes-body">
+                    <!-- -1 -->
+                    <div class="pp-sidebar-row cols-3-row">
+                       <div class="pp-sidebar-col">
+                          <label for="print-top">Top</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-top" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                          <label for="print-inside">Inside</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-inside" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                       </div>
+                       <div class="pp-sidebar-col pl-10">
+                          <label for="print-bottom">Bottom</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bottom" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                          <label for="print-outside">Outside</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-outside" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                       </div>
+                       <div class="pp-sidebar-col">
+                          <button class="pp-sm-btn">
+                          <i class="fa fa-link"></i>
+                          </button>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <!-- 02 -->
+              <div class="pp-sdebar-collapser">
+                 <div class="pp-sidebar-collapes-header">
+                    <img src="assets/img/collapse-arrow.png" alt=""> Bleed and Slug
+                 </div>
+                 <div class="pp-sidebar-collapes-body">
+                    <!-- -1 -->
+                    <div class="pp-sidebar-row cols-3-row">
+                       <div class="pp-sidebar-col">
+                          <label for="print-bleed-top">Top</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-top" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                          <label for="print-bleed-inside">Inside</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-inside" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                       </div>
+                       <div class="pp-sidebar-col pl-10">
+                          <label for="print-bleed-bottom">Bottom</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-bottom" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                          <label for="print-bleed-outside">Outside</label>
+                          <div class="custom-site-quantity">
+                            <span class="btn-dec">-</span>
+                            <input type="number" class="font-tools-sm-input xs-input" placeholder="12.7mm" name="print-bleed-outside" min="1">
+                            <span class="btn-inc">+</span>
+                          </div>
+                       </div>
+                       <div class="pp-sidebar-col">
+                          <button class="pp-sm-btn">
+                          <i class="fa fa-link"></i>
+                          </button>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <!--/inner-->
+           <div class="print-create-wrap">
+              <button type="submit" class="print-create-btn" style="border: none;">Create New</button>
+           </div>
+          </form>
+        </div>
+        <!--/.sidebar-->
+     </div>
+   </div>
+</div>
+<!--/.print-popup-wrap-->
+
+<div class="modal fade icentra-popup new-icentra-popup" id="addreplaceimagemodal">
+ <div class="modal-dialog modal-dialog-centered" style="max-width:800px;">
+   <div class="modal-content">
+      <form #replaceimgForm="ngForm" (ngSubmit)="onreplaceImgSubmit(replaceimgForm)" id="replaceimgForm">
+         <div class="modal-header">
+            <span>Image</span>
+           <a href="javascript:;" class="close" data-dismiss="modal">
+             <img src="assets/img/icons/popup-close.png" alt="">
+           </a>
+         </div>
+
+         <div class="modal-body" style="height:auto !important;">
+             <div class="form-group file-upload justify-content-end">
+                <button type="button" class="replace-btn" (click)="triggerreplaceImg();">Upload From Computer</button>
+                <div class="hiddenfile">
+                    <input type="file" class="form-control-file replaceImg" id="path" name="path" (change)="onreplaceFileChange($event)"  #fileInput  multiple="multiple">
+                </div>
+                <button type="submit" class="btn btn-primary submitbtn" style="display: none;">Add</button>
+            </div>
+             <div class="imgreplace-row">
+                 <div class="imgreplace-category-col">
+                   <div class="search-cat-dropdown">
+                      <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                      <span class="selimgcatname">Select Category</span>
+                      </a>
+                      <div class="selectimgcatid dropdown-menu dropdown-menu-categories catdropdown" id="imgcategeries">
+                      </div>
+                   </div>
+                 </div>
+                 <div class="imgreplace-search-col">
+                    <div class="input-group tempsection">
+                       <input type="text" name="imgsearch" class="search-task-input search-input search-box" id="imgsearch" placeholder="Search Images" (input)="searchlibraryimg()">
+                       <button class="close-icon"  type="reset"  style="display: none;"></button>
+                       <button class="btn-small searchicon task-search-btn" type="submit" >
+                       <i class="fa fa-search"></i>
+                       </button>
+                    </div>
+                 </div>
+             </div>
+             <div class="category-type-box replacesection-wrap"  id="replacesection"  style="height:200px;" malihu-scrollbar [scrollbarOptions]="inset2dark" >
+             </div>
+         </div>
+      </form>
+   </div>
+ </div>
+</div>
+<div class="se-pre-con" style="opacity: 0.8;"></div>
+<div class="modal fade icentra-popup library-manager-popup" id="openModalLibrarypopup" >
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+          <app-library-manager [options] = "{library:true}" (TaskFileSelected)="shareFromManager($event)"></app-library-manager>
+
+      </div>
+  </div>
+</div>

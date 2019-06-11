@@ -1,0 +1,20 @@
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+         <div class="access-denied-wrap">
+             <div class="access-denied-img">
+               <img src="assets/img/icons/lock.png" alt="">
+             </div>
+             <div class="access-denied-content">
+               <h3>Access Denied</h3>
+               <p>You do not have permission to access this page, please contact your administrator.</p>
+               <a [routerLink]="['/']" routerLinkActive="router-link-active"  class="btn btn-outline-dark box-shadow-none">Go to Dashboard</a>
+             </div>
+         </div>
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+   <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->

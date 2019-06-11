@@ -1,0 +1,191 @@
+<div class="icentra-editor creat-template-editor">
+  <div class="ic-editor-inner">
+    <div class="ic-editor-header">
+      <!-- 1 -->
+      <div class="header-active-tool">
+        <div class="header-active-tool-name">
+          <h6>Library Manager</h6>
+          <span>{{ parentName }}</span>
+        </div>
+      </div>
+
+      <a class="library-close" data-dismiss="modal">
+        <img src="assets/img/editor/library-close.png" alt="">
+      </a>
+
+    </div>
+    <div class="ic-editor-body">
+      <!-- Sidebar -->
+      <div class="ic-editor-sidebar">
+        <div class="ic-editor-sidebar-tools">
+          <!-- Tabs Links-->
+          <ul class="nav ic-tools-tab" role="tablist">
+            <li>
+              <a class="nav-link" id="private-tab" data-toggle="tab" href="#library-1">
+                <img src="assets/img/editor/hvr-private.png" alt="">
+                <img src="assets/img/editor/private.png" alt="" class="hvr">
+                <span>Private</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="office-tab" data-toggle="tab" href="#library-2">
+                <img src="assets/img/editor/edit-site.png" alt="">
+                <img src="assets/img/editor/hvr-lib-office.png" alt="" class="hvr">
+                <span>Office</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="icentra-tab" data-toggle="tab" href="#library-3">
+                <img src="assets/img/editor/lib-icentra.png" alt="">
+                <img src="assets/img/editor/hvr-lib-icentra.png" alt="" class="hvr">
+                <span>iCentra</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="received-tab" data-toggle="tab" href="#library-4">
+                <img src="assets/img/editor/received.png" alt="">
+                <img src="assets/img/editor/hvr-receied.png" alt="" class="hvr">
+                <span>Received</span>
+              </a>
+            </li>
+          </ul>
+          <!-- Tabs Content -->
+          <div class="tab-content ic-tools-tab-content" *ngIf="allFiles">
+            <div class="tab-pane fade show" *ngFor="let lib of libraryData; let step=index"
+              [ngClass]="{'active': step==0, 'show': step==0}" id="library-{{lib.id}}" role="tabpanel">
+              <div class="tab-content-inner" malihu-scrollbar [scrollbarOptions]="inset2dark" style="height:550px;">
+                <!-- <div class="lib-folder-add">
+                                       <a class="btn btn-link" (click)="inputFolderBox=lib.id"><i class="fas fa-plus"></i></a>
+                                       <input type="text" *ngIf="inputFolderBox === lib.id" class="col-md-6 form-control" [(ngModel)]="newFolderName" />
+                                       <a class="btn btn-link" *ngIf="newFolderName!==''" (click)="insertNewFolder('library', lib.id, newFolderName)"><i class="fas fa-check-circle" ></i></a>
+                                   </div> -->
+                <!-- 1 -->
+                <div *ngIf="lib.categories"  id="accordion_grp_1">
+                  <!-- Level 1 -->
+                  <div class="category-type-box level-1" *ngFor="let cat of lib.categories">
+                    <a (click)="setFiles(cat.model.id, cat.model.title)" class="collapser-btn collapsed" data-toggle="collapse"
+                      href="#libcat-{{cat.model.id}}" aria-expanded="false">
+                      <i class="fa fa-caret-down"></i>
+                      <i class="fa fa-caret-right" style="display:none;"></i>
+                      <span class="name">{{ cat.model.title }}</span>
+                      <span class="number">{{ getFilesTotal(cat.model.id) }}</span>
+                    </a>
+                    <div class="collapse fonts-collapesd" id="libcat-{{cat.model.id}}"  data-parent="#accordion_grp_1" *ngIf="cat.children">
+                         <!-- LEVEL 2 -->
+                         <div class=" sub-list category-type-box level-2"  *ngFor="let subCat of cat.children">
+                                <a (click)="setFiles(subCat.model.id, subCat.model.title)" class="collapser-btn collapsed" data-toggle="collapse"
+                                  href="#subcat-1-{{subCat.model.id}}" aria-expanded="false">
+                                  {{ subCat.model.title }} <span>({{getFilesTotal(subCat.model.id)}})</span>
+                                </a> 
+                                <div class="collapse fonts-collapesd" id="subcat-1-{{subCat.model.id}}" [attr.data-parent]="'#libcat-' + cat.model.id" *ngIf="subCat.children">
+                                    <!-- LEVEL 3 -->
+                                     <div class="sub-list  category-type-box level-3"  *ngFor="let subCatChild of subCat.children">
+                                        <a (click)="setFiles(subCatChild.model.id, subCatChild.model.title)" class="collapser-btn collapsed"
+                                          data-toggle="collapse" href="#subcat-2-{{subCatChild.model.id}}" aria-expanded="false">
+                                          {{ subCatChild.model.title }} <span>({{getFilesTotal(subCatChild.model.id)}})</span>
+                                        </a>
+                                        <div class="collapse fonts-collapesd" id="subcat-2-{{subCatChild.model.id}}" [attr.data-parent]="'#subcat-1-' + subCat.model.id" *ngIf="subCatChild.children">
+                                          <!-- LEVEL 4 -->
+                                          <div class="sub-list category-type-box level-4"  *ngFor="let subCatChildAG of subCatChild.children">
+                                            <a (click)="setFiles(subCatChildAG.model.id, subCatChildAG.model.title)" href="#subcat-3-{{subCatChildAG.model.id}}" class="collapser-btn collapsed" aria-expanded="false">
+                                              {{ subCatChildAG.model.title }}<span>({{getFilesTotal(subCatChildAG.model.id)}})</span>
+                                            </a>
+                                            <div class="collapse fonts-collapesd" id="subcat-3-{{subCatChildAG.model.id}}" [attr.data-parent]="'#subcat-2-' + subCatChild.model.id">
+                                            hrefehfjehjoif
+                                            </div>
+                                          </div>
+                                        </div>
+                                     </div><!-- END LEVEL 3 -->
+                                </div>
+                         </div>
+                         <!-- END LEVEL 2 -->
+                    </div>
+                  </div>
+                  <!-- END LEVEL 1 -->
+                </div>
+              </div><!-- /.tab-content-inner -->
+            </div>
+          </div>
+          <!--/.tab-content-->
+        </div>
+        <!--/.ic-editor-sidebar-tools-->
+      </div>
+      <!--/End sidebar-->
+
+      <!-- Start Main -->
+      <div class="ic-editor-workarea website-work-area">
+        <div class="library-manager-wrapper">
+          <div class="library-manager-header">
+            <div class="d-flex align-items-center">
+              <!-- search box -->
+              <div class="site-search-box right-icon">
+                <input type="text" class="search-input" placeholder="Search Files" [(ngModel)]="byName"
+                  (input)="setFiles(parentID, parentName)">
+                <button type="reset" class="search-box-btn close-icon sm d-none"></button>
+                <button type="submit" class="search-box-btn"><i class="fa fa-search"></i></button>
+              </div>
+              <!-- DroDown -->
+              <div class="sortby-dropdown">
+                <ng-select bindLabel="name" bindValue="label" [items]="fileTypes" [(ngModel)]="sortBy"
+                  placeholder="Sort By" (change)="setFiles(parentID, parentName)">
+                </ng-select>
+              </div>
+
+
+
+              <!-- Upload File -->
+              <input id="fileInput" type='file' [hidden]="true" name="photo" (change)="onSelectFile($event)" #fileInput multiple>
+              <!-- Buttons -->
+              <div class="btn-group ml-auto">
+                <a class="upload-gallery-btn" *ngIf="parentID !== -1"
+                  (click)="fileInput.click();$event.preventDefault();">
+                  <img src="assets/img/editor/upload-gallery.png" alt="">
+                  <span>Upload</span>
+                </a>
+                <input type="button" name="insert" data-dismiss="modal" (click)="emitNow()" class="insert-btn"
+                  value="Insert" [disabled]="selectedFile.length === 0">
+                <div *ngIf="parentID !== -1">
+                  <a class="upload-gallery-btn" (click)="showCreateMenu=true;$event.preventDefault();">
+                    <img src="assets/img/editor/upload-gallery.png" alt="">
+                    <span>Folder</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="d-flex align-items-center">
+              <div class="btn-group ml-auto my-2" *ngIf="showCreateMenu">
+                  <div class="site-search-box right-icon">
+                    <input type="text" class="search-input" [(ngModel)]="newSubFolderName" >
+                    <button type="button" class="search-box-btn" (click)="insertNewSubFolder()" [disabled]="newSubFolderName === ''">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+            </div>
+
+
+            <div class="library-manager-body" *ngIf="filesList">
+              <ul class="gallery-uploaded-list">
+                <li *ngFor="let file of filesList" (click)="setFileSelection(file.file.id)"
+                  [ngClass]="{'active': selectedFile.indexOf(file.file.id) !== -1}">
+                  <div class="thumbnail">
+                    <span (click)="deleteFile(file.id, parentID)" class="close"></span>
+                    <img [src]="libHelper.fileThumbbyType(file.file)" alt="">
+                  </div>
+                  <div class="gallery-ul-txt">
+                    <span class="name">{{file.file.file_name}}</span>
+                    <span>{{file.file.file_type}}</span>
+                    <span>{{file.file.size}} </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- End Main -->
+      </div>
+      <!--/body-->
+    </div>
+  </div>
+</div><!-- EDitor End -->

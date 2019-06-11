@@ -1,0 +1,382 @@
+<div class="container-fluid">
+    <div class="welcome-message">
+        <div class="welcome-header d-flex">
+            <h3>Task Manager</h3>
+            <app-breadcrumb></app-breadcrumb>
+        </div>
+    </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div class="welcome-outer-content">
+                <p>Below is the list of Tasks. Few of them assigned to you or your group members.</p>
+                <div class="activity-opner">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+                </div>
+            </div>
+            <!-- EDitor Start  -->
+            <div class="icentra-editor creat-template-editor mt-2">
+                <div class="ic-editor-inner">
+                    <div class="ic-editor-header">
+                        <!-- 1 -->
+                        <div class="header-active-tool">
+                           <span class="header-active-tool-sign">
+                             <img src="assets/img/editor/create-task.png" alt="">
+                           </span>
+                            <div class="header-active-tool-name">
+                                <h6>Tasks</h6>
+                                <span>My Task</span>
+                            </div>
+                        </div>
+                        <!-- 1.5 -->
+                        <div class="allusers-tools-col">
+                              <div class="bulk-action d-flex mr-2" *ngxPermissionsOnly="['task.bulk_actions']">
+                                 <div class="search-cat-dropdown d-flex">
+                                  <ng-select name="action" bindLabel="name" [items]="bulkOptions" style="width: 150px;"
+                                               [(ngModel)]="selectedBulk" bindValue="id" [searchable]="false"
+                                               placeholder="Bulk Action">
+                                    </ng-select>
+                                    <ng-select name="action" bindLabel="name" [items]="statusList"
+                                               *ngIf="selectedBulk === 2"
+                                               [(ngModel)]="selectedStatusBulk" bindValue="id" [searchable]="false"
+                                               placeholder="Select Status" class="pl-1">
+                                    </ng-select>
+                                    <ng-select name="action" bindLabel="name" [items]="priorityList"
+                                               *ngIf="selectedBulk === 3"
+                                               [(ngModel)]="selectedPriorityBulk" bindValue="id" [searchable]="false"
+                                               placeholder="Select Priority" class="pl-1">
+                                    </ng-select>
+                                 </div>
+                                 <button value="Apply" class="btn-apply allu-btn" [disabled]="disableApplyBtn()" (click)="application()">Apply
+                                </button>
+                              </div>
+                          </div>
+                        <!-- 2 -->
+                        <ul class="ic-header-tool-list">
+                            <li  *ngxPermissionsOnly="['task.create']">
+                                <a title="New" routerLink="/tasks/create-task" class="icentra-new" style="cursor: pointer">
+                                    <img src="assets/img/editor/new-user.png" alt="">
+                                    <span>New</span>
+                                </a>
+                            </li>
+                            <li  *ngxPermissionsOnly="['task.export']">
+                                <a title="Export" (click)="exportResult()" class="icentra-export" style="cursor: pointer">
+                                    <img src="assets/img/editor/export.png" alt="">
+                                    <span>Export</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ic-editor-body">
+                        <div class="job-table-inner w-100">
+                            <!-- Header -->
+                            <div class="job-table-header">
+                                <div class="mytasks-table-header">
+
+                                    <div class="job-view">
+                                        <a routerLink="/tasks/board">
+                                            View
+                                            <img src="assets/img/editor/grid-toggler.png" alt="" width="11px" />
+                                        </a>
+                                    </div>
+                                    <div class="input-daterange d-inline-flex align-items-center xen-date-range">
+                                        <div class="filter-by-date-range">
+                                            <ejs-daterangepicker id="daterangepicker" name="date" [(ngModel)]="userDate"
+                                                                 #date="ngModel" placeholder="Search Date Range"
+                                                                 (ngModelChange)="changeDates()"
+                                                                 required></ejs-daterangepicker>
+                                        </div>
+                                    </div>
+                                    <div class="filter-by-tasks mr-2">
+                                        <div class="search-cat-dropdown" *ngIf="typeList">
+                                            <ng-select [items]="typeList" bindLabel="name" bindValue="id"
+                                                       (change)="filterItem('jobType', $event)"
+                                                       [searchable]="true" placeholder="Job Type">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="task-search position-relative mr-2">
+                                        <input type="text"
+                                               [(ngModel)]="keyword" (input)="filterItem('keyword', keyword)"
+                                               name="task-search" class="search-task-input"
+                                               placeholder="Search By Keyword">
+                                        <button  (click)="keyword='';filterItem('keyword', keyword);" type="reset" class="close-icon sm" *ngIf="keyword"></button>
+                                    </div><!--/.task-search-->
+                                    <div class="tasks-dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;"
+                                           role="button">
+                                            <span *ngIf="statusListSelection === 'empty'">Status: All</span>
+                                            <span *ngIf="statusListSelection !== 'empty'">
+                                                <span *ngFor="let status of statusList">
+                                                    <span *ngIf="status.selected" [ngStyle]="{'color': status.color}"> {{status.name}},</span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-with-form">
+                                            <a *ngFor="let status of statusList" class="dropdown-item"
+                                               (click)="$event.stopPropagation();">
+                                                <label>
+                                                <input type="checkbox"
+                                                       name="options[]"
+                                                       value="{{status.id}}"
+                                                       (change)="changeCheckBox(status)"
+                                                       [ngModel]="status.selected"/>
+                                                <span>{{ status.name }}</span>
+                                                </label>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- 3 -->
+                                    <div class="tasks-dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;"
+                                           role="button">Assignee: All</a>
+                                        <div class="dropdown-menu dropdown-menu-with-form" style="overflow-y: scroll; height: 200px;">
+                                            <input type="search" class="search-to-assign" (input)="filterAssign($event.target.value)"
+                                                   placeholder="Find users/Groups">
+                                            <a *ngFor="let assign of assigns" class="dropdown-item"
+                                               (click)="$event.stopPropagation();">
+                                                <label>
+                                                <input type="checkbox"
+                                                       (change)="assignCheckbox(assign, $event.target.checked)"/>
+                                                <span>{{ assign.first_name }} {{ assign.last_name }}</span>
+                                                </label>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="total-view-result">
+                                        <span (click)="clearFilters()" style="cursor: pointer"><b>Clear Filter</b></span>
+                                    </div>
+
+                                    <!--<div class="tasks-more-options">-->
+                                        <!--<a class="moreOptionsToggler" href="javascript:void;">More Options</a>-->
+                                    <!--</div>-->
+                                    <div class="total-view-result  d-flex mr-0 ml-auto" *ngIf="taskList?.meta?.pagination">
+                                        <span><b>{{ taskList.meta.pagination.total }} Task</b></span>
+                                    </div>
+
+                                </div><!--/.mydesign-header-tools-->
+
+                                <!-- More options Content -->
+                                <div class="more-options-content d-none">
+                                    <!-- 2 -->
+                                    <!-- 4 -->
+                                    <!--<div class="task-search">-->
+                                        <!--<input type="date"-->
+                                               <!--[(ngModel)]="due_date" (input)="filterItem('due_date', due_date)"-->
+                                               <!--name="task-search" class="search-task-input">-->
+                                    <!--</div>&lt;!&ndash;/.task-search&ndash;&gt;-->
+                                </div>
+                            </div>
+                            <!-- Body -->
+                            <div class="job-table-body">
+                                <!-- Table Start -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th *ngxPermissionsOnly="['task.bulk_actions']">
+                                                <label class="custom-checkbox">
+                                                    <input type="checkbox"
+                                                           (change)="selectAll($event.target.checked)">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </th>
+                                            <th scope="col">
+                                                Title
+                                                <span class="table-sorting">
+                                                    <i class="fa fa-caret-up"
+                                                       [ngStyle]="{'color': search.orderBy == 'title' && search.orderByValue == 'asc'? 'blue' : 'gray'}"
+                                                       (click)="orderThis('title', 'asc')"></i>
+                                                    <i class="fa fa-caret-down"
+                                                       [ngStyle]="{'color': search.orderBy == 'title' && search.orderByValue == 'desc'? 'blue' : 'gray'}"
+                                                       (click)="orderThis('title', 'desc')"></i>
+                                                </span>
+                                            </th>
+                                            <th scope="col">
+                                                Property
+                                                <span class="table-sorting">
+                                                <i class="fa fa-caret-up"
+                                                   [ngStyle]="{'color': search.orderBy == 'property' && search.orderByValue == 'asc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('property', 'asc')"></i>
+                                                <i class="fa fa-caret-down"
+                                                   [ngStyle]="{'color': search.orderBy == 'property' && search.orderByValue == 'desc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('property', 'desc')"></i>
+                                                </span> 
+                                            </th>
+                                            <th scope="col">
+                                                Job Type
+                                                <span class="table-sorting">
+                                                <i class="fa fa-caret-up"
+                                                   [ngStyle]="{'color': search.orderBy == 'job_type_name' && search.orderByValue == 'asc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('job_type_name', 'asc')"></i>
+                                                <i class="fa fa-caret-down"
+                                                   [ngStyle]="{'color': search.orderBy == 'job_type_name' && search.orderByValue == 'desc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('job_type_name', 'desc')"></i>
+                                                </span> 
+                                            </th>
+                                            <th scope="col">
+                                                Due
+                                                <span class="table-sorting">
+                                                <i class="fa fa-caret-up"
+                                                   [ngStyle]="{'color': search.orderBy == 'due_date' && search.orderByValue == 'asc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('due_date', 'asc')"></i>
+                                                <i class="fa fa-caret-down"
+                                                   [ngStyle]="{'color': search.orderBy == 'due_date' && search.orderByValue == 'desc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('due_date', 'desc')"></i>
+                                                </span>
+                                            </th>
+                                            <th scope="col">
+                                                Assign to
+                                            </th>
+                                            <th scope="col">
+                                                Status
+                                                <span class="table-sorting">
+                                                <i class="fa fa-caret-up"
+                                                   [ngStyle]="{'color': search.orderBy == 'status' && search.orderByValue == 'asc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('status', 'asc')"></i>
+                                                <i class="fa fa-caret-down"
+                                                   [ngStyle]="{'color': search.orderBy == 'status' && search.orderByValue == 'desc'? 'blue' : 'gray'}"
+                                                   (click)="orderThis('status', 'desc')"></i>
+                                                </span>   
+                                            </th>
+                                            <th scope="col" width="180px">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody *ngIf="taskList">
+                                        <tr *ngFor="let task of taskList?.data">
+                                            <td *ngxPermissionsOnly="['task.bulk_actions']">
+                                                <label class="custom-checkbox">
+                                                    <input type="checkbox"
+                                                           [(ngModel)]="checkboxSelection[task.id]"
+                                                           (change)="checkedBoxStatus(task.id, $event.target.checked)">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <a [routerLink]="['/tasks/edit-task', task.id]">
+                                                    <span>{{task.title}}</span>
+                                                </a>
+                                            </td>
+                                            <td class="text-left">
+                                                    <span  *ngIf="task.property_id != null">
+                                                        {{task.property.data.address}}
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="task.job_type_id === null"></span>
+                                                <span *ngIf="task.job_type_id !== null"
+                                                      class="tbl-batch" style="color:#fff;"
+                                                      [ngStyle]="{'background':task.jobType.data.color}">{{task.jobType.data.name}}</span>
+                                            </td>
+                                            <td>
+                                                <span
+                                                        *ngIf="22!==23"
+                                                        class="xn-txt-red tbl-batch p-0 text-left">{{ task.due_date | date:'dd/MM/yy' }}</span>
+                                                <span *ngIf="22===23" class="xn-txt-red tbl-batch">Today</span>
+                                            </td>
+                                            <td class="text-left">
+                                                <span *ngIf="task.assigns.data.length > 0">
+                                                <span *ngFor="let assign of task.assigns.data ">
+                                                    {{assign.user_full_name}}, 
+                                                </span>
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <p  [ngStyle]="{ 'color' : task.taskStatus.data.color }"
+                                                   class="tbl-batch p-0 text-left">{{ task.taskStatus.data.name }}</p>
+                                            </td>
+                                            <td *ngIf="AuthUser.id">
+                                                <div class="action-col" style="width: 150px !important;">
+                                                    <a [routerLink]="['/tasks/edit-task', task.id]"
+                                                       *ngxPermissionsOnly="['task.edit']">
+                                                        <img src="assets/img/editor/edit-tool.png" alt="" width="15px">
+                                                    </a>
+                                                    <span *ngxPermissionsOnly="['task.delete']">
+                                                    <a (click)="deleteTask(task)"
+                                                       *ngIf="AuthUser.role_id === 1 || AuthUser.id === task.user_id">
+                                                        <img src="assets/img/editor/recycle.png" alt="" width="18px" style="cursor: pointer">
+                                                    </a>
+                                                    </span>
+                                                    <div class="action-dropdown"
+                                                         *ngxPermissionsOnly="['task.status.change']">
+                                                        <a href="#" role="button" data-toggle="dropdown"
+                                                           aria-haspopup="false" aria-expanded="false">
+                                                            <i class="fas fa-ellipsis-h"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                                            <ng-container *ngFor="let status of statusList">
+                                                                <a *ngIf="status.id !== task.taskStatus.data.id"
+                                                                   [ngStyle]="{'color':status.color}"
+                                                                   (click)="changeStatus(task.id, status.id)"
+                                                                   style="cursor: pointer;"
+                                                                   class="dropdown-item">
+                                                                    <span style="font-size: 15px">{{ status.name }}</span>
+                                                                </a>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div><!--/.task-dropdown-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- Table End -->
+                                </div>
+                            </div>
+
+                            <div class="table-pagination d-flex" *ngIf="taskList?.meta?.pagination">
+                                <div class="total-view-result  d-flex">
+                                    <span>{{ taskList.meta.pagination.total }} Task</span>
+                                </div>
+                                <div class="display-per-page  d-flex">
+                                    <span>Displaying</span>
+                                    <div class="display-page position-relative">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                           href="javascript:void(0)" role="button">
+                                            <span>{{ taskList.meta.pagination.per_page }}</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-categories">
+                                            <a style="cursor: pointer"
+                                               *ngFor="let val of [{p:50},{p:75},{p:100},{p:150}]"
+                                               class="dropdown-item" (click)="filterItem('per_page',val.p)"
+                                               role="button">{{ val.p }}</a>
+                                        </div>
+                                    </div>
+                                    <span>Per Page</span>
+                                </div>
+                                <!---->
+                                <div class="next-prev-page  d-flex" *ngIf="taskList">
+                                    <span>page {{ taskList.meta.pagination.current_page }}
+                                        of {{ taskList.meta.pagination.total_pages }}</span>
+                                    <a class="prev-page cursor-pointer"
+                                       *ngIf="taskList.meta.pagination.current_page > 1"
+                                       (click)="filterItem('page', taskList.meta.pagination.current_page -1 )"
+                                       role="button">
+                                        <i class="fa fa-caret-left"></i>
+                                    </a>
+                                    <input class="page-counter" type="number"
+                                           [(ngModel)]="pageNum"
+                                           (input)="filterItem('page', pageNum)">
+                                    <a class="next-page"
+                                       *ngIf="taskList.meta.pagination.current_page < taskList.meta.pagination.total_pages"
+                                       (click)="filterItem('page', taskList.meta.pagination.current_page +1 )"
+                                       role="button">
+                                        <i class="fa fa-caret-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!--/body-->
+                </div>
+            </div>
+            <!-- EDitor End -->
+        </div> <!--/.container-fluid-->
+    </div> <!--/.content-wrapper-->
+    <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->

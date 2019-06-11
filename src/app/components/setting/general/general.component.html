@@ -1,0 +1,152 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>Setting</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>This section refers to all details regarding the user settings</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+       <div class="icentra-editor creat-template-editor">
+            <div class="ic-editor-inner">
+              <div class="ic-editor-header">
+                <!-- 1 -->
+                 <div class="header-active-tool">
+                   <span class="header-active-tool-sign">
+                     <img src="assets/img/editor/user-setting.png" alt="">
+                   </span>
+                   <div class="header-active-tool-name">
+                     <h6>General Settings</h6>
+                     <span></span>
+                   </div>
+                 </div>
+                <!-- Start Tools -->
+                
+                <!-- 2 -->
+                <ul class="ic-header-tool-list">
+                  <li><a title="Save" (click)="setChanges()" class="cursor-pointer">
+                        <img src="assets/img/editor/save.png" alt="">
+                        <span>Save</span>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="ic-editor-body">
+                <!-- Mobile Header Tools -->
+                <ul class="mb-editer-header-tool">
+                  <li><a title="Add New" (click)="setChanges()" class="icentra-publish">
+                        <img src="assets/img/editor/save.png" alt="">
+                        <span>Save</span>
+                      </a>
+                  </li>
+                </ul>
+
+                <div class="ic-editor-sidebar">
+                  <div class="ic-editor-sidebar-tools">
+                    
+                    <app-general-setting-nav></app-general-setting-nav>
+
+                    <!-- Tabs Content -->
+                    <div class="tab-content ic-tools-tab-content">
+                          <div class="search-reports-templates">
+                            <div action="" class="form-inline">
+                               <div class="input-group">
+                                 <input type="text" name="task-search" class="search-task-input search-input" placeholder="search">
+                                   <button class="task-search-btn" type="submit">
+                                     <i class="fa fa-search"></i>
+                                   </button>
+                               </div>
+                            </div>
+                          </div><!--/search-->
+
+                          <ul class="all-users-list list--siderbar">
+                             <!--<li><a href="javascript:void">Library</a></li>
+                             <li><a href="javascript:void">Reports</a></li>
+                             <li><a href="javascript:void">Templates</a></li>
+                             <li><a href="javascript:void">User Management</a></li>-->
+                             <li><a href="javascript:void">Task Manager</a></li>
+                             
+                          </ul>
+                    </div>
+                    <!-- End tab-content -->
+                 </div><!--/.ic-editor-sidebar-tools-->
+                </div><!--/-sidebar-->
+                <!-- Main -->
+                <div class="user-view-workarea p-4">
+                   <div class="site-notifications">
+                      <div class="site-notify-header">
+                         <h4>Task Manager</h4>
+                         <p>Please select from the below options for your task email notifications.</p>
+                      </div>
+
+                      <div class="site-notify-body">
+                         <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-of-notifications-switchs">
+                                  <li>
+                                    <div class="task-switch-wrap">
+                                          <p>All Notifications</p>
+                                          <label class="switch">
+                                            <input type="checkbox" [(ngModel)]="all_notifications"
+                                            (change)="setAll($event.target.checked)">
+                                            <span class="slider"></span>
+                                          </label>
+                                     </div>
+                                  </li>
+                                  <li>
+                                    <div class="task-switch-wrap">
+                                          <p>Assigned New Tasks </p>
+                                          <label class="switch">
+                                            <input type="checkbox" [(ngModel)]="setting.task_assign">
+                                            <span class="slider"></span>
+                                          </label>
+                                     </div>
+                                  </li>
+                                  <li>
+                                    <div class="task-switch-wrap">
+                                          <p>Task Creation </p>
+                                          <label class="switch">
+                                            <input type="checkbox" [(ngModel)]="setting.task_create">
+                                            <span class="slider"></span>
+                                          </label>
+                                     </div>
+                                  </li>
+                                  <li>
+                                    <div class="task-switch-wrap">
+                                          <p>Task Updates</p>
+                                          <label class="switch">
+                                            <input type="checkbox" [(ngModel)]="setting.task_update">
+                                            <span class="slider"></span>
+                                          </label>
+                                     </div>
+                                  </li>
+                                </ul>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div><!--/end-main-->
+              </div><!--/body-->
+            </div>
+      </div>   
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+ <app-activity-stream></app-activity-stream>
+
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

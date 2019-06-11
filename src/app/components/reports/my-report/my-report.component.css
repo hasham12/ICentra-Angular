@@ -1,0 +1,57 @@
+.search-cat-dropdown,.editor-dropdown-tools,.font-tools-dropdown,.zoom-page-dropdown,.action-dropdown,
+.task-dropdown,.job-view
+{
+	position:relative;
+}
+.dropdown-menu{
+	min-width:6rem;
+	padding: 5px;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding:2px 5px;
+    clear: both;
+    font-weight: 400;
+    color: #9b9b9b;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    line-height: 1;
+    font-size: 12px;
+}
+
+
+
+
+.job-tracking-progress{
+    padding: 20px 25px;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: -10px 5px 21px 0px rgba(176, 192, 237, 0.48);
+    -webkit-box-shadow: -10px 5px 21px 0px rgba(176, 192, 237, 0.48);
+}
+.tracking-progress-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tracking-progress-row .singler-tracker {
+  width: 100%;
+  max-width:130px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: #303030;
+  margin-top: 15px;
+}
+
+.tracking-progress-row .singler-tracker p {
+  margin: 0px;
+  margin-top: 10px;
+}

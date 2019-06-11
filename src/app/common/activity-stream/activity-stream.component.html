@@ -1,0 +1,64 @@
+<!-- Activity Stream -->
+<div class="activity-stream">
+  <div class="stream-header">
+    <div class="stream-content">
+      <i class="fa fa-bullhorn" aria-hidden="true"></i>
+      <span>Activity Stream</span>
+    </div>
+    <a class="close-stream">
+      <i class="fa fa-long-arrow-alt-right" aria-hidden="true"></i>
+    </a>
+  </div>
+
+  <div class="stream-body">
+    <!-- Tabs Links -->
+    <!-- <ul class="nav nav-tabs stream-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all"
+          aria-selected="true">All</a>
+      </li>
+    </ul> -->
+
+    <div class="tab-content stream-tab-content" malihu-scrollbar [scrollbarOptions]="inset2dark">
+      <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+        <ul class="stream-tab-content-list">
+        <!-- 1 -->
+                    <li *ngFor="let activity of activities">
+                      <div class="stream-list-header">
+                        <div class="stream-profile">
+                          <a href=""><img src="assets/img/icons/stream-1.png" alt="" class="rounded-circle"></a>
+                        </div>
+                        <div class="time-action">
+                          <h4><a href="javascript:;">{{ activity.users.first_name }} {{ activity.users.last_name }}</a></h4>
+                          <span class="time">
+                            {{ activity.published*1000 | amTimeAgo:true}} ago
+                          </span>
+                        </div>
+                      </div>
+                      <div class="stream-list-content">
+                        <div class="stream-details">
+                          <p>{{ activity.content }}</p>
+                        </div>
+                        <ul class="stream-metadata">
+                          <li><span>{{ activity.likes_count }}</span><a href="javascript:void(0)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
+                          <li><span>{{ activity.heart_count }}</span><a href="javascript:void(0)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+                          <li><span>{{ activity.comments_count }}</span><a href="javascript:void(0)" class="reply-toggler"><i class="fa fa-comments"
+                                aria-hidden="true"></i></a></li>
+                        </ul>
+                        <div class="reply-form">
+                          <div class="reply-form-meta">
+                            <a href="javascript:void(0)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0)"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="reply-form-inner">
+                            <input type="text" name="reply" class="reply-input" placeholder="Comments">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

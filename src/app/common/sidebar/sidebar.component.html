@@ -1,0 +1,181 @@
+<!-- Sidebar -->
+<div class="sidebar xen-sidebar sidebar-left">
+    <button class="btn btn-link btn-sm xen-toggler order-1 order-sm-0" id="sidebarToggle">
+      <i class="fas fa-bars xen-bars"></i>
+    </button> 
+  <div class="xen-menu-sidebar-inner">
+  <div class="sidebar-header">
+    <div class="sidebar-logo full-logo">
+      <a routerLink="/"><img class="md-logo" src="assets/img/icentra-full-logo.png" alt=""></a>
+      <a routerLink="/"><img class="sm-logo" src="assets/img/icentra-sm-logo.png" alt=""></a>
+    </div>
+
+    <div class="sidebar-profile d-flex">
+      <div class="avatar">
+        <img  [src]="AuthUser && AuthUser.photo_thumb?AuthUser.photo_thumb:'assets/img/profile.png'" alt="" class="img-fluid rounded-circle">
+      </div>
+      <div class="content" *ngIf="AuthUser">
+        <h6>{{AuthUser.first_name}} {{AuthUser.last_name}}</h6>
+        <p>{{(AuthUser.position)?AuthUser.position:AuthUser.role}}</p>
+        <div class="sm-profile-links">
+          <a routerLink="/user/profile"><i class="fa fa-user"></i></a>
+          <a routerLink="/setting/general"><i class="fa fa-edit"></i></a>
+          <a href="javascript:;" (click)="logout()"><i class="fa fa-sign-out"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="color-border text-center">
+      <img src="assets/img/color-border.png" class="img-fluid" alt="">
+    </div>
+  </div>
+  <!-- Sidebar Links -->
+  <div id="accordion">
+    <ul class="navbar-nav xen-navbar-nav" >
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/" >
+          <i class="xen-fa xen-fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown" routerLinkActive="show" >
+        <a class="nav-link dropdown-toggle collapsed" href="#templatesubMenu" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="templatesubMenu">
+          <i class="xen-fa xen-fa-template"></i>
+          <span>Templates</span>
+        </a>
+        <div class="collapse sub-menu"  routerLinkActive="show" id="templatesubMenu" data-parent="#accordion">
+
+          <a class="dropdown-item " routerLinkActive="active" routerLink="/template/design">
+            <i class="fa xen-fa-design"></i>
+            <span>Select Design</span>
+          </a>
+
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/template/template-create">
+            <i class="fa xen-fa-create"></i>
+            <span>Create Template</span>
+          </a>
+
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/template/my-designs">
+            <i class="fa xen-fa-mydesign"></i>
+            <span>My Design</span>
+          </a>
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/template/library">
+            <i class="fa xen-fa-library"></i>
+            <span>Library</span>
+          </a>
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/template/website">
+            <i class="fa xen-fa-website"></i>
+            <span>Website</span>
+          </a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" routerLinkActive="show">
+        <a class="nav-link dropdown-toggle collapsed" href="#mytakssubMenu"  role="button" data-toggle="collapse" aria-haspopup="false"
+          aria-expanded="false">
+          <i class="xen-fa xen-fa-jobstatus"></i>
+          <span>My Tasks</span>
+        </a>
+        <div class="collapse sub-menu" routerLinkActive="show" id="mytakssubMenu" data-parent="#accordion">
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/tasks/create-task" *ngxPermissionsOnly="['task.create']">
+            <i class="fa xen-fa-myjob"></i>
+            <span>Create New</span>
+          </a>
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/tasks/my-tasks">
+            <i class="fa xen-fa-myjob"></i>
+            <span>My Tasks</span>
+          </a>
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/tasks/all-tasks"
+             *ngxPermissionsOnly="['task.view.all']">
+            <i class="fa xen-fa-alljobs"></i>
+            <span>All Tasks</span>
+          </a>
+          <!-- <a class="dropdown-item" routerLinkActive="active" routerLink="/tasks/incomplete">
+            <i class="fa xen-fa-incompleted"></i>
+            <span>Incomplete</span>
+          </a>
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/tasks/complete">
+            <i class="fa xen-fa-completed"></i>
+            <span>Complete</span>
+          </a>
+          <a class="dropdown-item" routerLinkActive="active" routerLink="/tasks/inprogress">
+            <i class="fa xen-fa-progress"></i>
+            <span>In Progress</span>
+          </a> -->
+
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" routerLinkActive="show">
+        <a class="nav-link dropdown-toggle collapsed" href="#reportssubMenu"  data-toggle="collapse" aria-haspopup="false"
+          aria-expanded="false">
+          <i class="xen-fa xen-fa-reports"></i>
+          <span>Reports</span>
+        </a>
+        <div class="collapse sub-menu" routerLinkActive="show" id="reportssubMenu" data-parent="#accordion">
+            <a class="dropdown-item" routerLink="/report/my-report" routerLinkActive="active">
+              <i class="fa xen-fa-myreport"></i>
+              <span>Overview</span>
+            </a>
+            <a class="dropdown-item" routerLink="/report/all-reports" routerLinkActive="active">
+              <i class="fa xen-fa-allreports"></i>
+              <span>All Reports</span>
+            </a>
+            <a class="dropdown-item" routerLink="/report/create-report" routerLinkActive="active">
+              <i class="fa xen-fa-crreport"></i>
+              <span>Create Report</span>
+            </a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" routerLinkActive="show">
+        <a class="nav-link dropdown-toggle collapsed" href="#myprofileSubMenu" role="button" data-toggle="collapse" aria-haspopup="false"
+          aria-expanded="false">
+          <i class="xen-fa xen-fa-profile"></i>
+          <span>My Profile</span>
+        </a>
+        <div class="collapse sub-menu" routerLinkActive="show" id="myprofileSubMenu" data-parent="#accordion">
+          <a class="dropdown-item" routerLink="/user/profile" routerLinkActive="active">
+            <i class="fa xen-fa-yourprofile"></i>
+            <span>Your Profile</span>
+          </a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" routerLinkActive="show" >
+        <a class="nav-link dropdown-toggle collapsed" href="#settingsubMenu"  data-toggle="collapse" aria-haspopup="false"
+          aria-expanded="false">
+          <i class="xen-fa xen-fa-setting"></i>
+          <span>Setting</span>
+        </a>
+        <div class="collapse sub-menu" routerLinkActive="show" id="settingsubMenu" data-parent="#accordion">
+          <a class="dropdown-item" routerLink="/setting/general" routerLinkActive="active">
+            <i class="fa xen-fa-general"></i>
+            <span>General</span>
+          </a>
+          <div class="nav-item dropdown" *ngxPermissionsOnly="['user.view','user.add','user.delete','user.edit']">
+            <a  class="dropdown-item" routerLink="/setting/list"  routerLinkActive="active">
+              <i class="fa xen-fa-users"></i>
+              <span>Users</span>
+            </a>
+          </div>
+          <a class="dropdown-item" routerLink="/setting/templates" routerLinkActive="active">
+            <i class="fa xen-fa-templates"></i>
+            <span>Templates</span>
+          </a>
+          <a class="dropdown-item"
+            routerLink="/setting/tasks"
+            routerLinkActive="active">
+            <i class="fa xen-fa-jobmanager"></i>
+            <span>Task Manager</span>
+          </a>
+          <a class="dropdown-item" routerLink="/setting/site-settings" routerLinkActive="active">
+            <i class="fa xen-fa-external"></i>
+            <span>Site Settings</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+ </div>
+</div>

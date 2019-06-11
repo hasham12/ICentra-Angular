@@ -1,0 +1,15 @@
+.ic-tools-tab{
+	border-right: 1px solid #eceef6;
+	width: 100%;
+	max-width:60px;
+}
+.ic-tools-tab li .nav-link, 
+.ic-tools-tab li .nav-link.active, 
+.ic-tools-tab li .nav-link.show{
+	color: #fccd13;
+	flex-flow:column;
+}
+.ic-tools-tab li .nav-link.active, .ic-tools-tab li .nav-link.show {
+	background: #f4f5fa;
+	color: #fccd13;
+}

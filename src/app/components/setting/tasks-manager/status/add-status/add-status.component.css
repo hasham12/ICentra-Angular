@@ -1,0 +1,201 @@
+.btn-secondary{
+  background-color: #fccd13;
+  border-color: #fccd13;
+  padding: .200rem 2rem;
+  border-radius: 0.4em;
+}
+.btn-secondary:hover,
+.btn-secondary:focus{
+  background-color:#fccd13;
+  border-color:#fccd13;
+  box-shadow:none;
+}
+/*Cutom Checkbox*/
+.custom-checkbox {
+  font-size:12px;
+  color:#9b9b9b;
+  display: block;
+  position: relative;
+  margin:0px;top:-7px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.custom-checkbox input {
+  position:absolute;opacity:0;cursor:pointer;height:0;width:0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height:16px;
+  width:16px;
+  border-radius: 40px;
+  background-color: #fff;
+  border:1px solid #eceef6;
+}
+.checkmark:after {content: "";position: absolute;display: none;}
+.custom-checkbox input:checked ~ .checkmark:after {display: block;}
+.custom-checkbox .checkmark:after {
+  left:6px;top:-1px;width:7px;height:12px;
+  border: solid #9b9b9b;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*Sidebar Tools*/
+.header-active-tool-sign{background:#fccd13;}
+.ic-tools-tab{
+  border-right: 1px solid #eceef6;
+  width: 100%;
+  max-width:60px;
+}
+.ic-tools-tab li .nav-link, 
+.ic-tools-tab li .nav-link.active, 
+.ic-tools-tab li .nav-link.show{
+  flex-flow:column;
+  color: #fccd13;
+}
+.ic-tools-tab li .nav-link.active, .ic-tools-tab li .nav-link.show {
+  background: #f4f5fa;
+  color: #fccd13;
+}
+.allusers-tools-col{
+  align-items: center;
+  margin-left: 0px;
+  margin-right: auto;
+}
+
+.ic-tools-tab li .nav-link,
+.ic-tools-tab li .nav-link.active, 
+.ic-tools-tab li .nav-link.show{
+    flex-flow: column;
+}
+
+
+/*Sidebar users list*/
+.all-users-list{
+  list-style:none;
+  padding:0px;
+}
+.all-users-list li a{
+  font-family:'Lato', sans-serif;
+  font-size:14px;
+  color:#9b9b9b;
+  padding:5px 15px;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+/*userview table*/
+.users-table-header.row,
+.table-body-row.row
+{margin:0px;align-items:center;}
+
+.users-table-header [class*="col"],
+.table-body-row [class*="col"]{
+  font-family:'Lato',sans-serif;
+  font-weight:400;
+  font-size:12px;
+  color:#9b9b9b;
+  margin-bottom:2px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  align-items:center;
+  white-space: nowrap;
+}
+.users-table-header{background:#ebebeb;}
+.users-table-header [class*="col"]{font-weight:700;}
+.table-body-row .col-1,
+.users-table-header .col-1{
+  max-width:1%;
+}
+.table-body-row .col img.sm-avtar{
+  width:22px;
+  height:22px;
+  border-radius:100px;
+}
+.table-body-row:nth-child(even){background:#f5f5f5;}
+
+
+/*Pagination*/
+.table-pagination{
+  text-align:right;
+  margin:20px 0px;
+  justify-content:flex-end;
+}
+.total-view-result {
+  font-size:14px;
+  color:#9b9b9b;
+  margin:0px 10px;
+  align-items:center;
+}
+
+/*display*/
+.display-per-page{
+  margin:0px 15px;
+  align-items:center;
+}
+.display-per-page span,
+.next-prev-page span{
+  font-size:14px;
+  color:#9b9b9b;
+  padding:0px 5px;
+}
+.display-per-page .display-page > a{
+  font-size:14px;
+  color:#9b9b9b;
+  padding:5px;
+  width:50px;
+  height:23px;
+  border:1px solid #eceef6;
+  border-radius:4px;
+  display:flex;
+  align-items:center;
+
+}
+/*next-prev*/
+.next-prev-page{
+  display:flex;
+  align-items:center;
+}
+.next-prev-page .page-counter{
+  font-size:14px;
+  color:#9b9b9b;
+  width:100%;
+  max-width:28px;height:23px;
+  border:1px solid #eceef6;
+  border-radius:4px;
+  margin:0px 6px;
+  text-align: center;
+  -webkit-appearance:textfield;
+  -moz-appearance:textfield;
+}
+.next-prev-page a{
+  color:#9b9b9b;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+
+
+
+.design-tag{
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  display: inline-block;
+  text-transform: capitalize;
+  width: 100%;
+  max-width: 72px;
+  text-align: center;
+}

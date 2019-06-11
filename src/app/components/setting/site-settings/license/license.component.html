@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>Setting</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>This section refers to all details retgarding the user settings</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+	     <div class="icentra-editor creat-template-editor">
+            <div class="ic-editor-inner">
+              <div class="ic-editor-header">
+                <!-- 1 -->
+                 <div class="header-active-tool">
+                   <span class="header-active-tool-sign">
+                     <img src="assets/img/editor/user-setting.png" alt="">
+                   </span>
+                   <div class="header-active-tool-name">
+                     <h6>Site Setting</h6>
+                     <span>License</span>
+                   </div>
+                 </div>
+                <!-- Start Tools -->
+                
+                <!-- 2 -->
+                <ul class="ic-header-tool-list">
+                  <li><a title="Add New" routerLink="">
+                        <img src="assets/img/editor/new-user.png" alt="">
+                        <span>Add</span>
+                      </a>
+                  </li>
+                  <li><a title="Edit" routerLink="">
+                        <img src="assets/img/editor/edit-tool.png" alt="">
+                        <span>Edit</span>
+                      </a>
+                  </li>
+                  <li><a title="Publish" routerLink="">
+                        <img src="assets/img/editor/yellow-publish.png" alt="">
+                        <span>Publish</span>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="ic-editor-body">
+                <!-- Mobile Header Tools -->
+                <ul class="mb-editer-header-tool">
+                  <li><a title="Add New" routerLink="">
+                        <img src="assets/img/editor/new-user.png" alt="">
+                      </a>
+                  </li>
+                  <li><a title="Edit" routerLink="">
+                        <img src="assets/img/editor/edit.png" alt="">
+                      </a>
+                  </li>
+                  <li><a title="Publish" routerLink="">
+                        <img src="assets/img/editor/publish.png" alt="">
+                      </a>
+                  </li>
+                </ul>
+
+                <div class="ic-editor-sidebar">
+                  <div class="ic-editor-sidebar-tools">
+                    
+                    <app-site-settings-nav></app-site-settings-nav>
+
+                    <!-- Tabs Content -->
+                    <div class="tab-content ic-tools-tab-content">
+                          <div class="search-reports-templates">
+                            <div action="" class="form-inline">
+                               <div class="input-group">
+                                 <input type="text" name="task-search" class="search-task-input search-input" placeholder="Search license Type">
+                                   <button class="task-search-btn" type="submit">
+                                     <i class="fa fa-search"></i>
+                                   </button>
+                               </div>
+                            </div>
+                          </div><!--/search-->
+
+                          <ul class="all-users-list list--siderbar">
+                             <li><a href="javascript:void">Single</a></li>
+                             <li><a href="javascript:void">Business Basic</a></li>
+                             <li><a href="javascript:void">Business Standard</a></li>
+                             <li><a href="javascript:void">Business Pro</a></li>
+                             <li><a href="javascript:void">Business Enterprise</a></li>
+                             <li><a href="javascript:void">Business Enterprise Pro</a></li>
+                             <li><a href="javascript:void">Free License</a></li>
+                          </ul>
+                    </div>
+                    <!-- End tab-content -->
+                 </div><!--/.ic-editor-sidebar-tools-->
+                </div><!--/-sidebar-->
+                <!-- Main -->
+                <div class="user-license-wrap user-view-workarea p-2">
+                    <div class="single-user-license user-license-form">
+                        <h6>Single User License</h6>
+
+                        <div class="col license-name">
+                           <label for="license-name">License Name</label>
+                           <input class="form-control" type="text" name="license-name" placeholder="Single User">
+                        </div>
+                        <div class="col user-allocation">
+                           <label for="user-allocation">User Allocation</label>
+                           <input class="form-control" type="text" name="user-allocation" placeholder="1" >
+                        </div>
+                        <div class="col license-cost">
+                           <label for="license-allocation">Cost</label>
+                           <input class="form-control" type="text" name="license-cost" placeholder="$139.00">
+                        </div>
+                        <div class="col license-recurrence">
+                           <label for="license-billing">Billing Cycle</label>
+                           <input class="form-control" type="text" name="license-billing" placeholder="30days" >
+                        </div>
+                    </div>
+                </div><!--/end-main-->
+              </div><!--/body-->
+            </div>
+      </div>   
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+ <app-activity-stream></app-activity-stream>
+
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

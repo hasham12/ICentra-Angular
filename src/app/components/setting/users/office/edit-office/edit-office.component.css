@@ -1,0 +1,81 @@
+
+/*Helping*/
+.btn-primary{
+	font-family:'Roboto', sans-serif;
+	font-size:12px;
+	background-color:#fccd13;
+	border-color:#fccd13;
+	box-shadow:none;
+}
+.btn-primary:hover,
+.btn-primary:focus{
+	background-color:#fccd13;
+	border-color:#fccd13;
+}
+
+.btn-secondary{
+	font-family:'Roboto', sans-serif;
+	font-size:12px;
+	background-color:#9b9b9d;
+	border-color:#9b9b9d;
+	box-shadow:none;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus{
+	background-color:#9b9b9d;
+	border-color:#9b9b9d;
+}
+
+
+.header-active-tool-sign{background:#fccd13;}
+
+
+.ic-tools-tab{
+	border-right: 1px solid #eceef6;
+	width: 100%;
+}
+.ic-tools-tab li .nav-link,
+.ic-tools-tab li .nav-link.active,
+.ic-tools-tab li .nav-link.show{
+	flex-flow:column;
+	color: #fccd13;
+}
+.ic-tools-tab li .nav-link.active, .ic-tools-tab li .nav-link.show {
+	background: #f4f5fa;
+	color: #fccd13;
+}
+.ic-editor-sidebar.no-tab-content{
+  	max-width:60px;
+    min-width: 60px;
+  }
+/*Workarea*/
+.create-user-form label{
+	font-family:'Lato', sans-serif;
+	font-size:14px;
+	color:#9b9b9b;
+	margin-bottom:3px;
+}
+.create-user-form .form-control{
+ border-color:#e6e7eb;
+ box-shadow:none;
+ color:#9b9b9b;
+}
+.create-user-form h3{
+	font-weight:'Lato', sans-serif;
+	font-size:14px;
+	color:#9b9b9b;
+	margin-top:30px;
+	margin-bottom:10px;
+	text-transform:uppercase;
+}
+
+
+.upload-logo{
+	margin: 5px 0px 37px;
+}
+.upload-logo span{
+	font-size:12px;
+	color:#9b9b9b;
+	padding:0px 10px;
+}

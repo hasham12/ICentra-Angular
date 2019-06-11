@@ -1,0 +1,67 @@
+.btn-primary{
+  background-color: #fccd13;
+  border-color: #fccd13;
+  padding: .200rem 2rem;
+  border-radius: 0.4em;
+}
+.btn-primary:hover,
+.btn-primary:focus{
+  background-color:#fccd13;
+  border-color:#fccd13;
+  box-shadow:none;
+}
+/*Sidebar Tools*/
+.header-active-tool-sign{background:#fccd13;}
+.ic-tools-tab{
+  border-right: 1px solid #eceef6;
+  width: 100%;
+  max-width:60px;
+}
+.ic-tools-tab li .nav-link, 
+.ic-tools-tab li .nav-link.active, 
+.ic-tools-tab li .nav-link.show{
+  flex-flow:column;
+  color: #fccd13;
+}
+.ic-tools-tab li .nav-link.active, .ic-tools-tab li .nav-link.show {
+  background: #f4f5fa;
+  color: #fccd13;
+}
+.allusers-tools-col{
+  align-items: center;
+  margin-left: 0px;
+  margin-right: auto;
+}
+.ic-tools-tab li .nav-link,
+.ic-tools-tab li .nav-link.active, 
+.ic-tools-tab li .nav-link.show{
+    flex-flow: column;
+}
+/*Sidebar users list*/
+.all-users-list{
+  list-style:none;
+  padding:0px;
+}
+.all-users-list li a{
+  font-family:'Lato', sans-serif;
+  font-size:14px;
+  color:#9b9b9b;
+  padding:5px 15px;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/*Workarea*/
+.create-user-form label{
+  font-family:'Lato', sans-serif;
+  font-size:14px;
+  color:#9b9b9b;
+  margin-bottom:3px;
+}
+.create-user-form .form-control{
+ border-color:#e6e7eb;
+ box-shadow:none;
+ color:#9b9b9b;
+}

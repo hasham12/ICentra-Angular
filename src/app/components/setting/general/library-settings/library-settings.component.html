@@ -1,0 +1,148 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+      <h3>Library Setting</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>This section refers to all details regarding the library settings</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+      <div class="icentra-editor creat-template-editor">
+        <div class="ic-editor-inner">
+          <div class="ic-editor-header">
+            <!-- 1 -->
+            <div class="header-active-tool">
+                   <span class="header-active-tool-sign">
+                     <img src="assets/img/editor/user-setting.png" alt="">
+                   </span>
+              <div class="header-active-tool-name">
+                <h6>Library Settings</h6>
+                <span></span>
+              </div>
+            </div>
+            <!-- Start Tools -->
+
+            <!-- 2 -->
+            <ul class="ic-header-tool-list">
+              <!--<li><a title="Save" (click)="setChanges()" class="cursor-pointer">-->
+                <!--<img src="assets/img/editor/save.png" alt="">-->
+                <!--<span>Save</span>-->
+              <!--</a>-->
+              <!--</li>-->
+            </ul>
+          </div>
+          <div class="ic-editor-body">
+            <!-- Mobile Header Tools -->
+            <ul class="mb-editer-header-tool">
+              <!--<li><a title="Add New" (click)="setChanges()" class="icentra-publish">-->
+                <!--<img src="assets/img/editor/save.png" alt="">-->
+                <!--<span>Save</span>-->
+              <!--</a>-->
+              <!--</li>-->
+            </ul>
+
+            <div class="ic-editor-sidebar">
+              <div class="ic-editor-sidebar-tools">
+
+                <app-general-setting-nav></app-general-setting-nav>
+
+                <!-- Tabs Content -->
+                <div class="tab-content ic-tools-tab-content" *ngIf="allFiles">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <ng-select [items]="libraryData" bindLabel="title" bindValue="id" [searchable]="true" placeholder="Select Lirary" [(ngModel)]="libraryId">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                        <div *ngIf="getCats().length > 0" id="accordion_grp_1">
+                          <!-- Level 1 -->
+                          <div class="category-type-box level-1" *ngFor="let cat of getCats()">
+                            <a (click)="setFiles(cat.model.id, cat.model.title)" class="collapser-btn collapsed" data-toggle="collapse"
+                               href="#libcat-{{cat.model.id}}" aria-expanded="false">
+                              <i class="fa fa-caret-down"></i>
+                              <i class="fa fa-caret-right" style="display:none;"></i>
+                              <span class="name">{{ cat.model.title }}</span>
+                              <span class="number">{{ getFilesTotal(cat.model.id) }}</span>
+                            </a>
+                            <div class="collapse fonts-collapesd" id="libcat-{{cat.model.id}}"  data-parent="#accordion_grp_1" *ngIf="cat.children">
+                              <!-- LEVEL 2 -->
+                              <div class=" sub-list category-type-box level-2"  *ngFor="let subCat of cat.children">
+                                <a (click)="setFiles(subCat.model.id, subCat.model.title)" class="collapser-btn collapsed" data-toggle="collapse"
+                                   href="#subcat-1-{{subCat.model.id}}" aria-expanded="false">
+                                  {{ subCat.model.title }} <span>({{getFilesTotal(subCat.model.id)}})</span>
+                                </a>
+                                <div class="collapse fonts-collapesd" id="subcat-1-{{subCat.model.id}}" [attr.data-parent]="'#libcat-' + cat.model.id" *ngIf="subCat.children">
+                                  <!-- LEVEL 3 -->
+                                  <div class="sub-list  category-type-box level-3"  *ngFor="let subCatChild of subCat.children">
+                                    <a (click)="setFiles(subCatChild.model.id, subCatChild.model.title)" class="collapser-btn collapsed"
+                                       data-toggle="collapse" href="#subcat-2-{{subCatChild.model.id}}" aria-expanded="false">
+                                      {{ subCatChild.model.title }} <span>({{getFilesTotal(subCatChild.model.id)}})</span>
+                                    </a>
+                                    <div class="collapse fonts-collapesd" id="subcat-2-{{subCatChild.model.id}}" [attr.data-parent]="'#subcat-1-' + subCat.model.id" *ngIf="subCatChild.children">
+                                      <!-- LEVEL 4 -->
+                                      <div class="sub-list category-type-box level-4"  *ngFor="let subCatChildAG of subCatChild.children">
+                                        <a (click)="setFiles(subCatChildAG.model.id, subCatChildAG.model.title)" href="#subcat-3-{{subCatChildAG.model.id}}" class="collapser-btn collapsed" aria-expanded="false">
+                                          {{ subCatChildAG.model.title }}<span>({{getFilesTotal(subCatChildAG.model.id)}})</span>
+                                        </a>
+                                        <div class="collapse fonts-collapesd" id="subcat-3-{{subCatChildAG.model.id}}" [attr.data-parent]="'#subcat-2-' + subCatChild.model.id">
+                                          hrefehfjehjoif
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div><!-- END LEVEL 3 -->
+                                </div>
+                              </div>
+                              <!-- END LEVEL 2 -->
+                            </div>
+                          </div>
+                          <!-- END LEVEL 1 -->
+                        </div>
+                  <!--/.tab-content-->
+
+                </div>
+                <!-- End tab-content -->
+              </div><!--/.ic-editor-sidebar-tools-->
+            </div><!--/-sidebar-->
+            <!-- Main -->
+            <div class="user-view-workarea p-4">
+              <div class="site-notifications">
+                <div class="site-notify-header">
+                  <h4>Library Manager</h4>
+                  <p>Please select from the below Folders and Sub folders and perform actions to them.</p>
+                </div>
+
+                <div class="site-notify-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--/end-main-->
+          </div><!--/body-->
+        </div>
+      </div>
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+  <app-activity-stream></app-activity-stream>
+
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

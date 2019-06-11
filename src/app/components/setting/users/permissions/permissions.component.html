@@ -1,0 +1,445 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>Setting</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <p>This section refers to all details retgarding the user settings</p>
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+       <div class="icentra-editor creat-template-editor">
+            <div class="ic-editor-inner">
+              <div class="ic-editor-header">
+                <!-- 1 -->
+                 <div class="header-active-tool">
+                   <span class="header-active-tool-sign">
+                     <img src="assets/img/editor/user-setting.png" alt="">
+                   </span>
+                   <div class="header-active-tool-name">
+                     <h6>Roles Permissions</h6>
+                     <span>User Role Editor</span>
+                   </div>
+                 </div>
+                <!-- Start Tools -->
+
+                <!-- 1 -->
+                <ul class="ic-header-tool-list ic-role-tools">
+                  <li><a title="Add New Role" routerLink="/setting/list/roles/add" >
+                        <img src="assets/img/editor/yellow-plus.png" alt="">
+                        <span>Add New Role</span>
+                      </a>
+                  </li>
+                </ul>
+
+                <!-- 2 -->
+                <ul class="ic-header-tool-list">
+                  <li>
+                    <a class="cursor-pointer" role="button" title="Update Permissions" (click)="updatePermissions()" >
+                        <img src="assets/img/editor/save.png" alt="">
+                        <span>Update</span>
+                      </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="ic-editor-body">
+                <!-- Mobile Header Tools -->
+                <ul class="mb-editer-header-tool">
+                  <li><a title="Update permissions" (click)="updatePermissions()" >
+                        <img src="assets/img/editor/save.png" alt="">
+                      </a>
+                  </li>
+                </ul>
+
+                <div class="ic-editor-sidebar">
+                  <div class="ic-editor-sidebar-tools">
+                    <!-- Tabs -->
+                    <ul class="nav --nav-tabs ic-tools-tab" role="tablist">
+                        <li class="nav-item" *ngxPermissionsOnly="['user.view','user.add','user.edit','user.delete','user.export']">
+                          <a class="nav-link" id="user-tab" data-toggle="tab" routerLink="/setting/list/users">
+                            <img src="assets/img/editor/user.png" alt="">
+                            <img src="assets/img/editor/hvr-user.png" alt="" class="hvr">
+                            <span>Users</span>
+                          </a>
+                        </li>
+                        <li class="nav-item" *ngxPermissionsOnly="['groups.manage']">
+                          <a class="nav-link" routerLink="/setting/list/groups">
+                            <img src="assets/img/editor/groups.png" alt="">
+                            <img src="assets/img/editor/hvr-groups.png" alt="" class="hvr">
+                            <span>Groups</span>
+                          </a>
+                        </li>
+                        <li class="nav-item" *ngxPermissionsOnly="['offices.manage']">
+                          <a class="nav-link" routerLink="/setting/list/offices">
+                            <img src="assets/img/editor/office.png" alt="">
+                            <img src="assets/img/editor/hvr-office.png" alt="" class="hvr">
+                            <span>U/Office</span>
+                          </a>
+                        </li>
+                        <li class="nav-item" *ngxPermissionsOnly="['permissions.manage']">
+                          <a class="nav-link active"  routerLink="/setting/list/permissions">
+                            <img src="assets/img/editor/access.png" alt="">
+                            <img src="assets/img/editor/hvr-access.png" alt="" class="hvr">
+                            <span>Access</span>
+                          </a>
+                        </li>
+                        <li class="nav-item" *ngxPermissionsOnly="['level.manage']">
+                            <a class="nav-link"  routerLink="/setting/list/users/level">
+                                <img src="assets/img/editor/levels.png" alt="">
+                                <img src="assets/img/editor/levels-hover.png" alt="" class="hvr">
+                            </a>
+                        </li>
+                      </ul>
+                    <!-- Tabs Content -->
+                    <div class="tab-content ic-tools-tab-content">
+                          <div class="search-reports-templates">
+                            <div action="" class="form-inline">
+                               <div class="input-group">
+                                 <input type="text" name="task-search" class="search-task-input search-input" placeholder="Search Roles" [(ngModel)]="filterValue" (input)="filterItem(filterValue)">
+                                   <button  (click)="AssignCopy(); filterValue=''" type="reset" class="close-icon sm" *ngIf="filterValue"></button>
+                                   <button class="task-search-btn" type="submit" *ngIf="!filterValue">
+                                     <i class="fa fa-search"></i>
+                                   </button>
+                               </div>
+                            </div>
+                          </div><!--/search-->
+
+                          <!-- Users Role -->
+                          <div class="single-permissions">
+                            <h3>Users</h3>
+                            <div class="single-permissions-box">
+                              <div class="form-check" *ngFor="let role of filteredRoles|slice:0:firstLoad.role let i=index">
+                                  <label class="custom-checkbox">{{role.name}}
+                                    <input type="radio" name="type" (change)="getPermissions(type = 'role',role_id=role.id)">
+                                    <span class="checkmark"></span>
+                                  </label>
+                              </div>
+                            </div>
+                            <span *ngIf="filteredRoles && firstLoad.role==5 && filteredRoles.length > 5" (click)="firstLoad.role = Roles.length" class="cursor-pointer show-more-permissions">Show More <i class="fa fa-caret-down"></i></span>
+                          </div>
+                          <!-- Offices Role -->
+                          <div class="single-permissions">
+                            <h3>Offices</h3>
+
+                            <div class="single-permissions-box">
+                              <div class="form-check" *ngFor="let office of filteredOffices|slice:0:firstLoad.office">
+                                  <label class="custom-checkbox">{{office.name}}
+                                    <input type="radio" name="type" (change)="getPermissions('office',office.id)">
+                                    <span class="checkmark"></span>
+                                  </label>
+                              </div>
+                            </div>
+                            <span *ngIf="filteredOffices && firstLoad.office==5 && filteredOffices.length>5" (click)="firstLoad.office = Offices.length" class="cursor-pointer show-more-permissions">Show More <i class="fa fa-caret-down"></i></span>
+                          </div>
+                          <!-- Marketing Group Role -->
+                          <div class="single-permissions">
+                            <h3>Groups</h3>
+                            <div class="single-permissions-box">
+                              <div class="form-check" *ngFor="let group of filteredGroups|slice:0:firstLoad.group">
+                                  <label class="custom-checkbox">{{group.name}}
+                                    <input type="radio" name="type" (change)="getPermissions('group',group.id)">
+                                    <span class="checkmark"></span>
+                                  </label>
+                              </div>
+                            </div>
+                            <span *ngIf="filteredGroups && firstLoad.group==5 && filteredGroups.length>5" (click)="firstLoad.office = Offices.length" class="cursor-pointer show-more-permissions">Show More <i class="fa fa-caret-down"></i></span>
+                          </div>
+                    </div>
+                    <!-- End tab-content -->
+                 </div><!--/.ic-editor-sidebar-tools-->
+                </div><!--/-sidebar-->
+                <!-- Main -->
+                <div class="permissions-workarea">
+                      <div class="permission-toggle-btn">
+                        <a class="btn btn-outline-default mr-2 ml-0" *ngIf="type=='role' && role_id" [routerLink]="['/setting/list/roles/edit/',role_id]" routerLinkActive="router-link-active">Edit Role</a>
+                        <button data-toggle="modal" data-target="#confirmDeleteRolemodel" class="btn btn-outline-default mr-auto ml-0" *ngIf="type=='role' && role_id">Delete Role</button>
+
+                        <button (click)="checkAll(true)" class="btn btn-outline-default">Select All</button>
+                        <button (click)="checkAll(false)" class="btn btn-outline-default">Unselect All</button>
+
+                      </div>
+
+                      <div class="row permissions-list">
+                        <div class="col-md-6">
+                            <!-- 1 -->
+                           <div class="permissions-box">
+                             <p>Core Capabilities</p>
+                              <div class="header">
+                                <a class="collapser-btn" data-toggle="collapse" href="#role_tab_1">
+                                  <span>User Related Capabilities</span>
+                                  <i class="fa fa-caret-down"></i>
+                                  <i class="fa fa-caret-up" style="display:none;"></i>
+                                </a>
+                              </div>
+                              <div class="body collapse show" id="role_tab_1" >
+                              <div class="form-check">
+                                <label class="custom-checkbox">Add User
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('user.add')" value="user.add" (change)="onPermissionSelected('user.add',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+
+                              <div class="form-check">
+                                <label class="custom-checkbox">Delete Users
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('user.delete')" value="user.delete"  (change)="onPermissionSelected('user.delete',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+
+                              <div class="form-check">
+                                <label class="custom-checkbox">Edit Users
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('user.edit')" value="user.edit"  (change)="onPermissionSelected('user.edit',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+
+                              <div class="form-check">
+                                <label class="custom-checkbox">View Users
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('user.view')" value="user.view"  (change)="onPermissionSelected('user.view',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                  <label class="custom-checkbox"> Manage Users Levels
+                                    <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('level.manage')" value="level.manage"  (change)="onPermissionSelected('level.manage',$event.target.checked)">
+                                    <span class="checkmark"></span>
+                                  </label>
+                                </div>
+                              <div class="form-check">
+                                <label class="custom-checkbox">Export Users
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('user.export')" value="user.export"  (change)="onPermissionSelected('user.export',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <label class="custom-checkbox">Manage Offices
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('offices.manage')" value="offices.manage"  (change)="onPermissionSelected('offices.manage',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <label class="custom-checkbox">Manage Groups
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('groups.manage')" value="groups.manage"  (change)="onPermissionSelected('groups.manage',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <label class="custom-checkbox">Manage Roles & Permissions
+                                  <input type="checkbox" name="permission" [checked]="selectAll || permissionChecked('permissions.manage')" value="permissions.manage"  (change)="onPermissionSelected('permissions.manage',$event.target.checked)">
+                                  <span class="checkmark"></span>
+                                </label>
+                              </div>
+                            </div><!--End of Body-->
+                           </div>
+                           <!-- 2 -->
+                           <div class="permissions-box">
+                               <div class="header">
+                                  <a class="collapser-btn" data-toggle="collapse" href="#role_tab_3">
+                                  <span> Task Related Capabilities</span>
+                                  <i class="fa fa-caret-down"></i>
+                                  <i class="fa fa-caret-up" style="display:none;"></i>
+                                </a>
+                              </div>
+                              <div class="body collapse show" id="role_tab_3" >
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Create Task
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.create')" value="task.create" (change)="onPermissionSelected('task.create',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Delete Task
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.delete')" value="task.delete" (change)="onPermissionSelected('task.delete',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Edit Task
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.edit')" value="task.edit" (change)="onPermissionSelected('task.edit',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Export Task
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.export')" value="task.export" (change)="onPermissionSelected('task.export',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">View All Task
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.view.all')" value="task.view.all" (change)="onPermissionSelected('task.view.all',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Category and Printing Management
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.printing.manager')" value="task.printing.manager" (change)="onPermissionSelected('task.printing.manager',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Change Task Status
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.status.change')" value="task.status.change" (change)="onPermissionSelected('task.status.change',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Create Task Status
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.status.create')" value="task.status.create" (change)="onPermissionSelected('task.status.create',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Edit Task Status
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.status.edit')" value="task.status.edit" (change)="onPermissionSelected('task.status.edit',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Delete Task Status
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.status.delete')" value="task.status.delete" (change)="onPermissionSelected('task.status.delete',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Bulk Options For Tasks
+                                          <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('task.bulk_actions')" value="task.bulk_actions" (change)="onPermissionSelected('task.bulk_actions',$event.target.checked)">
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+                          <p class="text-right">All 250/250</p>
+                          <!-- 2 -->
+                           <div class="permissions-box">
+                              <div class="header">
+                              <a class="collapser-btn" data-toggle="collapse" href="#role_tab_2">
+                                  <span>Templates</span>
+                                  <i class="fa fa-caret-down"></i>
+                                  <i class="fa fa-caret-up" style="display:none;"></i>
+                                </a>
+                              </div>
+                              <div class="body collapse show" id="role_tab_2" >
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Create Template
+                                        <input type="checkbox" name="permission" value="template.create" [checked]="selectAll || permissionChecked('template.create')"  (change)="onPermissionSelected('template.create',$event.target.checked)">
+                                        <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Edit Template
+                                        <input type="checkbox" name="permission" value="template.edit" [checked]="selectAll || permissionChecked('template.edit')" (change)="onPermissionSelected('template.edit',$event.target.checked)">
+                                        <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Delete Template
+                                        <input type="checkbox" name="permission" value="template.delete" [checked]="selectAll || permissionChecked('template.delete')" (change)="onPermissionSelected('template.delete',$event.target.checked)">
+                                        <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+
+                                  <div class="form-check">
+                                      <label class="custom-checkbox">Export Template
+                                        <input type="checkbox" name="permission" value="template.export" [checked]="selectAll || permissionChecked('template.export')" (change)="onPermissionSelected('template.export',$event.target.checked)">
+                                        <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                            </div>
+                           </div>
+                            <div class="permissions-box">
+                                <div class="header">
+                                    <a class="collapser-btn" data-toggle="collapse" href="#role_tab_4">
+                                        <span> Library Capabilities</span>
+                                        <i class="fa fa-caret-down"></i>
+                                        <i class="fa fa-caret-up" style="display:none;"></i>
+                                    </a>
+                                </div>
+                                <div class="body collapse show" id="role_tab_4" >
+                                    <div class="form-check">
+                                        <label class="custom-checkbox">iCentra Library Delete
+                                            <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('library.icentra.delete')" value="library.icentra.delete" (change)="onPermissionSelected('library.icentra.delete',$event.target.checked)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="custom-checkbox">iCentra Library Upload
+                                            <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('library.icentra.upload')" value="library.icentra.upload" (change)="onPermissionSelected('library.icentra.upload',$event.target.checked)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="custom-checkbox">iCentra Library Download
+                                            <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('library.icentra.download')" value="library.icentra.download" (change)="onPermissionSelected('library.icentra.download',$event.target.checked)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="custom-checkbox">Office Library Delete
+                                            <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('library.office.delete')" value="library.office.delete" (change)="onPermissionSelected('library.office.delete',$event.target.checked)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="custom-checkbox">Office Library Upload
+                                            <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('library.office.upload')" value="library.office.upload" (change)="onPermissionSelected('library.office.upload',$event.target.checked)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="custom-checkbox">Office Library Download
+                                            <input type="checkbox" name="permission" [checked]="isAllChecked() || permissionChecked('library.office.download')" value="library.office.download" (change)="onPermissionSelected('library.office.download',$event.target.checked)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                </div><!--/end-main-->
+              </div><!--/body-->
+            </div>
+      </div>
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+   <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>
+
+
+
+<div class="modal fade icentra-popup" id="confirmDeleteRolemodel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+               Are you sure to delete this role?
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form  (ngSubmit)="deleteRole()"  novalidate>
+              <div class="modal-footer justify-content-center">
+                  <button type="submit" class="btn btn-primary addimagemodal-btn">Confirm</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>

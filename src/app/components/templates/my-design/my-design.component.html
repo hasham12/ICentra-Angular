@@ -1,0 +1,132 @@
+<div class="container-fluid">
+  <div class="welcome-message">
+    <div class="welcome-header d-flex">
+       <h3>My Designs</h3>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+  </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <div class="welcome-outer-content">
+        <div class="activity-opner">
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <!-- EDitor Start  -->
+      <div class="icentra-editor mydesign-templates-wrap">
+        <div class="ic-editor-inner">
+          <div class="ic-editor-header mydesign-header">
+            <span class="header-active-tool-sign bg-dark">
+              <img alt="" src="assets/img/editor/design-name.png">
+            </span>
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mydesign-tabs mr-auto" role="tablist">
+              <li><a class="nav-link active" id="all-tab" data-toggle="tab" href="#all-design" (click)="allDesigns()">All</a></li>
+              <li><a class="nav-link " id="recent-tab" data-toggle="tab" href="#recent-design" (click)="recentDesigns()">Recent</a></li>
+              <li><a class="nav-link " id="favourite-tab" data-toggle="tab" href="#favourite-design" (click)="favDesigns()">Favourites</a></li>
+              <li><a class="nav-link " id="draft-tab" data-toggle="tab" href="#draft-design" (click)="draftDesigns()">Draft</a></li>
+            </ul>
+
+            <div class="mydesign-header-tools">
+              <div class="search-cat-dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                  <span id='catdropdown'>Search Category</span>
+                </a>
+                <div class="selecttempcatid dropdown-menu dropdown-menu-categories" malihu-scrollbar [scrollbarOptions]="inset2dark">
+                </div>
+              </div>
+              <div class="task-search">
+                <div action="" class="form-inline">
+                  <div class="input-group">
+                    <input type="text" name="task-search" class="search-task-input" name="designsearch"  id="designsearch" placeholder="Search Design" (keyup)="searchDesigns()">
+                    <button class="task-search-btn" type="submit" (click)="searchDesigns()">
+                    <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--/.task-search-->
+            </div>
+          </div>
+          <!--/.mydesign-header-->
+
+          <!-- BODY Start -->
+          <div class="ic-editor-body">
+            <div class="ic-editor-workarea p-0 d-flex">
+              <!-- custom scrollbar start -->
+              <div class="scrollbox-content">
+                <div class="ic-editor-workarea-main ic-editor-main-left p-0">
+                 <!-- Tabs Content -->
+                <div class="tab-content mydesign-tabs-content">
+                  <div class="tab-pane fade show active" id="top-design" role="tabpanel" aria-labelledby="top-tab">
+                      <div class="ic-designs-carousel-wrap">
+                        <div class="ic-designs-carousel-heading">
+                          Top ten frequently used designs
+                        </div>
+                        <!-- <ngx-slick-carousel class="carousel ic-designs-slider" [config]="slideConfig" (breakpoint)="breakpoint($event)">
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                           <a href="javascript:void(0)"  ngxSlickItem  class="desing-single-slide slide"></a>
+                        </ngx-slick-carousel> -->
+                      </div><!--/.ic-designs-carousel-wrap-->
+                  </div><!--1./tab-content-->
+                </div><!--/.tab-content-->
+                  <!-- Tabs Content -->
+                  <div class="tab-content mydesign-tabs-content">
+                    <div class="tab-pane fade show active" id="all-design" role="tabpanel" aria-labelledby="all-tab">
+                      <div class="mydesign-tab-content-header">
+                        <h3 id='titletext'>All Design</h3>
+                        <div class="mydesing-inner-row d-flex justify-content-between align-items-center">
+                          <p>
+                            <span id='destext'>Designs</span>
+                            <span id='cattext' class="dummy"> in categories</span>
+                          </p>
+                          <div class="mydeisgns-sorting-tools d-flex">
+                            <div class="design-sorting">
+                              <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown" id='sortdropdown'>
+                                Sort By
+                              </a>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="ascending()">Ascending </a>
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="descending()">Descending</a>
+                              </div>
+                            </div>
+                            <!--/.job-view-->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mydesign-tab-content-body">
+                        <ul class="mydesign-lists" id="templatesection">
+                        </ul>
+                      </div>
+                    </div>
+                    <!--1./tab-content-->
+                  </div>
+                  <!--/.tab-content-->
+                </div>
+                <!--/.ic-editor-workarea-main-->
+              </div>
+              <!--/.custom scrollbar start-->
+            </div>
+            <!--/.ic-editor-workarea-->
+          </div>
+          <!-- Body End -->
+        </div><!-- /.ic-editor-inner-->
+      </div>
+      <!-- EDitor End -->
+    </div>
+    <!--/.container-fluid-->
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+  <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->

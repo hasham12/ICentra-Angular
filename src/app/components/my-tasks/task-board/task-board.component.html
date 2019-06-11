@@ -1,0 +1,185 @@
+<div class="container-fluid">
+    <div class="welcome-message">
+        <div class="welcome-header d-flex">
+            <h3>Task Board</h3>
+            <app-breadcrumb></app-breadcrumb>
+        </div>
+    </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div class="welcome-outer-content">
+                <p>Below is the list of tasks to which you are associated with.</p>
+                <div class="activity-opner">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+                </div>
+            </div>
+            <!-- JOB STATUS Main Content -->
+            <div class="job-status job-status-main">
+                <div class="job-status-header d-flex">
+                    <div class="job-status-col d-flex">
+                        <div class="task-search">
+                            <div action="" class="form-inline">
+                                <div class="input-group align-items-center">
+                                    <input type="text" name="task-search" class="search-task-input"
+                                             (input)="filterItem('search',$event.target.value)"
+                                             placeholder="Search Task">
+                                    <button class="task-search-btn" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!--/.task-search-->
+
+                        <div class="job-view">
+                            <a routerLink="/tasks/my-tasks">
+                                <span>view</span>
+                                <i class="fa fa-list"></i>
+                            </a>
+                        </div><!--/.job-view-->
+
+                    </div><!--/.job-status-col-->
+                    <div class="job-status-col d-flex">
+                        <ul class="tasks-people-list">
+                            <li *ngFor="let user of assigns">
+                                <a (click)="filterItem('user_id', user.id)">
+                                    <img class="rounded-circle" [ngStyle]="{'border': searchedUsers.indexOf(user.id) !== -1 ? '2px solid blue' : ''}"
+                                         [src]="user.photo_thumb?user.photo_thumb:'assets/img/profile.png'" [alt]="user.full_name">
+                                </a>
+                            </li>
+                        </ul>
+                        <!--<a href="javascript:void(0)" class="add-task-link"></a>-->
+                    </div>
+                </div><!--/.job-status-header-->
+
+                <div class="tasks-status-wrap">
+                    <div class="row" cdkDropListGroup *ngIf="statuses">
+                        <div class="tasks-status-col col-md-3 col-sm-6" *ngFor="let status of statuses;">
+                            <div class="task-notstarted task-box task-primary"
+                                 [ngStyle]="{'border-top-color': status.color}" style="height:900px;">
+                                <div class="task-header">
+                                    <h4>{{ status.name }}</h4>
+                                    <!--<div class="task-dropdown">
+                                        <a href="#" role="button" data-toggle="dropdown" aria-haspopup="false"
+                                           aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                            <a class="dropdown-item" href="#">
+                                                <span>All Reports</span>
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <span>Create Report</span>
+                                            </a>
+                                            <a class="dropdown-item" href="mydesign">
+                                                <span>My Report</span>
+                                            </a>
+                                        </div>
+                                    </div>/.task-dropdown-->
+                                </div><!--/.task-header-->
+                                <div class="task-body">
+                                    <ul class="tasks-list darg-drop-list task-board-list"
+                                        cdkDropList
+                                        #s_="cdkDropList"
+                                        style="min-height: 200px"
+                                        [id]="status.id"
+                                        [cdkDropListData]="status.tasks.data"
+                                        [cdkDropListConnectedTo]="getConnectedTo(status.id)"
+                                        (cdkDropListDropped)="drop($event)">
+                      <li *ngFor="let item of status.tasks.data" style="background-color: white;margin: 5px 5px 5px 5px;" cdkDrag>
+
+                      <span class="task-tag bg-ferozi low-priority mr-2"
+                            [ngStyle]="{'background-color' : item.priority.color ? item.priority.color :  'red'}">
+                          {{ item.priority.name }}</span>
+                      <b>T-{{item.id}}</b>
+                          <button id="openModalEdit" data-toggle="modal" [hidden]="true" data-target="#openModalEditPopUp"></button>
+                      <p  style="cursor: pointer" (click)="showEditPopUp(item)">{{ item.title }}</p>
+                      <div class="task-meta">
+                        <div class="task-meta-col actione-links">
+                          <!--<a href="javascript:void(0)"><i class="fa xen-fa-msg" aria-hidden="true"></i><span>1</span></a>-->
+                          <!--<a href="javascript:void(0)"><i class="fa xen-fa-paperclip" aria-hidden="true"></i><span>1</span></a>-->
+                        </div>
+                        <div class="task-meta-col" *ngIf="assigns">
+                            <button id="openModalAssign" data-toggle="modal" [hidden]="true" data-target="#openModalAssignPopUp"></button>
+                          <a (click)="showAssignPopUp(item)" class="meta-add-btn" style="cursor: pointer">
+                              <img src="assets/img/add-btn.png" alt="">
+                          </a>
+                            <a (click)="showAssignPopUp(item)" class="meta-user-avatar" style="cursor: pointer"
+                               *ngFor="let assignee of item.assign_to_users">
+                                <img [src]="getPhoto(assignee.id)?getPhoto(assignee.id):'assets/img/profile.png'"
+                                     [alt]="assignee.first_name" class="rounded-circle"/>
+                            </a>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <!--<div class="add-task-btn-group">-->
+                    <!--<a href="javascript:void(0)" class="btn add-task-btn">-->
+                      <!--<img src="assets/img/add-task.png" alt="">-->
+                      <!--<span>Add Task</span>-->
+                    <!--</a>-->
+                  <!--</div>-->
+
+                </div>
+              </div>
+            </div><!-- 1/.col-md-3-->
+          </div>
+        </div>
+      </div><!--End job-status-main-->
+    </div>
+        <div class="modal fade icentra-popup" id="openModalEditPopUp" *ngIf="modelTaskEdit">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!--<div class="modal-header">-->
+                        <!--{{modelTaskEdit.title}}-->
+                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <!--</div>-->
+                    <div class="modal-body">
+                        <app-edit-task-model [taskId]="modelTaskEdit.id" (modelDone)="runReload($event)"></app-edit-task-model>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade icentra-popup new-icentra-popup" id="openModalAssignPopUp" *ngIf="modelTask && changeAssigneeList">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span>{{modelTask.title}}</span>
+                       <a class="close" data-dismiss="modal" href="javascript:;"><img alt="" src="assets/img/icons/popup-close.png"></a>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="assign">Change Assignee</label>
+                                <ng-select [(ngModel)]="changeAssigneeList"
+                                           [items]="assigns"
+                                           bindLabel="full_name"
+                                           bindValue="id"
+                                           [searchable]="true" [multiple]="true"
+                                           placeholder="Select Assignee">
+                                </ng-select>
+                              <span class="form-error"
+                                    *ngIf="changeAssigneeList.length === 0 ">Please select assignee<br></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button (click)="assignNewBtn(modelTask, changeAssigneeList)" class="btn btn-primary"
+                                [disabled]="changeAssigneeList.length === 0">Confirm</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    <!--/.container-fluid-->
+   <app-footer></app-footer>
+  </div>
+  <!--/.content-wrapper-->
+  <!-- Activity Stream -->
+  <app-activity-stream></app-activity-stream>
+</div><!-- /.inner-wrapper -->

@@ -1,0 +1,84 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand static-top row xen-main-navbar">
+    <button class="btn btn-link btn-sm xen-toggler order-1 order-sm-0" id="sidebarToggle" href="#" style="visibility:hidden;">
+      <i class="fas fa-bars xen-bars"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    <!-- <div class="xen-searchbar">
+      <div class="form-inline mr-auto mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="search">
+          <div class="input-group-append">
+            <button class="search-btn" type="submit"></button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-0 xen-top-right-nav">
+      <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span class="badge badge-danger" *ngIf="notifications.length > 0">{{notifications.length}}</span>
+          <i class="fas fa-bell fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown" >
+          <div class="notification-header" [hidden]="notifications.length == 0">
+            <p>Notification</p>
+            <a href="javascript:void(0)" (click)="readAllNotifications()">Mark all as read</a>
+          </div>
+          <ul class="sub-notifications-list" malihu-scrollbar [scrollbarOptions]="inset2dark" *ngIf="notifications.length>0;else noNotification">
+            <li *ngFor="let notification of notifications">
+               <a [routerLink]="[notification.data.link]" routerLinkActive="router-link-active" (click)="notificationRead(notification)">
+                 <div class="notification-thumbnail">
+                   <img [src]="notification.data.thumb?thumb(notification.data.thumb):'assets/img/profile.png'" alt="">
+                 </div>
+                 <div class="notification-content">
+                    <h3>{{notification.data.title}}</h3>
+                    <p>{{notification.data.message}}</p>
+                    <span class="time">{{ notification.data.time*1000 | amTimeAgo:true}} ago</span>
+                 </div>
+               </a>
+            </li>
+          </ul>
+          <ng-template class="sub-notifications-list" #noNotification>
+            <li>
+                <div class="notification-content no-notification">
+                  No new notifications
+                </div>
+            </li>
+          </ng-template>
+        </div>
+      </li>
+      <!-- <li class="nav-item dropdown no-arrow mx-1">
+        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span class="badge badge-danger">2</span>
+          <i class="fas fa-envelope fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <div class="fa-profile">
+            <img class="fluid-img rounded-circle"  [src]="AuthUser && AuthUser.photo_thumb?AuthUser.photo_thumb:'assets/img/profile.png'" alt="">
+          </div>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" routerLink="/setting/general">Settings</a>
+          <a class="dropdown-item d-none" href="#">View As Different User</a>
+          <div class="dropdown-divider d-none"></div>
+          <button class="dropdown-item" (click)="logout();" type="button">Logout </button>
+        </div>
+      </li>
+    </ul>
+  </nav>

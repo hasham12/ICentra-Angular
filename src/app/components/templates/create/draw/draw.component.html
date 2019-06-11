@@ -1,0 +1,77 @@
+<div class="upload-my-image">
+  <button class="upload-btn print-popup-toggler" type="button">Create New Design</button>
+</div>                  
+<div style="padding: 8px">
+   <button (click)="drawingmode();" id="drawingmode" class="upload-btn">Cancel drawing mode</button><br>
+   <button (click)="clearcanvas();" class="upload-btn">Clear</button><br>
+   <div id="drawing-mode-options" style="text-align: left;margin-top: 8px;font-size: 11px;">
+      <div class="" style="height: 50px;">
+         <div class="" style="width: 50%;float: left;">
+         
+            <div class="" style="float: left;">
+               <label for="drawing-mode-selector">Mode:</label>
+            </div>
+          
+               <select id="drawing-mode-selector" (change)="onChange($event.target.value)" style="width: 100%;">
+                  <option>Pencil</option>
+                  <option>Circle</option>
+                  <option>Spray</option>
+                  <option>Pattern</option>
+                  <option>hline</option>
+                  <option>vline</option>
+                  <option>square</option>
+                  <option>diamond</option>
+                  <option>texture</option>
+               </select>
+          
+         </div>
+         <div class="drawmainsection"  style="width: 50%;float: right;">
+            <div class="" style="float: left;">
+               <input type="range" class="drawslider" [(ngModel)]="props.lineWidth" value="30" min="0" max="150" id="drawing-line-width" (change)="drawinglinewidth($event.target.value)">
+            </div>
+             <div class="mt-1" style="float: left;">
+               <label for="drawing-line-width">Line width </label><span class="info">{{props.lineWidth}}</span>
+            </div>
+         </div>
+      </div>
+      <div class="" style="height: 50px;margin-top: 10px;">
+         <div class="" style="width: 50%;float: left;">
+            <div class="" style="float: left;">
+               <input type="text" class="form-control colorselectorline linecol"   [cpPosition]="'right'" [(colorPicker)]="props.line" [style.background]="props.line" (colorPickerChange)="drawingcolor()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+            </div>
+            <div class="">
+               <label for="drawing-color">Line color </label>
+            </div>
+         </div>
+         <div class=""  style="width: 50%;float: right;">
+            <div class="" style="float: left;">
+               <input type="text" class="form-control colorselectorshadow shadowcol"  [cpPosition]="'right'" [(colorPicker)]="props.shadow" [style.background]="props.shadow" (colorPickerChange)="drawingshadowcolor()" [cpOKButton]="true" [cpCancelButton]="true" [cpOutputFormat]="'hex'" >
+            </div>
+            <div class="shadow-col" style="float: left;">
+               <label for="drawing-shadow-color">Shadow color </label>
+            </div>
+            
+         </div>
+      </div>
+      <div class="" style="height: 50px;margin-top: 20px;">
+         <div class="" style="width: 50%;float: left;">
+           
+            <div class="" style="float: left;">
+               <input type="range" class="drawslider" [(ngModel)]="props.shadowWidth" value="0" min="0" max="50" id="drawing-shadow-width" (change)="drawingshadowwidth($event.target.value)">
+            </div>
+             <div class="mt-1" style="float: left;">
+               <label for="drawing-shadow-width">Shadow width </label><span class="info">{{props.shadowWidth}}</span>
+            </div>
+         </div>
+         <div class=""  style="width: 50%;float: right;">
+            
+            <div class="" style="float: left;">
+               <input type="range"  class="drawslider" [(ngModel)]="props.shadowOffset" value="0" min="0" max="50" id="drawing-shadow-offset" (change)="drawingshadowoffset($event.target.value)">
+            </div>
+            <div class="mt-1" style="float: left;">
+               <label for="drawing-shadow-width">Shadow offset </label><span class="info">{{props.shadowOffset}}</span>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

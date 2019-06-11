@@ -1,0 +1,119 @@
+
+/* 
+* --( a ) Xen Cards
+*/
+.xen-cards-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.xn-card {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 15px 10px;
+  padding: 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: -10px 9px 21px 0px rgba(176, 192, 237, 0.48);
+  -webkit-box-shadow: -10px 9px 21px 0px rgba(176, 192, 237, 0.48);
+}
+
+.xn-card:first-child {
+  margin-left: 0px;
+}
+
+.xn-card:last-child {
+  margin-right: 0px;
+}
+
+.xn-card-icon {
+  margin-bottom: 8px;
+}
+
+.xn-card:hover,
+.xn-card:focus {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* 
+* --( b ) Job-tracking progress
+*/
+.job-tracking-progress {
+  padding: 20px 25px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: -10px 5px 21px 0px rgba(176, 192, 237, 0.48);
+  -webkit-box-shadow: -10px 5px 21px 0px rgba(176, 192, 237, 0.48);
+}
+
+.job-tracking-progress h3 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #303030;
+}
+
+.job-tracking-progress h3 span {
+  position: relative;
+  margin: 0px 5px;
+}
+
+.job-tracking-progress h3 span:after {
+  content: "";
+  display: inline-block;
+  height: 2px;
+  width: 100%;
+  background: #e0e4f1;
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+}
+
+.tracking-progress-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tracking-progress-row .singler-tracker {
+  width: 100%;
+  max-width: 130px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: #303030;
+  margin-top: 15px;
+}
+
+.tracking-status-box{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.tracking-status-box span{
+  font-size: 30px;
+  background: #fff;
+  color: #303030;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  bottom: 0px;
+  width: 63%;
+  height: 40px;
+  line-height: 40px;
+}
+
+
+.tracking-progress-row .singler-tracker p {
+  margin:0px;
+  margin-top:10px;
+  text-transform:uppercase;
+}

@@ -1,0 +1,134 @@
+/*Buttons*/
+.btn-primary{
+	background-color:#fccd13;
+	border-color:#fccd13;
+	box-shadow:none;
+}
+.btn-primary:hover,
+.btn-primary:focus{
+	background-color:#fccd13;
+	border-color:#fccd13;
+}
+.btn-secondary{
+	background-color:#9b9b9d;
+	border-color:#9b9b9d;
+}
+.btn-secondary:hover,
+.btn-secondary:focus{
+	background-color:#9b9b9d;
+	border-color:#9b9b9d;
+}
+.header-active-tool-sign{background:#fccd13;}
+.ic-tools-tab{
+	border-right: 1px solid #eceef6;
+	width: 100%;
+}
+.ic-tools-tab li .nav-link,
+.ic-tools-tab li .nav-link.active,
+.ic-tools-tab li .nav-link.show{
+	flex-flow:column;
+	color: #fccd13;
+}
+.ic-tools-tab li .nav-link.active, .ic-tools-tab li .nav-link.show {
+	background: #f4f5fa;
+	color: #fccd13;
+}
+.ic-editor-sidebar.no-tab-content{
+  	max-width:60px;
+    min-width: 60px;
+  }
+/*Workarea*/
+.create-user-form label{
+	font-family:'Lato', sans-serif;
+	font-size:14px;
+	color:#9b9b9b;
+	margin-bottom:3px;
+}
+.create-user-form .form-control{
+ border-color:#e6e7eb;
+ box-shadow:none;
+ color:#9b9b9b;
+}
+.create-user-form h3{
+	font-weight:'Lato', sans-serif;
+	font-size:14px;
+	color:#9b9b9b;
+	margin-top:30px;
+	margin-bottom:10px;
+	text-transform:uppercase;
+}
+.dummy-text{
+	font-size:12px;
+	color:#cdc7c7;
+}
+/*Profile picture*/
+.profile-picture {
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+}
+.profile-img-wrap{
+  width:100%;
+  max-width:95px;
+  position:relative;
+}
+.profile-picture .profile-img {
+  width: 100%;
+  height: 95px;
+  border-radius: 100%;
+  background: #f2f2f2;
+  cursor: pointer;
+  overflow:hidden;
+  display: flex;
+}
+.profile-picture .profile-img img {
+  max-width:100%;
+  min-width:100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 100%;
+}
+.profile-picture span {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: #cdc7c7;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+.profile-picture span.close{
+  position:absolute;
+  background:#9b9b9d;
+  color:#fefefe;
+  width:20px;height:20px;
+  line-height:20px;
+  display:inline-block;
+  border-radius:40px;
+  padding:0px;right:0px;
+  text-align:center;
+}
+.profile-picture span.close:hover,
+.profile-picture span.close:focus{
+  background:#e12214;
+}
+.pass-toggler{
+  position:absolute;
+  right:10px;top:11px;
+  color:#9b9b9b;
+  cursor:pointer;
+  z-index:10;
+}
+#fileInput{
+  display: none;
+}
+/** form controles **/
+.ng-invalid.ng-touched{border-color:red !important;}
+.ng-valid.ng-touched{border-color:green !important;}
+.invalid-form{
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+.form-error{
+  color: #dc3545;
+}

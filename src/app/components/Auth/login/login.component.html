@@ -1,0 +1,46 @@
+<form action="/" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+    <div *ngIf="error" class="alert alert-danger" [hidden]="!error">{{error}}</div>
+
+     <div class="form-col">
+      <label>Email</label>
+       <i class="fa fa-user"></i>
+       <input type="email" formControlName="email" class="form-input"  placeholder="Email" required/>
+        <div *ngIf="loginForm.controls['email'].touched" class="invalid-form">
+            <div *ngIf="loginForm.controls['email'].hasError('required') || loginForm.controls['email'].hasError('email')">Valid email is required</div>
+        </div>
+     </div>
+
+     <div class="form-col">
+      <label>Password</label>
+       <i class="fa fa-key"></i>
+       <input type="password" formControlName="password" class="form-input"  placeholder="password" required/>
+        <div *ngIf="loginForm" class="invalid-form">
+            <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
+        </div>
+     </div>
+
+
+     <div class="form-row login-form-row">
+         <div class="form-col rememberme-row m-0">
+            <input type="checkbox" class="remember-me" formControlName="remember_me">
+            <label for="">Remember Me</label>
+         </div>
+
+         <div class="form-col btn-col m-0">
+            <input type="submit" value="Login" [disabled]="loginForm.invalid || loading" class="login-btn">
+            <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+
+      </div>
+
+
+     <div class="form-row login-form-row">
+       <div class="form-col rememberme-row m-0">
+          <a routerLink="/forgetpassword">Forget Password?</a>
+       </div>
+       <div class="form-col btn-col m-0">
+       </div>
+     </div>
+
+</form>

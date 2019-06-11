@@ -1,0 +1,49 @@
+
+
+<!-- Search Form -->
+<div class="search-reports-templates">
+	<div class="form-inline">
+	   <div class="input-group">
+      	   <input type="text" name="propertyfieldsearch"  id="propertyfieldsearch" class="search-task-input search-input search-box" placeholder="Search Property Fields" (input)="searchpropertyfield()" [(ngModel)]="propertyfieldsearch">
+           <button (click)="propertyfieldsearch='';searchpropertyfield();" type="reset" class="close-icon sm" *ngIf="propertyfieldsearch"></button>
+           <button (click)="searchpropertyfield()"  type="submit" class="btn-small searchicon task-search-btn"  *ngIf="!propertyfieldsearch">
+             <i class="fa fa-search"></i>
+           </button>
+	   </div>
+	</div>
+</div><!--/search-->
+
+<!-- Search Result -->
+<div class="rea-search-results">
+	<ul class="all-users-list list--siderbar">
+		<li *ngFor="let propertyfield of propertyfields">
+			<button class="upload-btn" type="button" (click)="addPropertyField(propertyfield)">ADD {{propertyfield.value}}</button>
+		</li>
+	</ul>
+</div>  
+
+
+
+
+<!-- Search Form -->
+<div class="search-reports-templates">
+	<div class="form-inline">
+	   <div class="input-group">
+      	   <input type="text" name="userfieldsearch"  id="userfieldsearch" class="search-task-input search-input search-box" placeholder="Search User Fields" (input)="searchuserfield()" [(ngModel)]="userfieldsearch">
+           <button (click)="userfieldsearch='';searchuserfield()" type="reset" class="close-icon sm" *ngIf="userfieldsearch"></button>
+           <button (click)="searchuserfield()" type="submit" class="btn-small searchicon task-search-btn"  *ngIf="!userfieldsearch">
+             <i class="fa fa-search"></i>
+           </button>
+	   </div>
+	</div>
+</div><!--/search-->
+
+<!-- Search Result -->
+<div class="rea-search-results">
+	<ul class="all-users-list list--siderbar">
+	  	<li *ngFor="let userfield of userfields">
+	  		<button class="upload-btn" type="button" (click)="addUserField(userfield)">ADD {{userfield[1]}}</button>
+	    </li>
+	</ul>
+</div>  
+

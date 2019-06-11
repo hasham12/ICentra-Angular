@@ -1,0 +1,183 @@
+<div class="container-fluid">
+    <div class="welcome-message">
+        <div class="welcome-header d-flex">
+            <h3>Reports</h3>
+            <app-breadcrumb></app-breadcrumb>
+        </div>
+    </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div class="welcome-outer-content">
+                <p>This section refers to all details retgarding the Reports</p>
+                <div class="activity-opner">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+                </div>
+            </div>
+            <!-- EDitor Start  -->
+            <div class="icentra-editor creat-template-editor">
+                <div class="ic-editor-inner">
+                    <div class="ic-editor-header">
+                        <!-- 1 -->
+                        <div class="header-active-tool">
+                   <span class="header-active-tool-sign">
+                     <img src="assets/img/editor/report-name.png" alt="">
+                   </span>
+                            <div class="header-active-tool-name">
+                                <h6>Reports</h6>
+                                <span>All Reports</span>
+                            </div>
+                        </div>
+                        <!-- Start Tools -->
+
+                        <!-- 1 -->
+                        <div class="allusers-tools-col">
+                            <div action="" class="form">
+                                <div class="bulk-action d-flex mr-2">
+                                    <div class="search-cat-dropdown">
+                                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                                            <span>Bulk Action</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-categories">
+                                            <a class="dropdown-item" href="javascript:void;">Move</a>
+                                            <a class="dropdown-item" href="javascript:void;">Delete</a>
+                                            <a class="dropdown-item" href="javascript:void;">Active</a>
+                                            <a class="dropdown-item" href="javascript:void;">Deactivate</a>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="Apply" class="btn-apply allu-btn">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 2 -->
+                        <ul class="ic-header-tool-list">
+                            <li><a title="Add New" routerLink="/report/create-report" >
+                                <img src="assets/img/editor/new-user.png" alt="">
+                                <span>Add</span>
+                            </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="ic-editor-body">
+                        <div class="ic-editor-sidebar">
+                            <div class="ic-editor-sidebar-tools">
+                                <!-- Tabs -->
+                                <ul class="nav --nav-tabs ic-tools-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active"  id="template-tab" data-toggle="tab" href="#template" (click)="getReports()">
+                                            <img src="assets/img/editor/hvr-all-reports.png" alt="">
+                                            <span>All Reports</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  id="template-tab" data-toggle="tab" href="#template" (click)="filterReports('my_reports', '')">
+                                            <img src="assets/img/editor/hvr-my-reports.png" alt="">
+                                            <span>My Reports</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  id="template-tab" data-toggle="tab" href="#template">
+                                            <img src="assets/img/editor/hvr-custom-reports.png" alt="">
+                                            <span>Custom Reports</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Tabs Content -->
+                                <div class="tab-content ic-tools-tab-content">
+                                    <div class="search-reports-templates">
+                                        <div action="" class="form-inline">
+                                            <div class="input-group">
+                                                <input type="text" name="task-search" class="search-task-input search-input" placeholder="Search Reports">
+                                                <button class="task-search-btn" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div><!--/search-->
+
+                                    <ul class="all-users-list filter-list list--siderbar">
+                                        <li><span (click)="filterCategory(false)">All</span></li>
+                                        <li *ngFor="let category of categories; index as i;"><span class="text-capitalize" (click)="filterCategory(category.key)">{{ category.name }}</span></li>
+                                    </ul>
+                                </div>
+                                <!-- End tab-content -->
+                            </div><!--/.ic-editor-sidebar-tools-->
+                        </div><!--/-sidebar-->
+                        <!-- Main -->
+                        <div class="user-view-workarea">
+
+                            <!-- all user table -->
+                            <div class="view-users-table">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="search-user" *ngIf="users">
+                                            <ng-select [items]="users" bindLabel="fullName" bindValue="id"
+                                                       (change)="filterReports('user', $event)"
+                                                       [searchable]="true" placeholder="Filter by user">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="input-daterange d-inline-flex align-items-center xen-date-range">
+                                            <div class="filter-by-date-range">
+                                                <ejs-daterangepicker id="daterangepicker" name="date" [(ngModel)]="filterDate"
+                                                                     #date="ngModel" placeholder="Filter by created date"
+                                                                     (ngModelChange)="changeDates()"
+                                                                     required></ejs-daterangepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="users-table-header row">
+                                    <div class="col-1">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" name="">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col">Report Name</div>
+                                    <div class="col">Reporting Area</div>
+                                    <div class="col">Report Creator</div>
+                                    <div class="col">Date Created</div>
+                                    <div class="col">Data Count</div>
+                                    <div class="col">Action</div>
+                                </div>
+                                <div class="table-body">
+                                    <div *ngFor="let report of reports; index as i;" class="table-body-row row">
+                                        <div class="col-1">
+                                            <label class="custom-checkbox">
+                                                <input type="checkbox" name="">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col">{{ report.name }}</div>
+                                        <div class="col text-capitalize">{{ report.module_type }}</div>
+                                        <div class="col">{{ report.user.data.first_name }} {{ report.user.data.last_name }}</div>
+                                        <div class="col">{{ report.created_at }}</div>
+                                        <div class="col">{{ report.data_count }}</div>
+                                        <div class="col">
+                                            <a routerLink=""><img src="assets/img/editor/edit-tool.png" alt="" width="15px"></a>
+                                            <a class="ml-2" [routerLink]="['/report/view/',report.id]"><img src="assets/img/editor/overview.png" alt="" width="15px"></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><!--/end-main-->
+                    </div><!--/body-->
+                </div>
+            </div>
+            <!-- EDitor End -->
+        </div>
+        <!--/.container-fluid-->
+    </div>
+    <!--/.content-wrapper-->
+    <!-- Activity Stream -->
+    <app-activity-stream></app-activity-stream>
+
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

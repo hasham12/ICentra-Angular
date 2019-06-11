@@ -1,0 +1,114 @@
+/*Switch radio box*/
+.task-switch-wrap {
+    display:flex;
+    align-items:center;
+    margin:10px 0px 20px;
+}
+.task-switch-wrap p{
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color:#9b9b9b;
+    margin:0px;
+}
+.switch {
+  position:relative;
+  display:inline-block;
+  width:60px;
+  height:34px;
+  margin:0px 10px;
+}
+.switch input { 
+  opacity:0;
+  width:0;
+  height:0;
+}
+.switch .slider {
+  position:absolute;
+  cursor:pointer;
+  top:0;left:0;
+  right:0;bottom:0;
+  background-color:#e1e1e1;
+  border-radius:4px;
+  -webkit-transition:.4s;
+  transition:.4s;
+}
+.switch .slider:before,
+.switch .slider:after{
+  position:absolute;
+  content:"";
+  height:26px;width:26px;
+  left:4px;bottom:4px;
+  background-color:white;
+  border-radius:4px;
+  -webkit-transition:.4s;
+  transition:.4s;
+}
+.switch .slider:after{
+    background:url('../../../../assets/img/editor/close-icon.png')no-repeat;
+    background-position: center;
+    right:4px;
+    left:auto;
+}
+
+/*white-tick*/
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.switch input:checked + .slider:after{
+  background:url('../../../../assets/img/editor/white-tick.png')no-repeat;
+  left:4px;top:11px;
+  right:auto;
+}
+
+
+/*Sidebar Tools*/
+.header-active-tool-sign{background:#fccd13;}
+.allusers-tools-col{
+	align-items: center;
+	margin-left: 0px;
+	margin-right: auto;
+}
+/*Sidebar users list*/
+.all-users-list{
+	list-style:none;
+	padding:0px;
+}
+.all-users-list li a{
+	font-family:'Lato', sans-serif;
+	font-size:14px;
+	color:#9b9b9b;
+	padding:5px 15px;
+	display:block;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+/*Workarea*/
+.user-view-workarea{
+	width:100%;
+	padding:10px;
+	background:#ffffff;
+}
+.site-notify-header h4{
+	font-size: 14px;
+	color: #9b9b9b;
+	margin:0px 0px 10px;
+	text-transform: capitalize;	
+}
+.site-notify-header p{
+	font-size: 14px;
+	color: #9b9b9b;
+	margin: 0px;
+}
+/*List of Siwtches*/
+.list-of-notifications-switchs{
+	list-style:none;
+	padding:0px;
+	margin-top:40px;
+}
+.list-of-notifications-switchs .task-switch-wrap{
+	justify-content:space-between;
+}
+.list-of-notifications-switchs .task-switch-wrap p{padding-right:20px;}

@@ -1,0 +1,163 @@
+
+/*Sidebar Tools*/
+.header-active-tool-sign{background:#fccd13;}
+.allusers-tools-col{
+	align-items: center;
+	margin-left: 0px;
+	margin-right: auto;
+}
+/*Sidebar users list*/
+.all-users-list{
+	list-style:none;
+	padding:0px;
+}
+.all-users-list li a{
+	font-family:'Lato', sans-serif;
+	font-size:14px;
+	color:#9b9b9b;
+	padding:5px 15px;
+	display:block;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+/*Workarea*/
+.user-view-workarea{
+	width:100%;
+	padding:10px;
+	background:#ffffff;
+}
+/*userview table*/
+.users-table-header.row,
+.table-body-row.row
+{margin:0px;align-items:center;}
+
+.users-table-header [class*="col"],
+.table-body-row [class*="col"]{
+	font-family:'Lato',sans-serif;
+	font-weight:400;
+	font-size:14px;
+	color:#9b9b9b;
+	margin-bottom:2px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	align-items:center;
+	white-space: nowrap;
+}
+.users-table-header{background:#ebebeb;}
+.users-table-header [class*="col"]{font-weight:700;}
+.table-body-row .col-1,
+.users-table-header .col-1{
+	max-width:1%;
+}
+.table-body-row .col img.sm-avtar{
+	width:22px;
+	height:22px;
+	border-radius:100px;
+}
+.table-body-row:nth-child(even){background:#f5f5f5;}
+
+
+/*Pagination*/
+.table-pagination{
+	text-align:right;
+	margin:20px 0px;
+	justify-content:flex-end;
+}
+.total-view-result {
+	font-size:11px;
+	color:#9b9b9b;
+	margin:0px 10px;
+	align-items:center;
+}
+
+/*display*/
+.display-per-page{
+	margin:0px 15px;
+	align-items:center;
+}
+.display-per-page span{
+	font-size:11px;
+	color:#9b9b9b;
+	padding:0px 5px;
+}
+.display-per-page .display-page > a{
+	font-size:11px;
+	color:#9b9b9b;
+	padding:5px;
+	width:50px;
+	height:23px;
+	border:1px solid #eceef6;
+	border-radius:4px;
+	display:flex;
+	align-items:center;
+
+}
+/*next-prev*/
+.next-prev-page{
+	display:flex;
+	align-items:center;
+}
+.next-prev-page .page-counter{
+	font-size:11px;
+	color:#9b9b9b;
+	width:100%;
+	max-width:28px;height:23px;
+	border:1px solid #eceef6;
+	border-radius:4px;
+	margin:0px 6px;
+	text-align: center;
+	-webkit-appearance:textfield;
+	-moz-appearance:textfield;
+}
+.next-prev-page a{
+	color:#9b9b9b;
+}
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+
+/* User License */
+.user-license-form h6{
+	font-weight:700;
+	font-size:14px;
+	color:#9b9b9b;
+	margin:0px;
+	padding:10px 15px 15px;
+}
+.user-license-form .col{margin-bottom:15px;}
+.user-license-form label{
+	font-weight:400;
+	font-size:14px;
+	color:#9b9b9b;
+	margin:0px;
+}
+.user-license-form .form-control{
+	font-size:12px;
+	color:#9b9b9d;
+	border-color:#e6e7eb;
+	box-shadow:none;
+	outline:none;
+}
+.user-license-form input:-ms-input-placeholder,
+.user-license-form input::-webkit-input-placeholder,
+.user-license-form input::-moz-placeholder{
+	color:#cdc7c7;
+}
+
+
+.license-name .form-control{
+	max-width:200px;
+}
+.user-allocation .form-control{
+	max-width:70px;
+}
+.license-cost .form-control{
+	max-width:90px;
+}
+.license-recurrence .form-control{
+	width:80px;
+	max-width:unset;
+}

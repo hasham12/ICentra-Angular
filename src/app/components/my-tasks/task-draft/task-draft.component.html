@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="welcome-message">
+        <div class="welcome-header d-flex">
+            <h3>Draft Task</h3>
+            <app-breadcrumb></app-breadcrumb>
+        </div>
+    </div><!-- /.welcome-message -->
+</div>
+
+<div class="inner-wrapper" id="wrapper">
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div class="welcome-outer-content">
+                <p>This section refers to all draft task regarding the user</p>
+                <div class="activity-opner">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+                </div>
+            </div>
+            <!-- EDitor Start  -->
+            <div class="icentra-editor creat-template-editor mt-2">
+                <div class="ic-editor-inner">
+                    <div class="ic-editor-header">
+                        <!-- 1 -->
+                        <div class="header-active-tool">
+              <span class="header-active-tool-sign">
+                <img src="assets/img/editor/create-task.png" alt="">
+              </span>
+                            <div class="header-active-tool-name">
+                                <h6>Tasks</h6>
+                                <span>My Task</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ic-editor-body">
+                        <div class="ic-editor-sidebar no-tab-content">
+                            <div class="ic-editor-sidebar-tools">
+                                <!-- Tabs -->
+                                <ul class="nav --nav-tabs ic-tools-tab">
+                                    <li class="nav-item">
+                                        <a class="nav-link" routerLink="/tasks/create-task">
+                                            <img src="assets/img/editor/create.png" alt="">
+                                            <img src="assets/img/editor/hvr-create.png" alt="" class="hvr">
+                                            <span>Create</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active">
+                                            <img src="assets/img/editor/draft.png" alt="">
+                                            <img src="assets/img/editor/hvr-draft.png" alt="" class="hvr">
+                                            <span>Draft</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.ic-editor-sidebar-tools-->
+                        </div>
+                        <!--/-sidebar-->
+                        <!-- Main -->
+                        <div class="user-workarea">
+                            <div action="" class="form">
+                                <div class="create-user-form">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-striped" *ngIf="draftTasks">
+                                                <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Created</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let task of draftTasks">
+                                                    <td>{{task.title}}</td>
+                                                    <td>{{task.created_at | date : 'shortDate'}}</td>
+                                                    <td>
+                                                        <a [routerLink]="['/tasks/edit-task', task.id]">
+                                                            <img src="/assets/img/editor/edit-icon.png"/>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/end-main-->
+                    </div>
+                    <!--/body-->
+                </div>
+            </div>
+            <!-- EDitor End -->
+        </div>
+        <!--/.container-fluid-->
+    </div>
+    <!--/.content-wrapper-->
+    <!-- Activity Stream -->
+    <app-activity-stream></app-activity-stream>
+
+
+</div><!-- /.inner-wrapper -->
+<app-footer></app-footer>

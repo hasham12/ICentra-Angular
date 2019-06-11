@@ -1,0 +1,20 @@
+.access-denied-wrap{
+	display: flex;
+	align-items: center;
+	max-width: 601px;
+	margin: 0px auto;
+}
+.access-denied-content{
+	width: 100%;
+	height: calc(100vh - 52px);
+	display: flex;
+	flex-flow: column;
+	align-items: flex-start;
+	justify-content: center;
+	padding-left: 28px;
+}
+
+.access-denied-img img{
+	width:230px;
+	height:auto;
+}

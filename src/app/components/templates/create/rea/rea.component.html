@@ -1,0 +1,55 @@
+
+<!-- Search Form -->
+<div class="search-reports-templates">
+	<div class="form-inline">
+	   <label>Select property listing</label>
+	   <div class="input-group">
+      	   <input type="text" name="propertysearch" id="propertysearch" class="search-task-input search-input search-box" 
+           	placeholder="Search Listing" 
+           	(input)="searchproperty()" 
+           	[(ngModel)]="propertysearch">
+            <button (click)="propertysearch=''" type="reset" class="close-icon sm" *ngIf="propertysearch"></button>
+            <button (click)="searchproperty()"  type="submit" class="btn-small searchicon task-search-btn"  *ngIf="!propertysearch">
+             <i class="fa fa-search"></i>
+           </button>
+	   </div>
+	</div>
+</div><!--/search-->
+
+<!-- Search Result -->
+<div class="rea-search-results">
+	<span *ngIf="properties?.length> 0">Total Listings found :- {{properties.length}}</span>
+	<ul class="all-users-list list--siderbar">
+		<li *ngFor="let property of properties">
+			<a (click)="getproperty(property._id)" href="javascript:void(0);">{{property.address}}</a>
+		</li>
+	</ul>
+</div>
+
+
+
+<!-- Search Form -->
+<div class="search-reports-templates">
+	<div class="form-inline">
+	   <label>Select sales agent</label>
+	   <div class="input-group">
+  	   <input type="text" name="usersearch"  id="usersearch" class="search-task-input search-input search-box" placeholder="Search User" (input)="searchuser()" [(ngModel)]="usersearch">
+           <button (click)="usersearch=''" type="reset" class="close-icon sm" *ngIf="usersearch"></button>
+           <button (click)="searchuser()"  type="submit" class="btn-small searchicon task-search-btn"  *ngIf="!usersearch">
+             <i class="fa fa-search"></i>
+           </button>
+	   </div>
+	</div>
+</div><!--/search-->
+
+<!-- Search Result -->
+<div class="rea-search-results">
+  <span *ngIf="users?.length> 0">Total Users found :- {{users.length}}</span>
+	<ul class="all-users-list list--siderbar">
+		<li *ngFor="let user of users">
+				<a (click)="getuser(user)" [routerLink]="">{{user.first_name}}</a>
+		</li>
+	</ul>
+</div>
+
+

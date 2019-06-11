@@ -1,0 +1,139 @@
+.btn-groups{
+      padding: 0px 8px;
+}
+
+.btn-groups .upload-btn{
+      background: #9b9b9b;
+}
+
+.modal-popup-wrap{
+  position:fixed;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0, .7);
+  z-index:1045;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-popup-container{
+  width:20%;
+  height: 325px;
+  background: #ffffff;
+  margin: 0px auto;
+  padding:20px;
+  display:flex;
+}
+.category-popup-container{
+  width:20%;
+  height: 230px;
+  background: #ffffff;
+  margin: 0px auto;
+  padding:20px;
+  display:flex;
+}
+.modal-create-wrap{
+  background: #ffffff;
+  text-align: center;
+  float: left;
+  width: 48%;
+  margin-top: 10px;
+}
+.modal-popup-header{
+  background:#f5f5f5;
+}
+.modal-popup-header h4{
+  font-size: 20px;
+  color:#888886;
+  text-transform: uppercase;
+  /*text-align: center;*/
+  margin: 10px 0px;
+  padding: 10px;
+}
+.modal-create-btn{
+  display:inline-block;
+  font-weight:600;
+  width: 65px;
+  padding:5px 10px;
+  font-size:11px;
+  color:#727272;
+  border: none;
+  background:#f5f5f5;
+  text-transform:uppercase;
+  text-decoration:none;
+  margin-left:auto;
+  transition:all 0.4s ease-in-out;
+  -webkit-transition:all 0.4s ease-in-out;
+}
+.modal-create-btn:hover,
+.modal-create-btn:focus{
+  text-decoration:none;
+  color: #545050;
+  background: #dddddde6;
+}
+.savedesin
+{
+  width: 50%;
+  float: left;
+  height: 30px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.savemain
+{
+  width: 50%;
+  float: left;
+  height: 30px; 
+  margin-bottom: 15px;
+}
+.catsec
+{
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+}
+.search-reports-templates .task-search-btn{
+  left:auto;
+  right:5px;
+}
+/*Sidebar users list*/
+.rea-search-results{
+    margin:20px 0px;
+    padding: 0px 8px;
+}
+.rea-search-results span{
+  color: #9b9b9b;
+  font-weight: 700;
+}
+
+.all-users-list{
+  list-style:none;
+  padding:0px;
+}
+.all-users-list li a{
+  font-family:'Lato', sans-serif;
+  font-size:14px;
+  color:#9b9b9b;
+  padding:5px;
+  display:block;
+}
+.all-users-list li a:focus,
+.all-users-list li a.active{
+  color:#fc7b82;
+}
+.input-group {
+  display: block;
+}
+
+.search-reports-templates{
+  border:none;
+}
+.search-reports-templates label{
+  font-weight:500;
+  font-size:14px;
+  color:#fc7b82;
+  padding:10px 5px 3px;
+  text-transform: capitalize;
+}

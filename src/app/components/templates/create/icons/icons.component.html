@@ -1,0 +1,114 @@
+
+  <div class="upload-my-image">
+     <button class="upload-btn print-popup-toggler" type="button">Create New Design</button>
+  </div>
+
+  <div class="search-reports-templates">
+    <div action="" class="form-inline">
+       <div class="input-group">
+         <input type="text" name="iconsearch"  id="iconsearch" class="search-task-input search-input search-box" placeholder="Search Icons" (input)="searchicons()">
+         <button class="close-icon"  type="reset" (click)="clearvalues()" style="display: none;"></button>
+         <button class="btn-small searchicon task-search-btn" type="button" (click)="searchicons()">
+         <i class="fa fa-search"></i>
+         </button>
+       </div>
+    </div>
+  </div><!--/.search-reports-templates-->
+
+  <div class="search-by-cat template-categories d-flex">
+     <div class="search-cat-dropdown">
+       <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown">
+         <!--  <span>Search by Category</span> -->
+         <span class="seliconcatname">Select Category</span>
+        </a>
+        <div class="selecticoncatid dropdown-menu dropdown-menu-categories catdropdown" id="iconcategeries">
+         <!--  <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a> -->
+        </div>
+     </div>
+     <div class="arrange-dropdown">
+        <a  href="javascript:void(0)" data-toggle="dropdown">
+        <img src="assets/img/editor/layout-toggler.png">
+        </a>
+        <div class="dropdown-menu catdropdown">
+           <a class="dropdown-item" href="javascript:void(0);" (click)='addiconcatmodal()'>Add Category</a>
+           <a class="dropdown-item" href="javascript:void(0);" (click)='addiconmodal()'>Add Icon</a>
+        </div>
+     </div>
+  </div><!--/.search-by-cat-->
+
+  <div class="upload-my-image">
+    <button class="upload-btn" type="button" (click)='addiconmodal()'>Upload My File</button>
+  </div>
+
+  <div class="editor-templates-wrap ">
+
+         <div class="category-type-box"  id="iconslist">
+         </div>
+
+  </div><!--/.editor-templates-wrap-->
+
+   <div class="modal fade icentra-popup new-icentra-popup" id="iconscategorymodal">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+          <form #iconcatForm="ngForm" (ngSubmit)="onIconCatSubmit(iconcatForm)" id="iconcatForm" novalidate>
+                  <!-- Modal Header -->
+                 <div class="modal-header">
+                    <span> Add Category</span>
+                   <a href="javascript:;" class="close" data-dismiss="modal">
+                     <img src="assets/img/icons/popup-close.png" alt="">
+                   </a>
+                 </div>
+                 <!-- Modal body -->
+                 <div class="modal-body">
+                         <div class="form-group">
+                             <label for="role" class="catsec">Category</label>
+                             <input type="text" class="form-control catsec" placeholder="Enter Name" name="name" id="name" ngModel>
+                         </div>
+
+                 </div>
+                 <!-- Modal footer -->
+                 <div class="modal-footer">
+                   <button type="submit" class="btn btn-primary addimagemodal-btn">Add</button>
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                 </div>
+          </form>
+       </div>
+     </div>
+   </div>
+
+   <div class="modal fade icentra-popup new-icentra-popup" id="Addiconsmodal">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+        <form #iconForm="ngForm" (ngSubmit)="onIconSubmit(iconForm)" id="iconForm">
+                 <!-- Modal Header -->
+                 <div class="modal-header">
+                    <span>Add Icons</span>
+                   <a href="javascript:;" class="close" data-dismiss="modal">
+                     <img src="assets/img/icons/popup-close.png" alt="">
+                   </a>
+                 </div>
+                 <!-- Modal body -->
+                 <div class="modal-body">
+                         <div class="form-group">
+                             <label for="role" class="catsec">Category</label>
+                             <select id="cat_id" name="cat_id" class="form-control iconcatid catsec" ngModel required>
+                                 <option value="null">Select Category</option>
+                             </select>
+                         </div>
+                         <div class="form-group">
+                             <label for="role" class="catsec">Image File</label>
+                             <input type="file" class="form-control-file catsec" id="path" style="margin-left: 18px;" name="path" (change)="onIconFileChange($event)" #fileInput accept="image/svg+xml" multiple="multiple">
+                         </div>
+
+
+                 </div>
+                 <!-- Modal footer -->
+                 <div class="modal-footer">
+                   <button type="submit" class="btn btn-primary addimagemodal-btn">Add</button>
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                 </div>
+          </form>
+       </div>
+     </div>
+   </div>
