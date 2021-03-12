@@ -41,7 +41,7 @@
     "isotope-layout": "^3.0.2",
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "ng-circle-progress": "^1.4.0",
